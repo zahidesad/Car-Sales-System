@@ -1,16 +1,11 @@
 package CarSalesSystem;
 
-import CorePackage.Customer;
-import CorePackage.Database;
-import CorePackage.Dealer;
-import CorePackage.User;
-import CorePackage.Vehicle;
+import CorePackage.*;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import login.LoginAndRegister;
 
 /**
  *
@@ -175,35 +170,41 @@ public class AdminControlPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        if (jComboBox1.getSelectedItem().equals("Customer") || jComboBox1.getSelectedItem().equals("Dealer")) {
-            for (User user : Database.getUsers()) {
-                if (user instanceof Customer customer) {
-                    if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == customer.getId()) {
-                        customer.deleteAccount();
-                        refreshTable();
-                        break;
+        if (tableDark1.getSelectedRow() != -1) {
+            if (jComboBox1.getSelectedItem().equals("Customer") || jComboBox1.getSelectedItem().equals("Dealer")) {
+                for (User user : Database.getUsers()) {
+                    if (user instanceof Customer customer) {
+                        if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == customer.getId()) {
+                            customer.deleteAccount();
+                            refreshTable();
+                            break;
+                        }
+                    } else if (user instanceof Dealer dealer) {
+                        if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == dealer.getId()) {
+                            dealer.deleteAccount();
+                            refreshTable();
+                            break;
+                        }
+
                     }
-                } else if (user instanceof Dealer dealer) {
-                    if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == dealer.getId()) {
-                        dealer.deleteAccount();
-                        refreshTable();
-                        break;
-                    }
+
                 }
 
             }
 
-        }
+            if (jComboBox1.getSelectedItem().equals("Vehicle")) {
+                for (Vehicle vehicle : Database.getVehicles()) {
+                    if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == vehicle.getId()) {
+                        vehicle.removeVehicle();
+                        refreshTable();
+                        break;
+                    }
 
-        if (jComboBox1.getSelectedItem().equals("Vehicle")) {
-            for (Vehicle vehicle : Database.getVehicles()) {
-                if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == vehicle.getId()) {
-                    vehicle.removeVehicle();
-                    refreshTable();
-                    break;
                 }
-            }
 
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ", "Selection Error", JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -212,12 +213,11 @@ public class AdminControlPanel extends javax.swing.JPanel {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
 
         if ((JOptionPane.showConfirmDialog(this, "Do You Want To Log Out?", "WARNING",
-        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
             MainFrame.event.logOut();
         } else {
-            
         }
-        
+
     }//GEN-LAST:event_backButtonActionPerformed
 
 

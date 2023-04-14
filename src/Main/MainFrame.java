@@ -1,37 +1,44 @@
 package Main;
 
-import CarSalesSystem.AdminControlPanel;
-import CarSalesSystem.DealerControlPanel;
-import CarSalesSystem.MainPage;
-import CarSalesSystem.DealerAccountDetailsPanel;
+import CarSalesSystem.*;
 import CorePackage.*;
 import SwingComponents.EventLogin;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import login.LoginAndRegister;
 
 /**
  *
  * @author zahid
  */
 public class MainFrame extends javax.swing.JFrame {
-
+    
     public static User account;
     
     public static EventLogin event;
     
     public static AdminControlPanel adminControlPanel;
+    
     public static DealerControlPanel dealerControlPanel;
     public static DealerAccountDetailsPanel dealerAccountDetailsPanel;
-
+    public static DealerManageVehiclePanel dealerManageVehiclePanel;
+    public static DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
+    
+    public static CustomerControlPanel customerControlPanel;
+    
     public MainFrame() {
         initComponents();
+        
+        
         adminControlPanel = new AdminControlPanel();
+        
         dealerControlPanel = new DealerControlPanel();
         dealerAccountDetailsPanel = new DealerAccountDetailsPanel();
-
+        dealerManageVehiclePanel = new DealerManageVehiclePanel();
+        dealerCustomerRequestsPanel = new DealerCustomerRequestsPanel();
+        
+        customerControlPanel = new CustomerControlPanel();
+        
         event = new EventLogin() {
-         
+            
             @Override
             public void logOut() {
                 main.removeAll();
@@ -39,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
                 main.revalidate();
                 main.repaint();
             }
-
+            
             @Override
             public void setPage(JPanel panel) {
                 main.removeAll();
@@ -48,14 +55,16 @@ public class MainFrame extends javax.swing.JFrame {
                 main.repaint();
             }
         };
-
+        
         loginAndRegister1.setEventLogin(event);
         dealerControlPanel.setEventLogin(event);
         dealerAccountDetailsPanel.setEventLogin(event);
         adminControlPanel.setEventLogin(event);
-
+        dealerManageVehiclePanel.setEventLogin(event);
+        dealerCustomerRequestsPanel.setEventLogin(event);
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -115,15 +124,15 @@ public class MainFrame extends javax.swing.JFrame {
             public void run() {
                 testInit();
                 new MainFrame().setVisible(true);
-
+                
             }
         });
-
+        
     }
-
+    
     public static void testInit() {
         //Default admin account
-        Admin admin = new Admin("admin", "123", "Zahid", 
+        Admin admin = new Admin("admin", "123", "Zahid",
                 "zahidesad.baltaci@stu.fsm.edu.tr", "05360666561");
 
         //Default dealer accounts
@@ -141,14 +150,17 @@ public class MainFrame extends javax.swing.JFrame {
         //Default vehicles
         Vehicle vehicle1 = new Vehicle(dealer1, customer1, "Togg",
                 "SUV", "Red", "SUV", "Electric", "2023", "500000₺");
-
+        
         Database.getVehicles().add(vehicle1);
+        dealer1.getListedVehicles().add(vehicle1);
+        customer1.getListedVehicles().add(vehicle1);
+        
         Database.getUsers().add(admin);
         Database.getUsers().add(dealer1);
         Database.getUsers().add(dealer2);
         Database.getUsers().add(customer1);
         Database.getUsers().add(customer2);
-
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

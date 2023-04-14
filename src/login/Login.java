@@ -1,12 +1,9 @@
 package login;
 
-import CarSalesSystem.AdminControlPanel;
-import CarSalesSystem.DealerControlPanel;
-
+import CarSalesSystem.*;
 import CorePackage.*;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
-import com.sun.tools.javac.Main;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,12 +12,10 @@ import javax.swing.JOptionPane;
  */
 public class Login extends PanelCustom {
 
-    /**
-     * Creates new form Login
-     */
     private EventLogin event;
     private AdminControlPanel adminControlPanel;
     private DealerControlPanel dealerControlPanel;
+    private CustomerControlPanel customerControlPanel;
 
     public Login() {
         initComponents();
@@ -31,6 +26,9 @@ public class Login extends PanelCustom {
         
         dealerControlPanel = new DealerControlPanel();
         dealerControlPanel.setEventLogin(MainFrame.event);
+        
+        customerControlPanel = new CustomerControlPanel();
+        customerControlPanel.setEventLogin(MainFrame.event);
     }
 
     public void setEventLogin(EventLogin event) {
@@ -115,13 +113,18 @@ public class Login extends PanelCustom {
         } else if (account instanceof Admin) {
             MainFrame.account = account;
             event.setPage(adminControlPanel);
+            txtUsername.setText("");
+            txtPassword.setText("");
         } else if (account instanceof Customer) {
             MainFrame.account = account;
-
+            event.setPage(customerControlPanel);
+            txtUsername.setText("");
+            txtPassword.setText("");
         } else if (account instanceof Dealer) {
             MainFrame.account = account;
             event.setPage(dealerControlPanel);
-
+            txtUsername.setText("");
+            txtPassword.setText("");
         }
     }//GEN-LAST:event_signInButtonActionPerformed
 

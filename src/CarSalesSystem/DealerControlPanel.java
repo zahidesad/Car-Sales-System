@@ -1,10 +1,10 @@
 package CarSalesSystem;
 
-import CorePackage.Dealer;
+
 import Main.MainFrame;
 import SwingComponents.EventLogin;
 import javax.swing.JOptionPane;
-import login.Login;
+
 
 /**
  *
@@ -13,11 +13,10 @@ import login.Login;
 public class DealerControlPanel extends javax.swing.JPanel {
 
 
-    /**
-     * Creates new form Dümenden
-     */
     private EventLogin event;  
     private DealerAccountDetailsPanel dealerAccountDetailsPanel;
+    private DealerManageVehiclePanel dealerManageVehiclePanel;
+    private DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
    
     
     
@@ -25,6 +24,14 @@ public class DealerControlPanel extends javax.swing.JPanel {
         initComponents();
         dealerAccountDetailsPanel = new DealerAccountDetailsPanel();
         dealerAccountDetailsPanel.setEventLogin(MainFrame.event);
+        
+        dealerManageVehiclePanel = new DealerManageVehiclePanel();
+        dealerManageVehiclePanel.setEventLogin(MainFrame.event);
+        
+        dealerCustomerRequestsPanel = new DealerCustomerRequestsPanel();
+        dealerCustomerRequestsPanel.setEventLogin(MainFrame.event);
+        
+        jLabel1.setText("Welcome " );
         
     }
 
@@ -39,7 +46,7 @@ public class DealerControlPanel extends javax.swing.JPanel {
 
         dealerControlPanelLabel = new javax.swing.JLabel();
         backButton = new SwingComponents.Button();
-        manageVehicleButton = new SwingComponents.Button();
+        manageVehiclesButton = new SwingComponents.Button();
         customerRequestsButton = new SwingComponents.Button();
         myAccountButton = new SwingComponents.Button();
         jLabel1 = new javax.swing.JLabel();
@@ -62,18 +69,28 @@ public class DealerControlPanel extends javax.swing.JPanel {
                 backButtonActionPerformed(evt);
             }
         });
-        add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, -1));
+        add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        manageVehicleButton.setBackground(new java.awt.Color(204, 204, 204));
-        manageVehicleButton.setForeground(new java.awt.Color(0, 0, 0));
-        manageVehicleButton.setText("MANAGE VEHICLES");
-        manageVehicleButton.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
-        add(manageVehicleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 310, 100));
+        manageVehiclesButton.setBackground(new java.awt.Color(204, 204, 204));
+        manageVehiclesButton.setForeground(new java.awt.Color(0, 0, 0));
+        manageVehiclesButton.setText("MANAGE VEHICLES");
+        manageVehiclesButton.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
+        manageVehiclesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageVehiclesButtonActionPerformed(evt);
+            }
+        });
+        add(manageVehiclesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 310, 100));
 
         customerRequestsButton.setBackground(new java.awt.Color(204, 204, 204));
         customerRequestsButton.setForeground(new java.awt.Color(0, 0, 0));
         customerRequestsButton.setText("CUSTOMER REQUESTS");
         customerRequestsButton.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
+        customerRequestsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerRequestsButtonActionPerformed(evt);
+            }
+        });
         add(customerRequestsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 310, 100));
 
         myAccountButton.setBackground(new java.awt.Color(204, 204, 204));
@@ -106,13 +123,21 @@ public class DealerControlPanel extends javax.swing.JPanel {
         MainFrame.event.setPage(dealerAccountDetailsPanel);
     }//GEN-LAST:event_myAccountButtonActionPerformed
 
+    private void manageVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVehiclesButtonActionPerformed
+        MainFrame.event.setPage(dealerManageVehiclePanel);
+    }//GEN-LAST:event_manageVehiclesButtonActionPerformed
+
+    private void customerRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerRequestsButtonActionPerformed
+        MainFrame.event.setPage(dealerCustomerRequestsPanel);
+    }//GEN-LAST:event_customerRequestsButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private SwingComponents.Button backButton;
     private SwingComponents.Button customerRequestsButton;
     private javax.swing.JLabel dealerControlPanelLabel;
     private javax.swing.JLabel jLabel1;
-    private SwingComponents.Button manageVehicleButton;
+    private SwingComponents.Button manageVehiclesButton;
     private SwingComponents.Button myAccountButton;
     // End of variables declaration//GEN-END:variables
 }
