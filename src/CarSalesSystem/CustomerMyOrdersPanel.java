@@ -1,5 +1,6 @@
 package CarSalesSystem;
 
+import CorePackage.ITriggerer;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
 import javax.swing.table.DefaultTableModel;
@@ -8,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author zahid
  */
-public class CustomerMyOrdersPanel extends javax.swing.JPanel {
+public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITriggerer{
 
     private EventLogin event;
 
@@ -103,4 +104,9 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel {
     private javax.swing.JLabel myOrdersLabel;
     private SwingComponents.TableDark tableDark1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void PageOn() {
+        
+    }
 }

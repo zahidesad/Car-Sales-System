@@ -1,15 +1,22 @@
 package CarSalesSystem;
 
+import CorePackage.Customer;
+import CorePackage.Dealer;
+import CorePackage.ITriggerer;
+import CorePackage.User;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
+import javax.swing.JPanel;
 
 /**
  *
  * @author zahid
  */
-public class CustomerAccountDetailsPanel extends javax.swing.JPanel {
+public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements ITriggerer {
 
+    private JPanel previousPanel;
     private EventLogin event;
+    public Customer customer;
 
     public CustomerAccountDetailsPanel() {
         initComponents();
@@ -17,6 +24,12 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel {
 
     public void setEventLogin(EventLogin event) {
         this.event = event;
+
+    }
+
+    public void accountDetailsForDealer() {
+        deleteAccountButton.setVisible(false);
+        previousPanel = MainFrame.dealerControlPanel;
 
     }
 
@@ -117,12 +130,23 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel {
         deleteAccountButton.setForeground(new java.awt.Color(0, 0, 0));
         deleteAccountButton.setText("Delete Account");
         deleteAccountButton.setFont(new java.awt.Font("Stencil", 2, 14)); // NOI18N
+        deleteAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAccountButtonActionPerformed(evt);
+            }
+        });
         add(deleteAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 480, 170, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainFrame.event.setPage(MainFrame.dealerControlPanel);
+        customer = null;
+        MainFrame.event.setPage(previousPanel);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void deleteAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccountButtonActionPerformed
+        customer.deleteAccount();
+        MainFrame.event.logOut();
+    }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -140,4 +164,20 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel {
     private SwingComponents.Label usernameInformationLabel;
     private SwingComponents.Label usernameLabel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void PageOn() {
+
+        if (customer == null) {
+            customer = (Customer) MainFrame.account;
+            previousPanel = MainFrame.customerControlPanel;
+            deleteAccountButton.setVisible(true);
+        }
+
+        customerIDInformationLabel.setText(customer.getId() + "");
+        nameInformationLabel.setText(customer.getName());
+        usernameInformationLabel.setText(customer.getUsername());
+        phoneNoInformationLabel.setText(customer.getPhone());
+        emailInformationLabel.setText(customer.getEmail());
+    }
 }

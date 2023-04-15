@@ -1,16 +1,24 @@
 package CarSalesSystem;
 
+import CorePackage.Customer;
+import CorePackage.Database;
+import CorePackage.Dealer;
+import CorePackage.ITriggerer;
+import CorePackage.User;
+import CorePackage.Vehicle;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author zahid
  */
-public class DealerCustomerRequestsPanel extends javax.swing.JPanel {
+public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements ITriggerer {
 
     private EventLogin event;
+    private Dealer dealer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"Customer ID", "Customer Username", "Vehicle ID", "Vehicle Brand", "Vehicle Model", "Price", "Status"};
@@ -19,11 +27,34 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel {
         initComponents();
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
-        refreshTable();
+
     }
 
     public void setEventLogin(EventLogin event) {
         this.event = event;
+    }
+
+    public void refreshTable() {
+        tableModel.setRowCount(0);
+        tableModel.setColumnIdentifiers(columNames);
+
+        for (Vehicle listedVehicle : dealer.getListedVehicles()) {
+            if (listedVehicle.getRegister().equals(Vehicle.pending)) {
+
+                Vector rowData = new Vector();
+                rowData.add(listedVehicle.getCustomer().getId());
+                rowData.add(listedVehicle.getCustomer().getUsername());
+                rowData.add(listedVehicle.getId());
+                rowData.add(listedVehicle.getBrand());
+                rowData.add(listedVehicle.getModel());
+                rowData.add(listedVehicle.getPrice());
+                rowData.add(listedVehicle.getRegister());
+
+                tableModel.addRow(rowData);
+            }
+
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -88,6 +119,11 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel {
         customerInfoButton.setForeground(new java.awt.Color(255, 255, 255));
         customerInfoButton.setText("Customer Info");
         customerInfoButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        customerInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerInfoButtonActionPerformed(evt);
+            }
+        });
         add(customerInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 470, 180, -1));
 
         acceptDennyButton.setBackground(new java.awt.Color(0, 0, 0));
@@ -97,15 +133,24 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel {
         add(acceptDennyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    public void refreshTable() {
-        tableModel.setRowCount(0);
-        tableModel.setColumnIdentifiers(columNames);
-    }
-
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         MainFrame.event.setPage(MainFrame.dealerControlPanel);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void customerInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerInfoButtonActionPerformed
+        
+        if (tableDark1.getSelectedRow() != -1) {
+            for (User user : Database.getUsers()) {
+                 User c = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
+                
+                    MainFrame.customerAccountDetailsPanel.customer = (Customer)c;
+                    MainFrame.customerAccountDetailsPanel.accountDetailsForDealer();
+                    MainFrame.event.setPage(MainFrame.customerAccountDetailsPanel);
+                    
+            }
+        }
+    }//GEN-LAST:event_customerInfoButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -116,4 +161,10 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel myCustomersLabel;
     private SwingComponents.TableDark tableDark1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void PageOn() {
+        dealer = (Dealer) MainFrame.account;
+        refreshTable();
+    }
 }

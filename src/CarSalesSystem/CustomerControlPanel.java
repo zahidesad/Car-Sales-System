@@ -1,5 +1,6 @@
 package CarSalesSystem;
 
+import CorePackage.ITriggerer;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
 import javax.swing.JOptionPane;
@@ -8,7 +9,7 @@ import javax.swing.JOptionPane;
  *
  * @author zahid
  */
-public class CustomerControlPanel extends javax.swing.JPanel {
+public class CustomerControlPanel extends javax.swing.JPanel implements ITriggerer{
     
     private EventLogin event;
     
@@ -26,7 +27,11 @@ public class CustomerControlPanel extends javax.swing.JPanel {
         
         customerAccountDetailsPanel = new CustomerAccountDetailsPanel();
         customerAccountDetailsPanel.setEventLogin(event);
+        
+        //jLabel1.setText("Welcome " + MainFrame.account.getName());
     }
+    
+    
     
     public void setEventLogin(EventLogin event) {
         this.event = event;
@@ -54,10 +59,10 @@ public class CustomerControlPanel extends javax.swing.JPanel {
         customerControlPanelLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         add(customerControlPanelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 740, 60));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("WELCOME");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 210, 30));
+        jLabel1.setText("WELCOME CUSTOMER");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 210, 30));
 
         viewVehiclesButton.setBackground(new java.awt.Color(204, 204, 204));
         viewVehiclesButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -103,7 +108,7 @@ public class CustomerControlPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewVehiclesButtonActionPerformed
-        MainFrame.event.setPage(customerVehicleListPanel);
+        MainFrame.event.setPage(customerVehicleListPanel);     
     }//GEN-LAST:event_viewVehiclesButtonActionPerformed
 
     private void myOrdersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myOrdersButtonActionPerformed
@@ -132,4 +137,9 @@ public class CustomerControlPanel extends javax.swing.JPanel {
     private SwingComponents.Button myOrdersButton;
     private SwingComponents.Button viewVehiclesButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void PageOn() {
+        jLabel1.setText("Welcome " + MainFrame.account.getName());
+    }
 }

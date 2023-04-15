@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author zahid
  */
-public class AdminControlPanel extends javax.swing.JPanel {
+public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer {
 
     private EventLogin event;
 
@@ -124,7 +124,7 @@ public class AdminControlPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableDark1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 860, 310));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 860, 320));
 
         adminControlPanelLabel.setBackground(new java.awt.Color(102, 102, 102));
         adminControlPanelLabel.setFont(new java.awt.Font("SansSerif", 2, 48)); // NOI18N
@@ -205,7 +205,8 @@ public class AdminControlPanel extends javax.swing.JPanel {
 
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ", "Selection Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
+                    "Selection Error", JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -230,4 +231,9 @@ public class AdminControlPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private SwingComponents.TableDark tableDark1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void PageOn() {
+
+    }
 }

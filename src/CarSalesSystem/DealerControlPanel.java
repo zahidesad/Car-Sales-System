@@ -1,6 +1,7 @@
 package CarSalesSystem;
 
 
+import CorePackage.ITriggerer;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
 import javax.swing.JOptionPane;
@@ -10,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author zahid
  */
-public class DealerControlPanel extends javax.swing.JPanel {
+public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer{
 
 
     private EventLogin event;  
@@ -31,7 +32,6 @@ public class DealerControlPanel extends javax.swing.JPanel {
         dealerCustomerRequestsPanel = new DealerCustomerRequestsPanel();
         dealerCustomerRequestsPanel.setEventLogin(MainFrame.event);
         
-        jLabel1.setText("Welcome " );
         
     }
 
@@ -104,10 +104,10 @@ public class DealerControlPanel extends javax.swing.JPanel {
         });
         add(myAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 330, 100));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("WELCOME");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 200, 30));
+        jLabel1.setText("WELCOME DEALER");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 200, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -140,4 +140,9 @@ public class DealerControlPanel extends javax.swing.JPanel {
     private SwingComponents.Button manageVehiclesButton;
     private SwingComponents.Button myAccountButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void PageOn() {
+         jLabel1.setText("Welcome " + MainFrame.account.getName());
+    }
 }

@@ -24,17 +24,17 @@ public class User {
 
     }
 
-    public User findUser(String username) {
+    public User findUser(int id) {
 
         User foundedPerson = null;
         for (User user : Database.getUsers()) {
-            if (user instanceof Customer) {
-                if (user.getUsername().equalsIgnoreCase(username)) {
+            if (user instanceof Customer customer ) {
+                if (customer.getId() == id) {
                     foundedPerson = user;
                     break;
                 }
-            } else if (user instanceof Dealer) {
-                if (user.getUsername().equalsIgnoreCase(username)) {
+            } else if (user instanceof Dealer dealer) {
+                if (dealer.getId() == id) {
                     foundedPerson = user;
                     break;
                 }

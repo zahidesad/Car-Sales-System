@@ -17,9 +17,9 @@ public class Vehicle {
 
     public final static String vehicleFuelType[] = {"Petrol", "Diesel", "Hybrid", "Electric"};
 
-    final static String pending = "pending";
-    final static String accepted = "accepted";
-    final static String available = "available";
+    public final static String pending = "Pending";
+    public final static String accepted = "Accepted";
+    public final static String available = "Available";
     private String register = available;
 
     private Dealer dealer;

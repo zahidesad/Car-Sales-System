@@ -12,24 +12,26 @@ import javax.swing.JPanel;
 public class MainFrame extends javax.swing.JFrame {
 
     public static User account;
-
+   
     public static EventLogin event;
-
+    // <editor-fold defaultstate="collapsed" desc="BURAYA HİÇ HİÇ BAKMA"> 
     public static AdminControlPanel adminControlPanel;
 
     public static DealerControlPanel dealerControlPanel;
     public static DealerAccountDetailsPanel dealerAccountDetailsPanel;
     public static DealerManageVehiclePanel dealerManageVehiclePanel;
     public static DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
-
+    public static DealerAddVehiclePanel dealerAddVehiclePanel;
+    
     public static CustomerControlPanel customerControlPanel;
     public static CustomerVehicleListPanel customerVehicleListPanel;
     public static CustomerMyOrdersPanel customerMyOrdersPanel;
     public static CustomerAccountDetailsPanel customerAccountDetailsPanel;
-
+    
+     // </editor-fold> 
     public MainFrame() {
         initComponents();
-
+        // <editor-fold defaultstate="collapsed" desc="BURAYA BAKMA">   
         adminControlPanel = new AdminControlPanel();
 
         dealerControlPanel = new DealerControlPanel();
@@ -41,13 +43,14 @@ public class MainFrame extends javax.swing.JFrame {
         customerVehicleListPanel = new CustomerVehicleListPanel();
         customerMyOrdersPanel = new CustomerMyOrdersPanel();
         customerAccountDetailsPanel = new CustomerAccountDetailsPanel();
-
+        dealerAddVehiclePanel = new DealerAddVehiclePanel();
+        // </editor-fold> 
         event = new EventLogin() {
 
             @Override
             public void logOut() {
                 main.removeAll();
-                main.add(loginAndRegister1);
+                main.add(loginAndRegister);
                 main.revalidate();
                 main.repaint();
             }
@@ -58,10 +61,12 @@ public class MainFrame extends javax.swing.JFrame {
                 main.add(panel);
                 main.revalidate();
                 main.repaint();
+                ITriggerer triggerer= (ITriggerer)panel;
+                triggerer.PageOn();
             }
         };
 
-        loginAndRegister1.setEventLogin(event);
+        loginAndRegister.setEventLogin(event);
 
         adminControlPanel.setEventLogin(event);
 
@@ -69,6 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
         dealerAccountDetailsPanel.setEventLogin(event);
         dealerManageVehiclePanel.setEventLogin(event);
         dealerCustomerRequestsPanel.setEventLogin(event);
+        dealerAddVehiclePanel.setEventLogin(event);
 
         customerControlPanel.setEventLogin(event);
         customerVehicleListPanel.setEventLogin(event);
@@ -82,13 +88,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         main = new javax.swing.JPanel();
-        loginAndRegister1 = new login.LoginAndRegister();
+        loginAndRegister = new login.LoginAndRegister();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 300));
 
         main.setLayout(new java.awt.BorderLayout());
-        main.add(loginAndRegister1, java.awt.BorderLayout.CENTER);
+        main.add(loginAndRegister, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,10 +159,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         //Default vehicles
         Vehicle vehicle1 = new Vehicle(dealer1, null, "Togg",
-                "SUV", "Red", "SUV", "Electric", "2023", "500000₺");
+                "T10X", "Red", "SUV", "Electric", "2023", "500000₺");
+        
+        Vehicle vehicle2 = new Vehicle(dealer2, customer2, "BMW", 
+                "5.20", "Black", "Sedan", "Diesel", "2022", "700000");
+        vehicle2.setRegister(Vehicle.pending);
 
         Database.getVehicles().add(vehicle1);
+        Database.getVehicles().add(vehicle2);
+        
+                
         dealer1.getListedVehicles().add(vehicle1);
+        dealer2.getListedVehicles().add(vehicle2);
+        
+        customer2.getListedVehicles().add(vehicle2);
 
         Database.getUsers().add(admin);
         Database.getUsers().add(dealer1);
@@ -167,7 +183,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private login.LoginAndRegister loginAndRegister1;
+    private login.LoginAndRegister loginAndRegister;
     public static javax.swing.JPanel main;
     // End of variables declaration//GEN-END:variables
 }

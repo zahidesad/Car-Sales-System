@@ -27,11 +27,11 @@ public class Dealer extends User {
 
     }
 
-    public void removeVehicle(String Id) {
+    public void removeVehicle(int Id) {
         Vehicle selectedVehicle = null;
 
         for (Vehicle vehicle : Database.getVehicles()) {
-            if (Id.equals(vehicle.getId())) {
+            if (Id == vehicle.getId()) {
                 selectedVehicle = vehicle;
                 break;
             }
@@ -39,7 +39,7 @@ public class Dealer extends User {
         Database.getVehicles().remove(selectedVehicle);
         listedVehicles.remove(selectedVehicle);
 
-        if (selectedVehicle != null) {
+        if (selectedVehicle != null && selectedVehicle.getCustomer() != null) {
             selectedVehicle.getCustomer().getListedVehicles().remove(selectedVehicle);
         }
 
@@ -49,7 +49,7 @@ public class Dealer extends User {
         for (Vehicle listedVehicle : listedVehicles) {
             Database.getVehicles().remove(listedVehicle);
 
-            if (listedVehicle != null) {
+            if (listedVehicle != null && listedVehicle.getCustomer()!=null) {
                 listedVehicle.getCustomer().getListedVehicles().remove(listedVehicle);
             }
         }

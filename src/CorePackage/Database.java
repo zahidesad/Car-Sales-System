@@ -34,7 +34,7 @@ public class Database {
         return account;
     }
 
-    public static boolean checkCUsername(String username) {
+    public static boolean checkUsername(String username) {
         boolean flag = false;
         for (User user : Database.getUsers()) {
             if (user.getUsername().equalsIgnoreCase(username)) {

@@ -4,28 +4,31 @@ import CorePackage.*;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author zahid
  */
-public class DealerManageVehiclePanel extends javax.swing.JPanel {
+public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITriggerer {
 
     private EventLogin event;
-    
 
-    Dealer dealer = new Dealer();
+    private Dealer dealer;
+
+    private DealerAddVehiclePanel dealerAddVehiclePanel;
 
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
 
     public DealerManageVehiclePanel() {
         initComponents();
-
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
-        refreshTable();
+
+        dealerAddVehiclePanel = new DealerAddVehiclePanel();
+        dealerAddVehiclePanel.setEventLogin(MainFrame.event);
 
     }
 
@@ -46,7 +49,6 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel {
             rowData.add(listedVehicle.getColor());
             rowData.add(listedVehicle.getYear());
             rowData.add(listedVehicle.getPrice());
-            rowData.add(listedVehicle.getYear());
             rowData.add(listedVehicle.getRegister());
 
             tableModel.addRow(rowData);
@@ -59,7 +61,7 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dealerManageVehiclePanelLabel = new javax.swing.JLabel();
+        myVehiclesLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDark1 = new SwingComponents.TableDark();
         addVehicleButton = new SwingComponents.Button();
@@ -69,13 +71,13 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(153, 153, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        dealerManageVehiclePanelLabel.setBackground(new java.awt.Color(102, 102, 102));
-        dealerManageVehiclePanelLabel.setFont(new java.awt.Font("SansSerif", 2, 42)); // NOI18N
-        dealerManageVehiclePanelLabel.setForeground(new java.awt.Color(0, 0, 0));
-        dealerManageVehiclePanelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dealerManageVehiclePanelLabel.setText("DEALER MANAGE VEHICLE PANEL");
-        dealerManageVehiclePanelLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(dealerManageVehiclePanelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 720, 60));
+        myVehiclesLabel.setBackground(new java.awt.Color(102, 102, 102));
+        myVehiclesLabel.setFont(new java.awt.Font("SansSerif", 2, 42)); // NOI18N
+        myVehiclesLabel.setForeground(new java.awt.Color(0, 0, 0));
+        myVehiclesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        myVehiclesLabel.setText("MY VEHICLES");
+        myVehiclesLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        add(myVehiclesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 350, 60));
 
         tableDark1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,12 +103,22 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel {
         addVehicleButton.setForeground(new java.awt.Color(255, 255, 255));
         addVehicleButton.setText("Add Vehicle");
         addVehicleButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        add(addVehicleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 180, -1));
+        addVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addVehicleButtonActionPerformed(evt);
+            }
+        });
+        add(addVehicleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 180, -1));
 
         deleteVehicleButton.setBackground(new java.awt.Color(0, 0, 0));
         deleteVehicleButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteVehicleButton.setText("Delete Vehicle");
         deleteVehicleButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        deleteVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteVehicleButtonActionPerformed(evt);
+            }
+        });
         add(deleteVehicleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 180, -1));
 
         backButton.setBackground(new java.awt.Color(0, 0, 0));
@@ -123,13 +135,39 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel {
         MainFrame.event.setPage(MainFrame.dealerControlPanel);
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void addVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehicleButtonActionPerformed
+        MainFrame.event.setPage(dealerAddVehiclePanel);
+    }//GEN-LAST:event_addVehicleButtonActionPerformed
+
+    private void deleteVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVehicleButtonActionPerformed
+        if (tableDark1.getSelectedRow() != -1) {
+            for (int i = 0; i < dealer.getListedVehicles().size(); i++) {
+                if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)
+                        == dealer.getListedVehicles().get(i).getId()) {
+                    dealer.removeVehicle(dealer.getListedVehicles().get(i).getId());
+                    refreshTable();
+                }
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
+                    "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_deleteVehicleButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private SwingComponents.Button addVehicleButton;
     private SwingComponents.Button backButton;
-    private javax.swing.JLabel dealerManageVehiclePanelLabel;
     private SwingComponents.Button deleteVehicleButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel myVehiclesLabel;
     private SwingComponents.TableDark tableDark1;
     // End of variables declaration//GEN-END:variables
+
+    public void PageOn() {
+        dealer = (Dealer) MainFrame.account;
+        refreshTable();
+    }
 }
