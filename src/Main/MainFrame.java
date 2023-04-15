@@ -10,35 +10,40 @@ import javax.swing.JPanel;
  * @author zahid
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+
     public static User account;
-    
+
     public static EventLogin event;
-    
+
     public static AdminControlPanel adminControlPanel;
-    
+
     public static DealerControlPanel dealerControlPanel;
     public static DealerAccountDetailsPanel dealerAccountDetailsPanel;
     public static DealerManageVehiclePanel dealerManageVehiclePanel;
     public static DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
-    
+
     public static CustomerControlPanel customerControlPanel;
-    
+    public static CustomerVehicleListPanel customerVehicleListPanel;
+    public static CustomerMyOrdersPanel customerMyOrdersPanel;
+    public static CustomerAccountDetailsPanel customerAccountDetailsPanel;
+
     public MainFrame() {
         initComponents();
-        
-        
+
         adminControlPanel = new AdminControlPanel();
-        
+
         dealerControlPanel = new DealerControlPanel();
         dealerAccountDetailsPanel = new DealerAccountDetailsPanel();
         dealerManageVehiclePanel = new DealerManageVehiclePanel();
         dealerCustomerRequestsPanel = new DealerCustomerRequestsPanel();
-        
+
         customerControlPanel = new CustomerControlPanel();
-        
+        customerVehicleListPanel = new CustomerVehicleListPanel();
+        customerMyOrdersPanel = new CustomerMyOrdersPanel();
+        customerAccountDetailsPanel = new CustomerAccountDetailsPanel();
+
         event = new EventLogin() {
-            
+
             @Override
             public void logOut() {
                 main.removeAll();
@@ -46,7 +51,7 @@ public class MainFrame extends javax.swing.JFrame {
                 main.revalidate();
                 main.repaint();
             }
-            
+
             @Override
             public void setPage(JPanel panel) {
                 main.removeAll();
@@ -55,16 +60,23 @@ public class MainFrame extends javax.swing.JFrame {
                 main.repaint();
             }
         };
-        
+
         loginAndRegister1.setEventLogin(event);
+
+        adminControlPanel.setEventLogin(event);
+
         dealerControlPanel.setEventLogin(event);
         dealerAccountDetailsPanel.setEventLogin(event);
-        adminControlPanel.setEventLogin(event);
         dealerManageVehiclePanel.setEventLogin(event);
         dealerCustomerRequestsPanel.setEventLogin(event);
-        
+
+        customerControlPanel.setEventLogin(event);
+        customerVehicleListPanel.setEventLogin(event);
+        customerMyOrdersPanel.setEventLogin(event);
+        customerAccountDetailsPanel.setEventLogin(event);
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -92,15 +104,9 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -117,19 +123,17 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 testInit();
                 new MainFrame().setVisible(true);
-                
+
             }
         });
-        
+
     }
-    
+
     public static void testInit() {
         //Default admin account
         Admin admin = new Admin("admin", "123", "Zahid",
@@ -148,19 +152,18 @@ public class MainFrame extends javax.swing.JFrame {
                 "asimtarik.kutluer@stu.fsm.edu.tr", "05070008134");
 
         //Default vehicles
-        Vehicle vehicle1 = new Vehicle(dealer1, customer1, "Togg",
+        Vehicle vehicle1 = new Vehicle(dealer1, null, "Togg",
                 "SUV", "Red", "SUV", "Electric", "2023", "500000₺");
-        
+
         Database.getVehicles().add(vehicle1);
         dealer1.getListedVehicles().add(vehicle1);
-        customer1.getListedVehicles().add(vehicle1);
-        
+
         Database.getUsers().add(admin);
         Database.getUsers().add(dealer1);
         Database.getUsers().add(dealer2);
         Database.getUsers().add(customer1);
         Database.getUsers().add(customer2);
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -30,23 +30,23 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        myCustomersLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDark1 = new SwingComponents.TableDark();
-        backButtons = new SwingComponents.Button();
+        backButton = new SwingComponents.Button();
         customerInfoButton = new SwingComponents.Button();
         acceptDennyButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel1.setFont(new java.awt.Font("SansSerif", 2, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("MY CUSTOMERS");
-        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 490, 60));
+        myCustomersLabel.setBackground(new java.awt.Color(102, 102, 102));
+        myCustomersLabel.setFont(new java.awt.Font("SansSerif", 2, 48)); // NOI18N
+        myCustomersLabel.setForeground(new java.awt.Color(0, 0, 0));
+        myCustomersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        myCustomersLabel.setText("MY CUSTOMERS");
+        myCustomersLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        add(myCustomersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 490, 60));
 
         tableDark1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,14 +75,14 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 860, 330));
 
-        backButtons.setBackground(new java.awt.Color(0, 0, 0));
-        backButtons.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BackArrow.png"))); // NOI18N
-        backButtons.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setBackground(new java.awt.Color(0, 0, 0));
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BackArrow.png"))); // NOI18N
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonsActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
-        add(backButtons, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         customerInfoButton.setBackground(new java.awt.Color(0, 0, 0));
         customerInfoButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,17 +103,17 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel {
     }
 
 
-    private void backButtonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonsActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         MainFrame.event.setPage(MainFrame.dealerControlPanel);
-    }//GEN-LAST:event_backButtonsActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private SwingComponents.Button acceptDennyButton;
-    private SwingComponents.Button backButtons;
+    private SwingComponents.Button backButton;
     private SwingComponents.Button customerInfoButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel myCustomersLabel;
     private SwingComponents.TableDark tableDark1;
     // End of variables declaration//GEN-END:variables
 }

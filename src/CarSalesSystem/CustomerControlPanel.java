@@ -9,17 +9,29 @@ import javax.swing.JOptionPane;
  * @author zahid
  */
 public class CustomerControlPanel extends javax.swing.JPanel {
-
+    
     private EventLogin event;
-
+    
+    private CustomerVehicleListPanel customerVehicleListPanel;
+    private CustomerMyOrdersPanel customerMyOrdersPanel;
+    private CustomerAccountDetailsPanel customerAccountDetailsPanel;
+    
     public CustomerControlPanel() {
         initComponents();
+        customerVehicleListPanel = new CustomerVehicleListPanel();
+        customerVehicleListPanel.setEventLogin(MainFrame.event);
+        
+        customerMyOrdersPanel = new CustomerMyOrdersPanel();
+        customerMyOrdersPanel.setEventLogin(event);
+        
+        customerAccountDetailsPanel = new CustomerAccountDetailsPanel();
+        customerAccountDetailsPanel.setEventLogin(event);
     }
-
+    
     public void setEventLogin(EventLogin event) {
         this.event = event;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -91,15 +103,15 @@ public class CustomerControlPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewVehiclesButtonActionPerformed
-
+        MainFrame.event.setPage(customerVehicleListPanel);
     }//GEN-LAST:event_viewVehiclesButtonActionPerformed
 
     private void myOrdersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myOrdersButtonActionPerformed
-
+        MainFrame.event.setPage(customerMyOrdersPanel);
     }//GEN-LAST:event_myOrdersButtonActionPerformed
 
     private void myAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAccountButtonActionPerformed
-
+        MainFrame.event.setPage(customerAccountDetailsPanel);
     }//GEN-LAST:event_myAccountButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -107,7 +119,7 @@ public class CustomerControlPanel extends javax.swing.JPanel {
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
             MainFrame.event.logOut();
         } else {
-
+            
         }
     }//GEN-LAST:event_backButtonActionPerformed
 

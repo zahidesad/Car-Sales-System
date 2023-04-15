@@ -147,6 +147,7 @@ public class AdminControlPanel extends javax.swing.JPanel {
         deleteButton.setBackground(new java.awt.Color(0, 0, 0));
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Delete Customer");
+        deleteButton.setBorderPainted(false);
         deleteButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
