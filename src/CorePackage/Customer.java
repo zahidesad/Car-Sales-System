@@ -29,10 +29,12 @@ public class Customer extends User {
 
     public void buyVehicle(int vehicleID) {
         for (Vehicle vehicle : Database.getVehicles()) {
+
             if (vehicle.getId() == vehicleID) {
                 vehicle.setRegister(Vehicle.pending);
                 vehicle.setCustomer(this);
                 this.listedVehicles.add(vehicle);
+
             }
         }
 

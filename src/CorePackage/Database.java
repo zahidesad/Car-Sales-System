@@ -46,7 +46,7 @@ public class Database {
     }
 
     //to delete all vehicles of given dealer
-    public void deleteAllVehicle(Dealer dealer) {
+    public static void deleteAllVehicle(Dealer dealer) {
         for (int i = 0; i < getVehicles().size(); i++) {
             if (getVehicles().get(i).getDealer().equals(dealer)) {
                 getVehicles().remove(getVehicles().get(i));

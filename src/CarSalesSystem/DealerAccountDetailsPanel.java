@@ -1,31 +1,38 @@
 package CarSalesSystem;
 
+import CorePackage.Database;
 import CorePackage.Dealer;
 import CorePackage.ITriggerer;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
+import javax.swing.JPanel;
 
 /**
  *
  * @author zahid
  */
-public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITriggerer{
+public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITriggerer {
 
+    private JPanel previousPanel;
     private EventLogin event;
-    
-    private Dealer dealer;
+    public Dealer dealer;
 
-    public DealerAccountDetailsPanel() {      
+    public DealerAccountDetailsPanel() {
         initComponents();
-        
+
     }
 
     public void setEventLogin(EventLogin event) {
         this.event = event;
-        
+
     }
 
-    
+    public void accountDetailsForCustomer() {
+        deleteAccountButton.setVisible(false);
+        previousPanel = MainFrame.customerControlPanel;
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -132,11 +139,13 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainFrame.event.setPage(MainFrame.dealerControlPanel);
+        dealer = null;
+        MainFrame.event.setPage(previousPanel);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void deleteAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccountButtonActionPerformed
         dealer.deleteAccount();
+        Database.deleteAllVehicle(dealer);
         MainFrame.event.logOut();
     }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
@@ -159,9 +168,13 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
 
     @Override
     public void PageOn() {
-        dealer = (Dealer) MainFrame.account;
-        
-        dealerIDInformationLabel.setText(dealer.getId()+"");
+        if (dealer == null) {
+            dealer = (Dealer) MainFrame.account;
+            previousPanel = MainFrame.dealerControlPanel;
+            deleteAccountButton.setVisible(true);
+        }
+
+        dealerIDInformationLabel.setText(dealer.getId() + "");
         nameInformationLabel.setText(dealer.getName());
         usernameInformationLabel.setText(dealer.getUsername());
         phoneNoInformationLabel.setText(dealer.getPhone());

@@ -9,6 +9,7 @@ import CorePackage.Vehicle;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -130,6 +131,11 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
         acceptDennyButton.setForeground(new java.awt.Color(255, 255, 255));
         acceptDennyButton.setText("Accept / Deny");
         acceptDennyButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        acceptDennyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptDennyButtonActionPerformed(evt);
+            }
+        });
         add(acceptDennyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -139,18 +145,33 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void customerInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerInfoButtonActionPerformed
-        
+
         if (tableDark1.getSelectedRow() != -1) {
             for (User user : Database.getUsers()) {
-                 User c = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
-                
-                    MainFrame.customerAccountDetailsPanel.customer = (Customer)c;
-                    MainFrame.customerAccountDetailsPanel.accountDetailsForDealer();
-                    MainFrame.event.setPage(MainFrame.customerAccountDetailsPanel);
-                    
+                User customer = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
+
+                MainFrame.customerAccountDetailsPanel.customer = (Customer) customer;
+                MainFrame.customerAccountDetailsPanel.accountDetailsForDealer();
+                MainFrame.event.setPage(MainFrame.customerAccountDetailsPanel);
+
             }
         }
+        JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
+                "Selection Error", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_customerInfoButtonActionPerformed
+
+    private void acceptDennyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptDennyButtonActionPerformed
+        if (tableDark1.getSelectedRow() != 1 && tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Vehicle.pending)) {
+            if ((JOptionPane.showConfirmDialog(this, "Do You Want To Accept Offer?", "Sales Process",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                dealer.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                refreshTable();
+            } else {
+                dealer.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                refreshTable();
+            }
+        }
+    }//GEN-LAST:event_acceptDennyButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

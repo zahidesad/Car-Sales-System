@@ -1,24 +1,33 @@
 package CarSalesSystem;
 
+import CorePackage.Customer;
+import CorePackage.Database;
+import CorePackage.Dealer;
 import CorePackage.ITriggerer;
+import CorePackage.User;
+import CorePackage.Vehicle;
 import Main.MainFrame;
 import SwingComponents.EventLogin;
+import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author zahid
  */
-public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITriggerer{
+public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITriggerer {
 
     private EventLogin event;
+    private Customer customer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
-    String[] columNames = {"Dealer ID", "Name", "Brand", "Model", "Type", "Color", "Year", "Fuel Type", "Price", "Status"};
+    String[] columNames = {"Dealer ID", "Name", "Vehicle ID", "Brand", "Model", "Type", "Color", "Year", "Fuel Type", "Price", "Status"};
+    String[] columNamesForDisplayDealers = {"Dealer ID", "Username", "Name", "Phone", "E-mail"};
 
     public CustomerVehicleListPanel() {
         initComponents();
-        
+
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
     }
@@ -26,11 +35,40 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     public void setEventLogin(EventLogin event) {
         this.event = event;
     }
-    
-    public void refreshTable(){
-        
-    
-    
+
+    public void refreshTable() {
+        tableModel.setRowCount(0);
+        tableModel.setColumnIdentifiers(columNames);
+
+        displayDealersButton.setText("Display Dealers");
+        buyVehicleButton.setVisible(true);
+
+        brandLabel.setVisible(true);
+        brandFilterJComboBox.setVisible(true);
+        typeLabel.setVisible(true);
+        typeFilterJComboBox.setVisible(true);
+        fuelLabel.setVisible(true);
+        fuelFilterJComboBox.setVisible(true);
+
+        for (Vehicle vehicle : Database.getVehicles()) {
+
+            Vector rowData = new Vector();
+
+            rowData.add(vehicle.getDealer().getId());
+            rowData.add(vehicle.getDealer().getName());
+            rowData.add(vehicle.getId());
+            rowData.add(vehicle.getBrand());
+            rowData.add(vehicle.getModel());
+            rowData.add(vehicle.getType());
+            rowData.add(vehicle.getColor());
+            rowData.add(vehicle.getYear());
+            rowData.add(vehicle.getFuel());
+            rowData.add(vehicle.getPrice());
+            rowData.add(vehicle.getRegister());
+
+            tableModel.addRow(rowData);
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -45,12 +83,12 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         brandFilterJComboBox = new javax.swing.JComboBox<>();
         fuelFilterJComboBox = new javax.swing.JComboBox<>();
         typeFilterJComboBox = new javax.swing.JComboBox<>();
+        typeLabel = new javax.swing.JLabel();
+        dealerLabel = new javax.swing.JLabel();
+        brandLabel = new javax.swing.JLabel();
         fuelLabel = new javax.swing.JLabel();
-        dealerLabel1 = new javax.swing.JLabel();
-        brandLabel1 = new javax.swing.JLabel();
-        fuelLabel1 = new javax.swing.JLabel();
         buyVehicleButton = new SwingComponents.Button();
-        dealerInfoButton1 = new SwingComponents.Button();
+        dealerInfoButton = new SwingComponents.Button();
         displayDealersButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
@@ -96,59 +134,84 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         dealerFilterJComboBox.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         dealerFilterJComboBox.setForeground(new java.awt.Color(255, 255, 255));
         dealerFilterJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(dealerFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, -1));
+        dealerFilterJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dealerFilterJComboBoxActionPerformed(evt);
+            }
+        });
+        add(dealerFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, -1, 30));
 
         brandFilterJComboBox.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         brandFilterJComboBox.setForeground(new java.awt.Color(255, 255, 255));
         brandFilterJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(brandFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, -1, -1));
+        brandFilterJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brandFilterJComboBoxActionPerformed(evt);
+            }
+        });
+        add(brandFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 105, -1, 30));
 
         fuelFilterJComboBox.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         fuelFilterJComboBox.setForeground(new java.awt.Color(255, 255, 255));
         fuelFilterJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(fuelFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, -1, -1));
+        add(fuelFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 105, -1, 30));
 
         typeFilterJComboBox.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         typeFilterJComboBox.setForeground(new java.awt.Color(255, 255, 255));
         typeFilterJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(typeFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, -1, -1));
+        add(typeFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 105, -1, 30));
+
+        typeLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        typeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        typeLabel.setText("Type :");
+        add(typeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, -1, -1));
+
+        dealerLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        dealerLabel.setForeground(new java.awt.Color(0, 0, 0));
+        dealerLabel.setText("Dealer :");
+        add(dealerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        brandLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        brandLabel.setForeground(new java.awt.Color(0, 0, 0));
+        brandLabel.setText("Brand :");
+        add(brandLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, -1));
 
         fuelLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         fuelLabel.setForeground(new java.awt.Color(0, 0, 0));
-        fuelLabel.setText("Type :");
-        add(fuelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 40, 20));
-
-        dealerLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        dealerLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        dealerLabel1.setText("Dealer :");
-        add(dealerLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 50, 20));
-
-        brandLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        brandLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        brandLabel1.setText("Brand :");
-        add(brandLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 50, 20));
-
-        fuelLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        fuelLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        fuelLabel1.setText("Fuel : ");
-        add(fuelLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 40, 20));
+        fuelLabel.setText("Fuel : ");
+        add(fuelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, -1, -1));
 
         buyVehicleButton.setBackground(new java.awt.Color(0, 0, 0));
         buyVehicleButton.setForeground(new java.awt.Color(255, 255, 255));
         buyVehicleButton.setText("Buy Vehicle ");
         buyVehicleButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        buyVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buyVehicleButtonActionPerformed(evt);
+            }
+        });
         add(buyVehicleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 280, -1));
 
-        dealerInfoButton1.setBackground(new java.awt.Color(0, 0, 0));
-        dealerInfoButton1.setForeground(new java.awt.Color(255, 255, 255));
-        dealerInfoButton1.setText("Dealer Info");
-        dealerInfoButton1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        add(dealerInfoButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 170, -1));
+        dealerInfoButton.setBackground(new java.awt.Color(0, 0, 0));
+        dealerInfoButton.setForeground(new java.awt.Color(255, 255, 255));
+        dealerInfoButton.setText("Dealer Info");
+        dealerInfoButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        dealerInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dealerInfoButtonActionPerformed(evt);
+            }
+        });
+        add(dealerInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 170, -1));
 
         displayDealersButton.setBackground(new java.awt.Color(0, 0, 0));
         displayDealersButton.setForeground(new java.awt.Color(255, 255, 255));
         displayDealersButton.setText("Display Dealers");
         displayDealersButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        displayDealersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayDealersButtonActionPerformed(evt);
+            }
+        });
         add(displayDealersButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 180, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,27 +219,191 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         MainFrame.event.setPage(MainFrame.customerControlPanel);
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void dealerFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealerFilterJComboBoxActionPerformed
+
+        for (User user : Database.getUsers()) {
+            if (user instanceof Dealer dealer) {
+                if (dealerFilterJComboBox.getSelectedIndex() != -1) {
+
+                    if (dealerFilterJComboBox.getSelectedItem().equals(dealer.getName())) {
+                        tableModel.setRowCount(0);
+                        for (Vehicle listedVehicle : dealer.getListedVehicles()) {
+                            Vector rowData = new Vector();
+
+                            rowData.add(listedVehicle.getDealer().getId());
+                            rowData.add(listedVehicle.getDealer().getName());
+                            rowData.add(listedVehicle.getId());
+                            rowData.add(listedVehicle.getBrand());
+                            rowData.add(listedVehicle.getModel());
+                            rowData.add(listedVehicle.getType());
+                            rowData.add(listedVehicle.getColor());
+                            rowData.add(listedVehicle.getYear());
+                            rowData.add(listedVehicle.getFuel());
+                            rowData.add(listedVehicle.getPrice());
+                            rowData.add(listedVehicle.getRegister());
+
+                            tableModel.addRow(rowData);
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }//GEN-LAST:event_dealerFilterJComboBoxActionPerformed
+
+    private void dealerInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealerInfoButtonActionPerformed
+        if (tableDark1.getSelectedRow() != -1) {
+            for (User user : Database.getUsers()) {
+                User dealer = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
+
+                MainFrame.dealerAccountDetailsPanel.dealer = (Dealer) dealer;
+                MainFrame.dealerAccountDetailsPanel.accountDetailsForCustomer();
+                MainFrame.event.setPage(MainFrame.dealerAccountDetailsPanel);
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
+                    "Selection Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_dealerInfoButtonActionPerformed
+
+    private void brandFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brandFilterJComboBoxActionPerformed
+        for (int i = 0; i < Vehicle.vehicleBrand.length; i++) {
+            if (brandFilterJComboBox.getSelectedIndex() != -1) {
+                if (brandFilterJComboBox.getSelectedItem().equals(Vehicle.vehicleBrand[i])) {
+                    tableModel.setRowCount(0);
+
+                    for (Vehicle vehicle : Database.getVehicles()) {
+                        Vector rowData = new Vector();
+
+                        rowData.add(vehicle.getDealer().getId());
+                        rowData.add(vehicle.getDealer().getName());
+                        rowData.add(vehicle.getId());
+                        rowData.add(vehicle.getBrand());
+                        rowData.add(vehicle.getModel());
+                        rowData.add(vehicle.getType());
+                        rowData.add(vehicle.getColor());
+                        rowData.add(vehicle.getYear());
+                        rowData.add(vehicle.getFuel());
+                        rowData.add(vehicle.getPrice());
+                        rowData.add(vehicle.getRegister());
+
+                        tableModel.addRow(rowData);
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_brandFilterJComboBoxActionPerformed
+
+    private void displayDealersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayDealersButtonActionPerformed
+
+        if (displayDealersButton.getText().equals("Display Dealers")) {
+            tableModel.setRowCount(0);
+            tableModel.setColumnIdentifiers(columNamesForDisplayDealers);
+            displayDealersButton.setText("Display Vehicles");
+            buyVehicleButton.setVisible(false);
+
+            brandLabel.setVisible(false);
+            brandFilterJComboBox.setVisible(false);
+            typeLabel.setVisible(false);
+            typeFilterJComboBox.setVisible(false);
+            fuelLabel.setVisible(false);
+            fuelFilterJComboBox.setVisible(false);
+
+            for (User user : Database.getUsers()) {
+                if (user instanceof Dealer dealer) {
+                    Vector rowData = new Vector();
+
+                    rowData.add(dealer.getId());
+                    rowData.add(dealer.getName());
+                    rowData.add(dealer.getUsername());
+                    rowData.add(dealer.getPhone());
+                    rowData.add(dealer.getEmail());
+
+                    tableModel.addRow(rowData);
+                }
+            }
+        } else {
+
+            refreshTable();
+        }
+
+
+    }//GEN-LAST:event_displayDealersButtonActionPerformed
+
+    private void buyVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyVehicleButtonActionPerformed
+        if (tableDark1.getSelectedRow() != -1) {
+            for (Vehicle vehicle : Database.getVehicles()) {
+                if (vehicle.getRegister() != (Vehicle.available)) {
+                    JOptionPane.showMessageDialog(this, "This vehicle cannot buyed ",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    customer.buyVehicle((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
+                    JOptionPane.showMessageDialog(this, "Your order has been processed",
+                            "Your Order Successful", JOptionPane.INFORMATION_MESSAGE);
+                    refreshTable();
+                    break;
+
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
+                    "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_buyVehicleButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private SwingComponents.Button backButton;
     private javax.swing.JComboBox<String> brandFilterJComboBox;
-    private javax.swing.JLabel brandLabel1;
+    private javax.swing.JLabel brandLabel;
     private SwingComponents.Button buyVehicleButton;
-    private javax.swing.JComboBox<String> dealerFilterJComboBox;
-    private SwingComponents.Button dealerInfoButton1;
-    private javax.swing.JLabel dealerLabel1;
+    private javax.swing.JComboBox<Object> dealerFilterJComboBox;
+    private SwingComponents.Button dealerInfoButton;
+    private javax.swing.JLabel dealerLabel;
     private SwingComponents.Button displayDealersButton;
     private javax.swing.JComboBox<String> fuelFilterJComboBox;
     private javax.swing.JLabel fuelLabel;
-    private javax.swing.JLabel fuelLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private SwingComponents.TableDark tableDark1;
     private javax.swing.JComboBox<String> typeFilterJComboBox;
+    private javax.swing.JLabel typeLabel;
     private javax.swing.JLabel vehicleListLabel;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void PageOn() {
-        
+        customer = (Customer) MainFrame.account;
+        refreshTable();
+
+        dealerFilterJComboBox.removeAllItems();
+        brandFilterJComboBox.removeAllItems();
+        typeFilterJComboBox.removeAllItems();
+        fuelFilterJComboBox.removeAllItems();
+
+        for (int i = 0; i < Database.getUsers().size(); i++) {
+            if (Database.getUsers().get(i) instanceof Dealer) {
+                dealerFilterJComboBox.addItem(Database.getUsers().get(i).getName());
+            }
+        }
+
+        for (int i = 0; i < Vehicle.vehicleBrand.length; i++) {
+            brandFilterJComboBox.addItem(Vehicle.vehicleBrand[i]);
+        }
+
+        for (int i = 0; i < Vehicle.vehicleType.length; i++) {
+            typeFilterJComboBox.addItem(Vehicle.vehicleType[i]);
+
+        }
+
+        for (int i = 0; i < Vehicle.vehicleFuelType.length; i++) {
+            fuelFilterJComboBox.addItem(Vehicle.vehicleFuelType[i]);
+        }
+
     }
 }

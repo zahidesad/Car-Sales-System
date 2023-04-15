@@ -28,7 +28,6 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
         customerAccountDetailsPanel = new CustomerAccountDetailsPanel();
         customerAccountDetailsPanel.setEventLogin(event);
         
-        //jLabel1.setText("Welcome " + MainFrame.account.getName());
     }
     
     
@@ -62,7 +61,7 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("WELCOME CUSTOMER");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 210, 30));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 210, 30));
 
         viewVehiclesButton.setBackground(new java.awt.Color(204, 204, 204));
         viewVehiclesButton.setForeground(new java.awt.Color(0, 0, 0));
