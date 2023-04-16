@@ -3,13 +3,14 @@ package login;
 import CorePackage.Customer;
 import CorePackage.Database;
 import CorePackage.Dealer;
+import CorePackage.ITriggerer;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author zahid
  */
-public class Register extends PanelCustom {
+public class Register extends PanelCustom implements ITriggerer{
 
     /**
      * Creates new form Register
@@ -129,7 +130,7 @@ public class Register extends PanelCustom {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerDealerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerDealerButtonActionPerformed
-        
+    
         if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtName.getText().equals("")
                 || txtPhoneNumber.getText().equals("") || txtEmail.getText().equals("")) {
 
@@ -194,4 +195,9 @@ public class Register extends PanelCustom {
     private SwingComponents.TextField txtPhoneNumber;
     private SwingComponents.TextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void PageOn() {
+        
+    }
 }

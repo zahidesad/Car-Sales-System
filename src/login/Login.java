@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author zahid
  */
-public class Login extends PanelCustom {
+public class Login extends PanelCustom implements ITriggerer{
 
     public Login() {
         initComponents();
@@ -118,4 +118,9 @@ public class Login extends PanelCustom {
     private SwingComponents.Password txtPassword;
     private SwingComponents.TextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void PageOn() {
+        
+    }
 }
