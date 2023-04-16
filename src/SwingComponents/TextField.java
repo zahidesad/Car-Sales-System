@@ -12,7 +12,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import login.LoginAndRegister;
+import login.LoginAndRegisterDesign;
 
 public class TextField extends JTextField {
 
@@ -30,7 +30,7 @@ public class TextField extends JTextField {
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setBackground(new Color(0, 0, 0, 0));
         setHorizontalAlignment(JTextField.CENTER);
-        setSelectionColor(LoginAndRegister.mainColor);
+        setSelectionColor(LoginAndRegisterDesign.mainColor);
     }
 
     @Override

@@ -3,7 +3,7 @@ package login;
 import CarSalesSystem.*;
 import CorePackage.*;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -12,27 +12,10 @@ import javax.swing.JOptionPane;
  */
 public class Login extends PanelCustom {
 
-    private EventLogin event;
-    private AdminControlPanel adminControlPanel;
-    private DealerControlPanel dealerControlPanel;
-    private CustomerControlPanel customerControlPanel;
-
     public Login() {
         initComponents();
         setAlpha(1);
-        
-        adminControlPanel = new AdminControlPanel();
-        adminControlPanel.setEventLogin(MainFrame.event);
-        
-        dealerControlPanel = new DealerControlPanel();
-        dealerControlPanel.setEventLogin(MainFrame.event);
-        
-        customerControlPanel = new CustomerControlPanel();
-        customerControlPanel.setEventLogin(MainFrame.event);
-    }
 
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
     }
 
     @SuppressWarnings("unchecked")
@@ -103,7 +86,6 @@ public class Login extends PanelCustom {
 
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
 
-
         String password = String.valueOf(txtPassword.getPassword());
         User account = Database.loginVerification(txtUsername.getText(), password);
 
@@ -111,18 +93,19 @@ public class Login extends PanelCustom {
             JOptionPane.showMessageDialog(this, "This user does not exist!",
                     "User Not Found", JOptionPane.ERROR_MESSAGE);
         } else if (account instanceof Admin) {
-            MainFrame.account = account;
-            event.setPage(adminControlPanel);
+            MainFrame.instance.setAccount(account);
+            MainFrame.instance.setPage(MainFrame.instance.getAdminControlPanel());
+
             txtUsername.setText("");
             txtPassword.setText("");
         } else if (account instanceof Customer) {
-            MainFrame.account = account;
-            event.setPage(customerControlPanel);
+            MainFrame.instance.setAccount(account);
+            MainFrame.instance.setPage(MainFrame.instance.getCustomerControlPanel());
             txtUsername.setText("");
             txtPassword.setText("");
         } else if (account instanceof Dealer) {
-            MainFrame.account = account;
-            event.setPage(dealerControlPanel);
+            MainFrame.instance.setAccount(account);
+            MainFrame.instance.setPage(MainFrame.instance.getDealerControlPanel());
             txtUsername.setText("");
             txtPassword.setText("");
         }

@@ -8,7 +8,7 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import login.LoginAndRegister;
+import login.LoginAndRegisterDesign;
 
 /**
  *

@@ -13,7 +13,7 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import login.LoginAndRegister;
+import login.LoginAndRegisterDesign;
 
 public class Password extends JPasswordField {
 
@@ -31,7 +31,7 @@ public class Password extends JPasswordField {
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setBackground(new Color(0, 0, 0, 0));
         setHorizontalAlignment(JTextField.CENTER);
-        setSelectionColor(LoginAndRegister.mainColor);
+        setSelectionColor(LoginAndRegisterDesign.mainColor);
     }
 
     @Override

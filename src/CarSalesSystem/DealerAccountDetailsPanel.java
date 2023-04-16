@@ -4,7 +4,6 @@ import CorePackage.Database;
 import CorePackage.Dealer;
 import CorePackage.ITriggerer;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import javax.swing.JPanel;
 
 /**
@@ -14,7 +13,6 @@ import javax.swing.JPanel;
 public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITriggerer {
 
     private JPanel previousPanel;
-    private EventLogin event;
     public Dealer dealer;
 
     public DealerAccountDetailsPanel() {
@@ -22,14 +20,9 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
 
     }
 
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
-
-    }
-
     public void accountDetailsForCustomer() {
         deleteAccountButton.setVisible(false);
-        previousPanel = MainFrame.customerControlPanel;
+        previousPanel = MainFrame.instance.getCustomerControlPanel();
 
     }
 
@@ -52,6 +45,7 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
         deleteAccountButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         myAccountLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -140,13 +134,13 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         dealer = null;
-        MainFrame.event.setPage(previousPanel);
+        MainFrame.instance.setPage(previousPanel);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void deleteAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccountButtonActionPerformed
         dealer.deleteAccount();
         Database.deleteAllVehicle(dealer);
-        MainFrame.event.logOut();
+        MainFrame.instance.logOut();
     }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
 
@@ -169,8 +163,8 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
     @Override
     public void PageOn() {
         if (dealer == null) {
-            dealer = (Dealer) MainFrame.account;
-            previousPanel = MainFrame.dealerControlPanel;
+            dealer = (Dealer) MainFrame.instance.getAccount();
+            previousPanel = MainFrame.instance.getDealerControlPanel();
             deleteAccountButton.setVisible(true);
         }
 

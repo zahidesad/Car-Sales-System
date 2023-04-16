@@ -5,7 +5,6 @@ import CorePackage.Dealer;
 import CorePackage.ITriggerer;
 import CorePackage.User;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import javax.swing.JPanel;
 
 /**
@@ -15,21 +14,15 @@ import javax.swing.JPanel;
 public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements ITriggerer {
 
     private JPanel previousPanel;
-    private EventLogin event;
     public Customer customer;
 
     public CustomerAccountDetailsPanel() {
         initComponents();
     }
 
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
-
-    }
-
     public void accountDetailsForDealer() {
         deleteAccountButton.setVisible(false);
-        previousPanel = MainFrame.dealerControlPanel;
+        previousPanel = MainFrame.instance.getDealerControlPanel();
 
     }
 
@@ -52,6 +45,7 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
         deleteAccountButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         myAccountLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -140,12 +134,12 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         customer = null;
-        MainFrame.event.setPage(previousPanel);
+        MainFrame.instance.setPage(previousPanel);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void deleteAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccountButtonActionPerformed
         customer.deleteAccount();
-        MainFrame.event.logOut();
+        MainFrame.instance.logOut();
     }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
 
@@ -169,8 +163,8 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
     public void PageOn() {
 
         if (customer == null) {
-            customer = (Customer) MainFrame.account;
-            previousPanel = MainFrame.customerControlPanel;
+            customer = (Customer) MainFrame.instance.getAccount();
+            previousPanel = MainFrame.instance.getCustomerControlPanel();
             deleteAccountButton.setVisible(true);
         }
 

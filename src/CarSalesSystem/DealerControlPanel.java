@@ -1,44 +1,19 @@
 package CarSalesSystem;
 
-
 import CorePackage.ITriggerer;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import javax.swing.JOptionPane;
-
 
 /**
  *
  * @author zahid
  */
-public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer{
+public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer {
 
-
-    private EventLogin event;  
-    private DealerAccountDetailsPanel dealerAccountDetailsPanel;
-    private DealerManageVehiclePanel dealerManageVehiclePanel;
-    private DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
-   
-    
-    
     public DealerControlPanel() {
         initComponents();
-        dealerAccountDetailsPanel = new DealerAccountDetailsPanel();
-        dealerAccountDetailsPanel.setEventLogin(MainFrame.event);
-        
-        dealerManageVehiclePanel = new DealerManageVehiclePanel();
-        dealerManageVehiclePanel.setEventLogin(MainFrame.event);
-        
-        dealerCustomerRequestsPanel = new DealerCustomerRequestsPanel();
-        dealerCustomerRequestsPanel.setEventLogin(MainFrame.event);
-        
-        
-    }
 
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -52,6 +27,8 @@ public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setMinimumSize(new java.awt.Dimension(900, 529));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dealerControlPanelLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -112,23 +89,23 @@ public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         if ((JOptionPane.showConfirmDialog(this, "Do You Want To Log Out?", "WARNING",
-        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-            MainFrame.event.logOut();
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+            MainFrame.instance.logOut();
         } else {
-            
+
         }
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void myAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAccountButtonActionPerformed
-        MainFrame.event.setPage(dealerAccountDetailsPanel);
+        MainFrame.instance.setPage(MainFrame.instance.getDealerAccountDetailsPanel());
     }//GEN-LAST:event_myAccountButtonActionPerformed
 
     private void manageVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVehiclesButtonActionPerformed
-        MainFrame.event.setPage(dealerManageVehiclePanel);
+        MainFrame.instance.setPage(MainFrame.instance.getDealerManageVehiclePanel());
     }//GEN-LAST:event_manageVehiclesButtonActionPerformed
 
     private void customerRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerRequestsButtonActionPerformed
-        MainFrame.event.setPage(dealerCustomerRequestsPanel);
+        MainFrame.instance.setPage(MainFrame.instance.getDealerCustomerRequestsPanel());
     }//GEN-LAST:event_customerRequestsButtonActionPerformed
 
 
@@ -143,6 +120,6 @@ public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer
 
     @Override
     public void PageOn() {
-         jLabel1.setText("Welcome " + MainFrame.account.getName());
+        jLabel1.setText("Welcome " + MainFrame.instance.getAccount().getName());
     }
 }

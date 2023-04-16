@@ -2,40 +2,21 @@ package CarSalesSystem;
 
 import CorePackage.ITriggerer;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author zahid
  */
-public class CustomerControlPanel extends javax.swing.JPanel implements ITriggerer{
-    
-    private EventLogin event;
-    
-    private CustomerVehicleListPanel customerVehicleListPanel;
-    private CustomerMyOrdersPanel customerMyOrdersPanel;
-    private CustomerAccountDetailsPanel customerAccountDetailsPanel;
-    
+public class CustomerControlPanel extends javax.swing.JPanel implements ITriggerer {
+
     public CustomerControlPanel() {
         initComponents();
-        customerVehicleListPanel = new CustomerVehicleListPanel();
-        customerVehicleListPanel.setEventLogin(MainFrame.event);
-        
-        customerMyOrdersPanel = new CustomerMyOrdersPanel();
-        customerMyOrdersPanel.setEventLogin(event);
-        
-        customerAccountDetailsPanel = new CustomerAccountDetailsPanel();
-        customerAccountDetailsPanel.setEventLogin(event);
-        
+
     }
+
     
-    
-    
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
-    }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -48,6 +29,7 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
         backButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         customerControlPanelLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -107,23 +89,23 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewVehiclesButtonActionPerformed
-        MainFrame.event.setPage(customerVehicleListPanel);     
+        MainFrame.instance.setPage(MainFrame.instance.getCustomerVehicleListPanel());
     }//GEN-LAST:event_viewVehiclesButtonActionPerformed
 
     private void myOrdersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myOrdersButtonActionPerformed
-        MainFrame.event.setPage(customerMyOrdersPanel);
+        MainFrame.instance.setPage(MainFrame.instance.getCustomerMyOrdersPanel());
     }//GEN-LAST:event_myOrdersButtonActionPerformed
 
     private void myAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myAccountButtonActionPerformed
-        MainFrame.event.setPage(customerAccountDetailsPanel);
+         MainFrame.instance.setPage(MainFrame.instance.getCustomerAccountDetailsPanel());
     }//GEN-LAST:event_myAccountButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         if ((JOptionPane.showConfirmDialog(this, "Do You Want To Log Out?", "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-            MainFrame.event.logOut();
+            MainFrame.instance.logOut();
         } else {
-            
+
         }
     }//GEN-LAST:event_backButtonActionPerformed
 
@@ -139,6 +121,6 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
 
     @Override
     public void PageOn() {
-        jLabel1.setText("Welcome " + MainFrame.account.getName());
+        jLabel1.setText("Welcome " + MainFrame.instance.getAccount().getName());
     }
 }

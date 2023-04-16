@@ -2,8 +2,9 @@ package Main;
 
 import CarSalesSystem.*;
 import CorePackage.*;
-import SwingComponents.EventLogin;
+import login.*;
 import javax.swing.JPanel;
+import login.LoginAndRegister;
 
 /**
  *
@@ -11,106 +12,119 @@ import javax.swing.JPanel;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    public static User account;
-   
-    public static EventLogin event;
-    // <editor-fold defaultstate="collapsed" desc="BURAYA HİÇ HİÇ BAKMA"> 
-    public static AdminControlPanel adminControlPanel;
+    // --------------- VARIABLE DECLERATIONS ------------------
+    public static MainFrame instance;
 
-    public static DealerControlPanel dealerControlPanel;
-    public static DealerAccountDetailsPanel dealerAccountDetailsPanel;
-    public static DealerManageVehiclePanel dealerManageVehiclePanel;
-    public static DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
-    public static DealerAddVehiclePanel dealerAddVehiclePanel;
-    
-    public static CustomerControlPanel customerControlPanel;
-    public static CustomerVehicleListPanel customerVehicleListPanel;
-    public static CustomerMyOrdersPanel customerMyOrdersPanel;
-    public static CustomerAccountDetailsPanel customerAccountDetailsPanel;
-    
-     // </editor-fold> 
+    private final LoginAndRegister loginAndRegister;
+
+    private final AdminControlPanel adminControlPanel;
+
+    private final DealerControlPanel dealerControlPanel;
+    private final DealerAccountDetailsPanel dealerAccountDetailsPanel;
+    private final DealerManageVehiclePanel dealerManageVehiclePanel;
+    private final DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
+    private final DealerAddVehiclePanel dealerAddVehiclePanel;
+
+    private final CustomerControlPanel customerControlPanel;
+    private final CustomerVehicleListPanel customerVehicleListPanel;
+    private final CustomerMyOrdersPanel customerMyOrdersPanel;
+    private final CustomerAccountDetailsPanel customerAccountDetailsPanel;
+
+    private final JPanel container;
+
+    private User account;
+
     public MainFrame() {
         initComponents();
-        // <editor-fold defaultstate="collapsed" desc="BURAYA BAKMA">   
+
+        // Initilize Variables
+        loginAndRegister = new LoginAndRegister();
+
         adminControlPanel = new AdminControlPanel();
 
         dealerControlPanel = new DealerControlPanel();
         dealerAccountDetailsPanel = new DealerAccountDetailsPanel();
         dealerManageVehiclePanel = new DealerManageVehiclePanel();
         dealerCustomerRequestsPanel = new DealerCustomerRequestsPanel();
+        dealerAddVehiclePanel = new DealerAddVehiclePanel();
 
         customerControlPanel = new CustomerControlPanel();
         customerVehicleListPanel = new CustomerVehicleListPanel();
         customerMyOrdersPanel = new CustomerMyOrdersPanel();
         customerAccountDetailsPanel = new CustomerAccountDetailsPanel();
-        dealerAddVehiclePanel = new DealerAddVehiclePanel();
-        // </editor-fold> 
-        event = new EventLogin() {
 
-            @Override
-            public void logOut() {
-                main.removeAll();
-                main.add(loginAndRegister);
-                main.revalidate();
-                main.repaint();
-            }
+        container = new JPanel();
 
-            @Override
-            public void setPage(JPanel panel) {
-                main.removeAll();
-                main.add(panel);
-                main.revalidate();
-                main.repaint();
-                ITriggerer triggerer= (ITriggerer)panel;
-                triggerer.PageOn();
-            }
-        };
+        this.add(container);
+        container.add(loginAndRegister);
 
-        loginAndRegister.setEventLogin(event);
+        setSize(900, 565);
 
-        adminControlPanel.setEventLogin(event);
+    }
 
-        dealerControlPanel.setEventLogin(event);
-        dealerAccountDetailsPanel.setEventLogin(event);
-        dealerManageVehiclePanel.setEventLogin(event);
-        dealerCustomerRequestsPanel.setEventLogin(event);
-        dealerAddVehiclePanel.setEventLogin(event);
+    // --------------- ENCAPSULATE FIELDS ------------------
+    public LoginAndRegister getLoginAndRegister() {
+        return loginAndRegister;
+    }
 
-        customerControlPanel.setEventLogin(event);
-        customerVehicleListPanel.setEventLogin(event);
-        customerMyOrdersPanel.setEventLogin(event);
-        customerAccountDetailsPanel.setEventLogin(event);
+    public AdminControlPanel getAdminControlPanel() {
+        return adminControlPanel;
+    }
 
+    public DealerControlPanel getDealerControlPanel() {
+        return dealerControlPanel;
+    }
+
+    public DealerAccountDetailsPanel getDealerAccountDetailsPanel() {
+        return dealerAccountDetailsPanel;
+    }
+
+    public DealerManageVehiclePanel getDealerManageVehiclePanel() {
+        return dealerManageVehiclePanel;
+    }
+
+    public DealerCustomerRequestsPanel getDealerCustomerRequestsPanel() {
+        return dealerCustomerRequestsPanel;
+    }
+
+    public DealerAddVehiclePanel getDealerAddVehiclePanel() {
+        return dealerAddVehiclePanel;
+    }
+
+    public CustomerControlPanel getCustomerControlPanel() {
+        return customerControlPanel;
+    }
+
+    public CustomerVehicleListPanel getCustomerVehicleListPanel() {
+        return customerVehicleListPanel;
+    }
+
+    public CustomerMyOrdersPanel getCustomerMyOrdersPanel() {
+        return customerMyOrdersPanel;
+    }
+
+    public CustomerAccountDetailsPanel getCustomerAccountDetailsPanel() {
+        return customerAccountDetailsPanel;
+    }
+
+    public User getAccount() {
+        return account;
+    }
+
+    public void setAccount(User account) {
+        this.account = account;
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        main = new javax.swing.JPanel();
-        loginAndRegister = new login.LoginAndRegister();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 300));
-
-        main.setLayout(new java.awt.BorderLayout());
-        main.add(loginAndRegister, java.awt.BorderLayout.CENTER);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(main, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     public static void main(String args[]) {
 
         try {
@@ -133,11 +147,31 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 testInit();
-                new MainFrame().setVisible(true);
+                // ---------------- SINGLETON -----------------
+                instance = new MainFrame();
+                instance.setVisible(true);
 
             }
         });
 
+    }
+
+    public final void setPage(JPanel page) {
+        container.removeAll();
+        container.add(page);
+        container.revalidate();
+        container.repaint();
+        System.out.println("Page Setted!");
+
+        if (page instanceof ITriggerer) {
+            ITriggerer iTriggerer = (ITriggerer) page;
+            iTriggerer.PageOn();
+        }
+    }
+
+    public void logOut() {
+        account = null;
+        setPage(getLoginAndRegister());
     }
 
     public static void testInit() {
@@ -160,18 +194,17 @@ public class MainFrame extends javax.swing.JFrame {
         //Default vehicles
         Vehicle vehicle1 = new Vehicle(dealer1, null, "Togg",
                 "T10X", "Red", "SUV", "Electric", "2023", "500000₺");
-        
-        Vehicle vehicle2 = new Vehicle(dealer2, customer2, "BMW", 
+
+        Vehicle vehicle2 = new Vehicle(dealer2, customer2, "BMW",
                 "5.20", "Black", "Sedan", "Diesel", "2022", "700000");
         vehicle2.setRegister(Vehicle.pending);
 
         Database.getVehicles().add(vehicle1);
         Database.getVehicles().add(vehicle2);
-        
-                
+
         dealer1.getListedVehicles().add(vehicle1);
         dealer2.getListedVehicles().add(vehicle2);
-        
+
         customer2.getListedVehicles().add(vehicle2);
 
         Database.getUsers().add(admin);
@@ -183,7 +216,5 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private login.LoginAndRegister loginAndRegister;
-    public static javax.swing.JPanel main;
     // End of variables declaration//GEN-END:variables
 }

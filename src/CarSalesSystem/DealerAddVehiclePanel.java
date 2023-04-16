@@ -5,7 +5,6 @@ import CorePackage.Dealer;
 import CorePackage.ITriggerer;
 import CorePackage.Vehicle;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,14 +13,8 @@ import javax.swing.JOptionPane;
  */
 public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITriggerer {
 
-    private EventLogin event;
-
     public DealerAddVehiclePanel() {
         initComponents();
-    }
-
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
     }
 
     @SuppressWarnings("unchecked")
@@ -47,6 +40,8 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
         addVehicleButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setMinimumSize(new java.awt.Dimension(900, 529));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addVehicleLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -153,11 +148,11 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainFrame.event.setPage(MainFrame.dealerManageVehiclePanel);
+        MainFrame.instance.setPage(MainFrame.instance.getDealerManageVehiclePanel());
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void addVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehicleButtonActionPerformed
-        Dealer dealer = (Dealer) MainFrame.account;
+        Dealer dealer = (Dealer) MainFrame.instance.getAccount();
         Vehicle vehicle = new Vehicle(dealer, null, brandjComboBox.getSelectedItem().toString(), txtModel.getText(),
                 txtColor.getText(), typejComboBox.getSelectedItem().toString(), fuelTypejComboBox.getSelectedItem().toString(),
                 yearjComboBox.getSelectedItem().toString(), txtPrice.getText());
@@ -170,7 +165,7 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
             dealer.getListedVehicles().add(vehicle);
             JOptionPane.showMessageDialog(this, "Successfully Created A Vehicle ",
                     "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
-            MainFrame.event.setPage(MainFrame.dealerManageVehiclePanel);
+            MainFrame.instance.setPage(MainFrame.instance.getDealerManageVehiclePanel());
         }
 
     }//GEN-LAST:event_addVehicleButtonActionPerformed

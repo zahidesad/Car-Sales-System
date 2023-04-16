@@ -7,7 +7,6 @@ import CorePackage.ITriggerer;
 import CorePackage.User;
 import CorePackage.Vehicle;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements ITriggerer {
 
-    private EventLogin event;
     private Dealer dealer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
@@ -29,10 +27,6 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
 
-    }
-
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
     }
 
     public void refreshTable() {
@@ -70,6 +64,8 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
         acceptDennyButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setMinimumSize(new java.awt.Dimension(900, 529));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         myCustomersLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -141,7 +137,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
 
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainFrame.event.setPage(MainFrame.dealerControlPanel);
+        MainFrame.instance.setPage(MainFrame.instance.getDealerControlPanel());
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void customerInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerInfoButtonActionPerformed
@@ -150,9 +146,9 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
             for (User user : Database.getUsers()) {
                 User customer = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
 
-                MainFrame.customerAccountDetailsPanel.customer = (Customer) customer;
-                MainFrame.customerAccountDetailsPanel.accountDetailsForDealer();
-                MainFrame.event.setPage(MainFrame.customerAccountDetailsPanel);
+                MainFrame.instance.getCustomerAccountDetailsPanel().customer = (Customer) customer;
+                MainFrame.instance.getCustomerAccountDetailsPanel().accountDetailsForDealer();
+                MainFrame.instance.setPage(MainFrame.instance.getCustomerAccountDetailsPanel());
 
             }
         }
@@ -185,7 +181,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
 
     @Override
     public void PageOn() {
-        dealer = (Dealer) MainFrame.account;
+        dealer = (Dealer) MainFrame.instance.getAccount();
         refreshTable();
     }
 }

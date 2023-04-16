@@ -2,7 +2,6 @@ package CarSalesSystem;
 
 import CorePackage.*;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,11 +12,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITriggerer {
 
-    private EventLogin event;
-
     private Dealer dealer;
-
-    private DealerAddVehiclePanel dealerAddVehiclePanel;
 
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
@@ -27,13 +22,6 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
 
-        dealerAddVehiclePanel = new DealerAddVehiclePanel();
-        dealerAddVehiclePanel.setEventLogin(MainFrame.event);
-
-    }
-
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
     }
 
     public void refreshTable() {
@@ -69,6 +57,8 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
         backButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setMinimumSize(new java.awt.Dimension(900, 529));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         myVehiclesLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -132,11 +122,11 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainFrame.event.setPage(MainFrame.dealerControlPanel);
+        MainFrame.instance.setPage(MainFrame.instance.getDealerControlPanel());
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void addVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehicleButtonActionPerformed
-        MainFrame.event.setPage(dealerAddVehiclePanel);
+        MainFrame.instance.setPage(MainFrame.instance.getDealerAddVehiclePanel());
     }//GEN-LAST:event_addVehicleButtonActionPerformed
 
     private void deleteVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVehicleButtonActionPerformed
@@ -148,7 +138,7 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
                     refreshTable();
                 }
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
@@ -167,7 +157,7 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
     // End of variables declaration//GEN-END:variables
 
     public void PageOn() {
-        dealer = (Dealer) MainFrame.account;
+        dealer = (Dealer) MainFrame.instance.getAccount();
         refreshTable();
     }
 }

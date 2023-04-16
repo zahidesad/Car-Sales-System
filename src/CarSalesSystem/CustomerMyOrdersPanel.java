@@ -7,7 +7,6 @@ import CorePackage.ITriggerer;
 import CorePackage.User;
 import CorePackage.Vehicle;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITriggerer {
 
-    private EventLogin event;
     private Customer customer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
@@ -29,10 +27,6 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
 
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
-    }
-
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
     }
 
     @SuppressWarnings("unchecked")
@@ -47,6 +41,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         cancelOrderButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         myOrdersLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -132,7 +127,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
     }
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainFrame.event.setPage(MainFrame.customerControlPanel);
+        MainFrame.instance.setPage(MainFrame.instance.getCustomerControlPanel());
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void dealerInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealerInfoButtonActionPerformed
@@ -140,9 +135,9 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
             for (User user : Database.getUsers()) {
                 User dealer = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
 
-                MainFrame.dealerAccountDetailsPanel.dealer = (Dealer) dealer;
-                MainFrame.dealerAccountDetailsPanel.accountDetailsForCustomer();
-                MainFrame.event.setPage(MainFrame.dealerAccountDetailsPanel);
+                MainFrame.instance.getDealerAccountDetailsPanel().dealer = (Dealer) dealer;
+                MainFrame.instance.getDealerAccountDetailsPanel().accountDetailsForCustomer();
+                MainFrame.instance.setPage(MainFrame.instance.getDealerAccountDetailsPanel());
                 ;
             }
             return;
@@ -174,7 +169,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
 
     @Override
     public void PageOn() {
-        customer = (Customer) MainFrame.account;
+        customer = (Customer) MainFrame.instance.getAccount();
         refreshTable();
     }
 }

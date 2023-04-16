@@ -2,7 +2,6 @@ package CarSalesSystem;
 
 import CorePackage.*;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer {
 
-    private EventLogin event;
+
 
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Name", "Username", "E-mail", "Phone"};
@@ -26,9 +25,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
     }
 
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
-    }
+    
 
     public void refreshTable() {
         if (jComboBox1.getSelectedItem().equals("Customer")) {
@@ -102,6 +99,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
         backButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tableDark1.setBackground(new java.awt.Color(102, 102, 102));
@@ -216,7 +214,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
         if ((JOptionPane.showConfirmDialog(this, "Do You Want To Log Out?", "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-            MainFrame.event.logOut();
+            MainFrame.instance.logOut();
         } else {
         }
 

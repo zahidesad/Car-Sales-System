@@ -7,7 +7,6 @@ import CorePackage.ITriggerer;
 import CorePackage.User;
 import CorePackage.Vehicle;
 import Main.MainFrame;
-import SwingComponents.EventLogin;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITriggerer {
 
-    private EventLogin event;
     private Customer customer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
@@ -30,10 +28,6 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
 
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
-    }
-
-    public void setEventLogin(EventLogin event) {
-        this.event = event;
     }
 
     public void refreshTable() {
@@ -92,6 +86,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         displayDealersButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         vehicleListLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -216,7 +211,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainFrame.event.setPage(MainFrame.customerControlPanel);
+        MainFrame.instance.setPage(MainFrame.instance.getCustomerControlPanel());
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void dealerFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealerFilterJComboBoxActionPerformed
@@ -257,9 +252,9 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
             for (User user : Database.getUsers()) {
                 User dealer = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
 
-                MainFrame.dealerAccountDetailsPanel.dealer = (Dealer) dealer;
-                MainFrame.dealerAccountDetailsPanel.accountDetailsForCustomer();
-                MainFrame.event.setPage(MainFrame.dealerAccountDetailsPanel);
+                MainFrame.instance.getDealerAccountDetailsPanel().dealer = (Dealer) dealer;
+                MainFrame.instance.getDealerAccountDetailsPanel().accountDetailsForCustomer();
+                MainFrame.instance.setPage(MainFrame.instance.getDealerAccountDetailsPanel());
 
             }
         } else {
@@ -341,7 +336,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
                         "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             customer.buyVehicle((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
             JOptionPane.showMessageDialog(this, "Your order has been processed",
                     "Your Order Successful", JOptionPane.INFORMATION_MESSAGE);
@@ -376,7 +371,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
 
     @Override
     public void PageOn() {
-        customer = (Customer) MainFrame.account;
+        customer = (Customer) MainFrame.instance.getAccount();
         refreshTable();
 
         dealerFilterJComboBox.removeAllItems();
