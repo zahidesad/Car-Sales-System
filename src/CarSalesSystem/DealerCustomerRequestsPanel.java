@@ -151,6 +151,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
                 MainFrame.instance.setPage(MainFrame.instance.getCustomerAccountDetailsPanel());
 
             }
+            return;
         }
         JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                 "Selection Error", JOptionPane.ERROR_MESSAGE);

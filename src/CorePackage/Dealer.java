@@ -46,10 +46,14 @@ public class Dealer extends User {
     }
 
     public void cancelAllOrder() {
+
         for (Vehicle listedVehicle : listedVehicles) {
+            if (listedVehicle.getRegister().equals(Vehicle.accepted)) {
+                return;
+            }
             Database.getVehicles().remove(listedVehicle);
 
-            if (listedVehicle != null && listedVehicle.getCustomer()!=null) {
+            if (listedVehicle != null && listedVehicle.getCustomer() != null) {
                 listedVehicle.getCustomer().getListedVehicles().remove(listedVehicle);
             }
         }
@@ -60,7 +64,7 @@ public class Dealer extends User {
         for (Vehicle listedVehicle : listedVehicles) {
             if (listedVehicle.getId() == VehicleID) {
                 listedVehicle.setRegister(Vehicle.accepted);
-                Database.getVehicles().remove(listedVehicle);
+                //Database.getVehicles().remove(listedVehicle);
             }
         }
     }

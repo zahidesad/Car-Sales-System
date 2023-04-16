@@ -140,6 +140,7 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
     private void deleteAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccountButtonActionPerformed
         customer.deleteAccount();
         MainFrame.instance.logOut();
+        customer = null;
     }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
 

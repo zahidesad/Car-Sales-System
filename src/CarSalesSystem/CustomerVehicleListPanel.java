@@ -331,7 +331,8 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
 
     private void buyVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyVehicleButtonActionPerformed
         if (tableDark1.getSelectedRow() != -1) {
-            if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Vehicle.pending)) {
+            if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Vehicle.pending)
+                    || tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Vehicle.accepted)) {
                 JOptionPane.showMessageDialog(this, "This vehicle cannot buyed ",
                         "Error", JOptionPane.ERROR_MESSAGE);
                 return;

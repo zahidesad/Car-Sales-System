@@ -131,6 +131,13 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
 
     private void deleteVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVehicleButtonActionPerformed
         if (tableDark1.getSelectedRow() != -1) {
+            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Vehicle.accepted)) {
+                JOptionPane.showMessageDialog(this, "This car cannot be deleted because it has been sold. ",
+                        " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
+
+                return;
+            }
+
             for (int i = 0; i < dealer.getListedVehicles().size(); i++) {
                 if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)
                         == dealer.getListedVehicles().get(i).getId()) {

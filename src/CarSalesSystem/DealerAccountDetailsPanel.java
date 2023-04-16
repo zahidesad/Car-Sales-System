@@ -141,6 +141,7 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
         dealer.deleteAccount();
         Database.deleteAllVehicle(dealer);
         MainFrame.instance.logOut();
+        dealer = null;
     }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
 

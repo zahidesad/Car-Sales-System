@@ -12,8 +12,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer {
 
-
-
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Name", "Username", "E-mail", "Phone"};
     String[] columNamesVehicles = {"ID", "Dealer", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
@@ -24,8 +22,6 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
         tableDark1.setModel(tableModel);
 
     }
-
-    
 
     public void refreshTable() {
         if (jComboBox1.getSelectedItem().equals("Customer")) {
@@ -193,7 +189,14 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
             if (jComboBox1.getSelectedItem().equals("Vehicle")) {
                 for (Vehicle vehicle : Database.getVehicles()) {
-                    if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == vehicle.getId()) {
+                    if (tableModel.getValueAt(tableDark1.getSelectedRow(), 8).equals(Vehicle.accepted)) {
+                        JOptionPane.showMessageDialog(this, "This car cannot be deleted because it has been sold. ",
+                                " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    } else if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == vehicle.getId()) {
+                        if (vehicle.getRegister().equals(Vehicle.pending)) {
+                            vehicle.setRegister(Vehicle.available);
+                        }
                         vehicle.removeVehicle();
                         refreshTable();
                         break;
