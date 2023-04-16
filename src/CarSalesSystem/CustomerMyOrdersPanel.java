@@ -143,8 +143,9 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
                 MainFrame.dealerAccountDetailsPanel.dealer = (Dealer) dealer;
                 MainFrame.dealerAccountDetailsPanel.accountDetailsForCustomer();
                 MainFrame.event.setPage(MainFrame.dealerAccountDetailsPanel);
-
+                ;
             }
+            return;
         }
         JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                 "Selection Error", JOptionPane.ERROR_MESSAGE);
@@ -154,6 +155,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         if (tableDark1.getSelectedRow() != -1) {
             customer.cancelOrder((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
             refreshTable();
+
         } else {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
