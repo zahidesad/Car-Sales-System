@@ -109,7 +109,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         tableModel.setColumnIdentifiers(columNames);
 
         for (Vehicle listedVehicle : customer.getListedVehicles()) {
-            if (listedVehicle.getRegister().equals(Vehicle.pending) || listedVehicle.getRegister().equals(Vehicle.accepted)) {
+            if (!listedVehicle.getRegisterForCustomer().equals(Vehicle.available)) {
 
                 Vector rowData = new Vector();
                 rowData.add(listedVehicle.getDealer().getId());
@@ -118,7 +118,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
                 rowData.add(listedVehicle.getBrand());
                 rowData.add(listedVehicle.getModel());
                 rowData.add(listedVehicle.getPrice());
-                rowData.add(listedVehicle.getRegister());
+                rowData.add(listedVehicle.getRegisterForCustomer());
 
                 tableModel.addRow(rowData);
             }
@@ -148,8 +148,19 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
 
     private void cancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderButtonActionPerformed
         if (tableDark1.getSelectedRow() != -1) {
-            customer.cancelOrder((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
-            refreshTable();
+            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 6).equals(Vehicle.pending)) {
+                if ((JOptionPane.showConfirmDialog(this, "Do you really want to cancel your order? "
+                        + "This action cannot be undone!", "WARNING",
+                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                    customer.cancelOrder((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
+                    refreshTable();
+                } else {
+
+                }
+            } else {
+                JOptionPane.showConfirmDialog(this, "This car is already in accepted or denied status. ",
+                        "Invalid Transaction", JOptionPane.ERROR_MESSAGE);
+            }
 
         } else {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",

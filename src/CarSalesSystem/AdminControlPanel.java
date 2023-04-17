@@ -170,15 +170,26 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                 for (User user : Database.getUsers()) {
                     if (user instanceof Customer customer) {
                         if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == customer.getId()) {
-                            customer.deleteAccount();
-                            refreshTable();
-                            break;
+                            if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this account? "
+                                    + "This action cannot be undone!", "WARNING",
+                                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                                customer.deleteAccount();
+                                refreshTable();
+                                break;
+                            } else {
+
+                            }
                         }
                     } else if (user instanceof Dealer dealer) {
                         if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == dealer.getId()) {
-                            dealer.deleteAccount();
-                            refreshTable();
-                            break;
+                            if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this account? "
+                                    + "This action cannot be undone!", "WARNING",
+                                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                                dealer.deleteAccount();
+                                refreshTable();
+                                break;
+                            } else {
+                            }
                         }
 
                     }
@@ -197,9 +208,15 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                         if (vehicle.getRegister().equals(Vehicle.pending)) {
                             vehicle.setRegister(Vehicle.available);
                         }
-                        vehicle.removeVehicle();
-                        refreshTable();
-                        break;
+                        if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this vehicle? "
+                                + "This action cannot be undone!", "WARNING",
+                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                            vehicle.removeVehicle();
+                            refreshTable();
+                            break;
+                        } else {
+
+                        }
                     }
 
                 }

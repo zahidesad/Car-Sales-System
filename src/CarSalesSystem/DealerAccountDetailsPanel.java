@@ -4,6 +4,7 @@ import CorePackage.Database;
 import CorePackage.Dealer;
 import CorePackage.ITriggerer;
 import Main.MainFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -138,10 +139,17 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void deleteAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccountButtonActionPerformed
-        dealer.deleteAccount();
-        Database.deleteAllVehicle(dealer);
-        MainFrame.instance.logOut();
-        dealer = null;
+
+        
+        if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete your account? "
+                    + "This action cannot be undone!", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+        
+            dealer.deleteAccount();
+            Database.deleteAllVehicle(dealer);
+            MainFrame.instance.logOut();
+            dealer = null;
+        }
     }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
 

@@ -20,7 +20,10 @@ public class Vehicle {
     public final static String pending = "Pending";
     public final static String accepted = "Accepted";
     public final static String available = "Available";
+    public final static String denied = "Denied";
+
     private String register = available;
+    private String registerForCustomer = pending;
 
     private Dealer dealer;
     private Customer customer;
@@ -57,6 +60,14 @@ public class Vehicle {
 
     public void setRegister(String register) {
         this.register = register;
+    }
+
+    public String getRegisterForCustomer() {
+        return registerForCustomer;
+    }
+
+    public void setRegisterForCustomer(String registerForCustomer) {
+        this.registerForCustomer = registerForCustomer;
     }
 
     public Dealer getDealer() {

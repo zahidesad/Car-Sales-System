@@ -33,7 +33,7 @@ public class SplashScreen extends javax.swing.JDialog {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/2.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/baltaci.com.png"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         lblStatus.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N

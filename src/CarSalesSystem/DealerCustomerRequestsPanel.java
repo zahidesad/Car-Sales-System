@@ -164,7 +164,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
                 dealer.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
                 refreshTable();
             } else {
-                dealer.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                dealer.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));            
                 refreshTable();
             }
         }

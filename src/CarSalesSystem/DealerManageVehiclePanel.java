@@ -11,23 +11,23 @@ import javax.swing.table.DefaultTableModel;
  * @author zahid
  */
 public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITriggerer {
-
+    
     private Dealer dealer;
-
+    
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
-
+    
     public DealerManageVehiclePanel() {
         initComponents();
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
-
+        
     }
-
+    
     public void refreshTable() {
         tableModel.setRowCount(0);
         tableModel.setColumnIdentifiers(columNames);
-
+        
         for (Vehicle listedVehicle : dealer.getListedVehicles()) {
             Vector rowData = new Vector();
             rowData.add(listedVehicle.getId());
@@ -38,13 +38,13 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
             rowData.add(listedVehicle.getYear());
             rowData.add(listedVehicle.getPrice());
             rowData.add(listedVehicle.getRegister());
-
+            
             tableModel.addRow(rowData);
-
+            
         }
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -134,18 +134,27 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
             if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Vehicle.accepted)) {
                 JOptionPane.showMessageDialog(this, "This car cannot be deleted because it has been sold. ",
                         " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
-
                 return;
-            }
-
-            for (int i = 0; i < dealer.getListedVehicles().size(); i++) {
-                if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)
-                        == dealer.getListedVehicles().get(i).getId()) {
-                    dealer.removeVehicle(dealer.getListedVehicles().get(i).getId());
-                    refreshTable();
+            } else if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Vehicle.pending)) {
+                JOptionPane.showMessageDialog(this, "This car cannot be deleted because you have not yet responded to the customer's request.\n"
+                        + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
+                        " Incorrect Operation", JOptionPane.INFORMATION_MESSAGE);
+                
+                MainFrame.instance.setPage(MainFrame.instance.getDealerCustomerRequestsPanel());
+                
+            } else if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this vehicle to your account? "
+                    + "This action cannot be undone!", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                
+                for (int i = 0; i < dealer.getListedVehicles().size(); i++) {
+                    if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)
+                            == dealer.getListedVehicles().get(i).getId()) {
+                        dealer.removeVehicle(dealer.getListedVehicles().get(i).getId());
+                        refreshTable();
+                    }
                 }
             }
-
+            
         } else {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);

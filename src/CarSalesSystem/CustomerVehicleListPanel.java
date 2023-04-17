@@ -333,16 +333,26 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         if (tableDark1.getSelectedRow() != -1) {
             if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Vehicle.pending)
                     || tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Vehicle.accepted)) {
-                JOptionPane.showMessageDialog(this, "This vehicle cannot buyed ",
+                JOptionPane.showMessageDialog(this, "This vehicle cannot buyed! ",
                         "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            customer.buyVehicle((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
-            JOptionPane.showMessageDialog(this, "Your order has been processed",
-                    "Your Order Successful", JOptionPane.INFORMATION_MESSAGE);
-            refreshTable();
+            if ((JOptionPane.showConfirmDialog(this, "Do you really want to buy this vehicle? ", "Are You Sure?",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
+                customer.buyVehicle((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
+                if (customer.isFlagForBuyVehicle()) {
+                    JOptionPane.showMessageDialog(this, "You cannot submit a request again for a car that you "
+                            + "have previously purchased and rejected.", "Invalid Transaction", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Your order has been processed",
+                            "Your Order Successful", JOptionPane.INFORMATION_MESSAGE);
+                    refreshTable();
+                }
+            } else {
+
+            }
         } else {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
@@ -374,7 +384,8 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     public void PageOn() {
         customer = (Customer) MainFrame.instance.getAccount();
         refreshTable();
-
+        
+        customer.setFlagForBuyVehicle(false);
         dealerFilterJComboBox.removeAllItems();
         brandFilterJComboBox.removeAllItems();
         typeFilterJComboBox.removeAllItems();

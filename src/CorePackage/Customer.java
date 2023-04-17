@@ -14,6 +14,8 @@ public class Customer extends User {
         return listedVehicles;
     }
 
+    private boolean flagForBuyVehicle = false;
+
     static int newId = 300;
     int id = 0;
 
@@ -28,13 +30,18 @@ public class Customer extends User {
     }
 
     public void buyVehicle(int vehicleID) {
-        for (Vehicle vehicle : Database.getVehicles()) {
 
-            if (vehicle.getId() == vehicleID) {
+        for (Vehicle vehicle : Database.getVehicles()) {
+            if (vehicle.getId() == vehicleID && !vehicle.getRegisterForCustomer().equals(Vehicle.denied)) {
                 vehicle.setRegister(Vehicle.pending);
+                vehicle.setRegisterForCustomer(Vehicle.pending);
                 vehicle.setCustomer(this);
                 this.listedVehicles.add(vehicle);
-
+                setFlagForBuyVehicle(false);
+                break;
+            } else {
+                setFlagForBuyVehicle(true);
+                break;
             }
         }
 
@@ -62,5 +69,13 @@ public class Customer extends User {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isFlagForBuyVehicle() {
+        return flagForBuyVehicle;
+    }
+
+    public void setFlagForBuyVehicle(boolean flagForBuyVehicle) {
+        this.flagForBuyVehicle = flagForBuyVehicle;
     }
 }

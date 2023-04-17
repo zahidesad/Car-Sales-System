@@ -2,6 +2,7 @@ package Main;
 
 import CarSalesSystem.*;
 import CorePackage.*;
+import java.awt.Dimension;
 import login.*;
 import javax.swing.JPanel;
 import login.LoginAndRegister;
@@ -59,7 +60,8 @@ public class MainFrame extends javax.swing.JFrame {
         container.add(loginAndRegister);
 
         setSize(900, 565);
-        setLocationRelativeTo(null); //// this method display the JFrame to center position of a screen
+        setLocationRelativeTo(null); //// this method display the MainFrame to center position of a screen
+        this.setResizable(false);
 
     }
 

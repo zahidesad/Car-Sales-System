@@ -5,6 +5,7 @@ import CorePackage.Dealer;
 import CorePackage.ITriggerer;
 import CorePackage.User;
 import Main.MainFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -138,9 +139,14 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void deleteAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAccountButtonActionPerformed
-        customer.deleteAccount();
-        MainFrame.instance.logOut();
-        customer = null;
+        if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete your account? "
+                + "This action cannot be undone!", "WARNING",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+            customer.deleteAccount();
+            MainFrame.instance.logOut();
+            customer = null;
+        }
+
     }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
 

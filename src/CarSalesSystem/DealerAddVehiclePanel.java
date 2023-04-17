@@ -153,20 +153,24 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
 
     private void addVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehicleButtonActionPerformed
         Dealer dealer = (Dealer) MainFrame.instance.getAccount();
-        Vehicle vehicle = new Vehicle(dealer, null, brandjComboBox.getSelectedItem().toString(), txtModel.getText(),
-                txtColor.getText(), typejComboBox.getSelectedItem().toString(), fuelTypejComboBox.getSelectedItem().toString(),
-                yearjComboBox.getSelectedItem().toString(), txtPrice.getText());
-
         if (txtModel.getText().equals("") || txtColor.getText().equals("") || txtPrice.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Fill All Entries.",
                     "Failure", JOptionPane.ERROR_MESSAGE);
-        } else {
+
+            return;
+        } else if ((JOptionPane.showConfirmDialog(this, "Do you really want to add this vehicle to your account? ",
+                "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+            Vehicle vehicle = new Vehicle(dealer, null, brandjComboBox.getSelectedItem().toString(), txtModel.getText(),
+                    txtColor.getText(), typejComboBox.getSelectedItem().toString(), fuelTypejComboBox.getSelectedItem().toString(),
+                    yearjComboBox.getSelectedItem().toString(), txtPrice.getText());
+
             Database.getVehicles().add(vehicle);
             dealer.getListedVehicles().add(vehicle);
             JOptionPane.showMessageDialog(this, "Successfully Created A Vehicle ",
                     "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
             MainFrame.instance.setPage(MainFrame.instance.getDealerManageVehiclePanel());
         }
+
 
     }//GEN-LAST:event_addVehicleButtonActionPerformed
 
