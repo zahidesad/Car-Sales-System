@@ -30,17 +30,20 @@ public class Customer extends User {
     }
 
     public void buyVehicle(int vehicleID) {
-
         for (Vehicle vehicle : Database.getVehicles()) {
-            if (vehicle.getId() == vehicleID && !vehicle.getRegisterForCustomer().equals(Vehicle.denied)) {
+            if (vehicle.getId() == vehicleID) {
+                if (this.listedVehicles.contains(vehicle)) {
+                    for (Vehicle listedVehicle : listedVehicles) {
+                        if (listedVehicle.getId() == vehicle.getId() && listedVehicle.getRegister().equals(Vehicle.denied)) {
+                            setFlagForBuyVehicle(true);
+                            return;
+                        }
+                    }
+                }
                 vehicle.setRegister(Vehicle.pending);
-                vehicle.setRegisterForCustomer(Vehicle.pending);
                 vehicle.setCustomer(this);
                 this.listedVehicles.add(vehicle);
                 setFlagForBuyVehicle(false);
-                break;
-            } else {
-                setFlagForBuyVehicle(true);
                 break;
             }
         }

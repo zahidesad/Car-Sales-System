@@ -23,7 +23,6 @@ public class Vehicle {
     public final static String denied = "Denied";
 
     private String register = available;
-    private String registerForCustomer = pending;
 
     private Dealer dealer;
     private Customer customer;
@@ -50,6 +49,19 @@ public class Vehicle {
         id = newId++;
     }
 
+    public Vehicle(int id, Dealer dealer, Customer customer, String brand, String model, String color, String type, String fuel, String year, String price) {
+        this.dealer = dealer;
+        this.customer = customer;
+        this.brand = brand;
+        this.model = model;
+        this.color = color;
+        this.type = type;
+        this.fuel = fuel;
+        this.year = year;
+        this.price = price;
+        this.id = id;
+    }
+
     public void removeVehicle() {
         Database.getVehicles().remove(this);
     }
@@ -60,14 +72,6 @@ public class Vehicle {
 
     public void setRegister(String register) {
         this.register = register;
-    }
-
-    public String getRegisterForCustomer() {
-        return registerForCustomer;
-    }
-
-    public void setRegisterForCustomer(String registerForCustomer) {
-        this.registerForCustomer = registerForCustomer;
     }
 
     public Dealer getDealer() {

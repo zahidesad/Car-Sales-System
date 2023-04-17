@@ -160,7 +160,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
     private void acceptDennyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptDennyButtonActionPerformed
         if (tableDark1.getSelectedRow() != 1 && tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Vehicle.pending)) {
             if ((JOptionPane.showConfirmDialog(this, "Do You Want To Accept Offer?", "Sales Process",
-                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                    JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION)) {
                 dealer.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
                 refreshTable();
             } else {

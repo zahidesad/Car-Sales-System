@@ -109,7 +109,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         tableModel.setColumnIdentifiers(columNames);
 
         for (Vehicle listedVehicle : customer.getListedVehicles()) {
-            if (!listedVehicle.getRegisterForCustomer().equals(Vehicle.available)) {
+            if (!listedVehicle.getRegister().equals(Vehicle.available)) {
 
                 Vector rowData = new Vector();
                 rowData.add(listedVehicle.getDealer().getId());
@@ -118,7 +118,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
                 rowData.add(listedVehicle.getBrand());
                 rowData.add(listedVehicle.getModel());
                 rowData.add(listedVehicle.getPrice());
-                rowData.add(listedVehicle.getRegisterForCustomer());
+                rowData.add(listedVehicle.getRegister());
 
                 tableModel.addRow(rowData);
             }

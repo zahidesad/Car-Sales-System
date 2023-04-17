@@ -342,9 +342,10 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
                 customer.buyVehicle((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
-                if (customer.isFlagForBuyVehicle()) {
+                if (customer.isFlagForBuyVehicle() == true) {
                     JOptionPane.showMessageDialog(this, "You cannot submit a request again for a car that you "
                             + "have previously purchased and rejected.", "Invalid Transaction", JOptionPane.ERROR_MESSAGE);
+                    return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Your order has been processed",
                             "Your Order Successful", JOptionPane.INFORMATION_MESSAGE);
@@ -384,8 +385,8 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     public void PageOn() {
         customer = (Customer) MainFrame.instance.getAccount();
         refreshTable();
-        
-        customer.setFlagForBuyVehicle(false);
+
+//        customer.setFlagForBuyVehicle(false);
         dealerFilterJComboBox.removeAllItems();
         brandFilterJComboBox.removeAllItems();
         typeFilterJComboBox.removeAllItems();
