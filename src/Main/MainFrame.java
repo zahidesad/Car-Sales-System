@@ -55,10 +55,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         container = new JPanel();
 
-        this.add(container);
+        this.add(container); 
         container.add(loginAndRegister);
 
         setSize(900, 565);
+        setLocationRelativeTo(null); //// this method display the JFrame to center position of a screen
 
     }
 
@@ -148,14 +149,16 @@ public class MainFrame extends javax.swing.JFrame {
             public void run() {
                 testInit();
                 // ---------------- SINGLETON -----------------
-                instance = new MainFrame();
+                new Main.SplashScreen(null,true).setVisible(true);
+                instance = new MainFrame();               
                 instance.setVisible(true);
 
             }
         });
 
     }
-
+    
+    // Method to set page transitions
     public final void setPage(JPanel page) {
         container.removeAll();
         container.add(page);
@@ -168,12 +171,14 @@ public class MainFrame extends javax.swing.JFrame {
             iTriggerer.PageOn();
         }
     }
-
+    
+    //Method to log out and redirect the logged out user back to the login and register page.
     public void logOut() {
         account = null;
         setPage(getLoginAndRegister());
     }
-
+    
+    //Method for default account
     public static void testInit() {
         //Default admin account
         Admin admin = new Admin("admin", "123", "Zahid",
