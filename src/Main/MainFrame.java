@@ -2,8 +2,6 @@ package Main;
 
 import CarSalesSystem.*;
 import CorePackage.*;
-import java.awt.Dimension;
-import login.*;
 import javax.swing.JPanel;
 import login.LoginAndRegister;
 

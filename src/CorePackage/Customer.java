@@ -64,7 +64,9 @@ public class Customer extends User {
     public void cancelAllOrder() {
         for (Vehicle listedVehicle : listedVehicles) {
             listedVehicle.setCustomer(null);
-            listedVehicle.setRegister(Vehicle.available);
+            if (!listedVehicle.getRegister().equals(Vehicle.accepted)) {
+                listedVehicle.setRegister(Vehicle.available);
+            }
 
         }
 

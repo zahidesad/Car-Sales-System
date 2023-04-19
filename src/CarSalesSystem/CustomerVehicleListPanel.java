@@ -43,6 +43,8 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         typeFilterJComboBox.setVisible(true);
         fuelLabel.setVisible(true);
         fuelFilterJComboBox.setVisible(true);
+        dealerLabel.setVisible(true);
+        dealerFilterJComboBox.setVisible(true);
 
         for (Vehicle vehicle : Database.getVehicles()) {
 
@@ -149,11 +151,21 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         fuelFilterJComboBox.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         fuelFilterJComboBox.setForeground(new java.awt.Color(255, 255, 255));
         fuelFilterJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        fuelFilterJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fuelFilterJComboBoxActionPerformed(evt);
+            }
+        });
         add(fuelFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 105, -1, 30));
 
         typeFilterJComboBox.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         typeFilterJComboBox.setForeground(new java.awt.Color(255, 255, 255));
         typeFilterJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        typeFilterJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typeFilterJComboBoxActionPerformed(evt);
+            }
+        });
         add(typeFilterJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 105, -1, 30));
 
         typeLabel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
@@ -215,13 +227,13 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void dealerFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealerFilterJComboBoxActionPerformed
-
+        tableModel.setRowCount(0);
         for (User user : Database.getUsers()) {
             if (user instanceof Dealer dealer) {
                 if (dealerFilterJComboBox.getSelectedIndex() != -1) {
 
                     if (dealerFilterJComboBox.getSelectedItem().equals(dealer.getName())) {
-                        tableModel.setRowCount(0);
+
                         for (Vehicle listedVehicle : dealer.getListedVehicles()) {
                             Vector rowData = new Vector();
 
@@ -265,28 +277,26 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     }//GEN-LAST:event_dealerInfoButtonActionPerformed
 
     private void brandFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brandFilterJComboBoxActionPerformed
-        for (int i = 0; i < Vehicle.vehicleBrand.length; i++) {
+        tableModel.setRowCount(0);
+        for (Vehicle vehicle : Database.getVehicles()) {
             if (brandFilterJComboBox.getSelectedIndex() != -1) {
-                if (brandFilterJComboBox.getSelectedItem().equals(Vehicle.vehicleBrand[i])) {
-                    tableModel.setRowCount(0);
+                if (brandFilterJComboBox.getSelectedItem().equals(vehicle.getBrand())) {
 
-                    for (Vehicle vehicle : Database.getVehicles()) {
-                        Vector rowData = new Vector();
+                    Vector rowData = new Vector();
 
-                        rowData.add(vehicle.getDealer().getId());
-                        rowData.add(vehicle.getDealer().getName());
-                        rowData.add(vehicle.getId());
-                        rowData.add(vehicle.getBrand());
-                        rowData.add(vehicle.getModel());
-                        rowData.add(vehicle.getType());
-                        rowData.add(vehicle.getColor());
-                        rowData.add(vehicle.getYear());
-                        rowData.add(vehicle.getFuel());
-                        rowData.add(vehicle.getPrice());
-                        rowData.add(vehicle.getRegister());
+                    rowData.add(vehicle.getDealer().getId());
+                    rowData.add(vehicle.getDealer().getName());
+                    rowData.add(vehicle.getId());
+                    rowData.add(vehicle.getBrand());
+                    rowData.add(vehicle.getModel());
+                    rowData.add(vehicle.getType());
+                    rowData.add(vehicle.getColor());
+                    rowData.add(vehicle.getYear());
+                    rowData.add(vehicle.getFuel());
+                    rowData.add(vehicle.getPrice());
+                    rowData.add(vehicle.getRegister());
 
-                        tableModel.addRow(rowData);
-                    }
+                    tableModel.addRow(rowData);
 
                 }
             }
@@ -307,9 +317,12 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
             typeFilterJComboBox.setVisible(false);
             fuelLabel.setVisible(false);
             fuelFilterJComboBox.setVisible(false);
+            dealerLabel.setVisible(false);
+            dealerFilterJComboBox.setVisible(false);
 
             for (User user : Database.getUsers()) {
                 if (user instanceof Dealer dealer) {
+
                     Vector rowData = new Vector();
 
                     rowData.add(dealer.getId());
@@ -362,6 +375,60 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
 
     }//GEN-LAST:event_buyVehicleButtonActionPerformed
 
+    private void typeFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeFilterJComboBoxActionPerformed
+        tableModel.setRowCount(0);
+        for (Vehicle vehicle : Database.getVehicles()) {
+            if (typeFilterJComboBox.getSelectedIndex() != -1) {
+                if (typeFilterJComboBox.getSelectedItem().equals(vehicle.getType())) {
+
+                    Vector rowData = new Vector();
+
+                    rowData.add(vehicle.getDealer().getId());
+                    rowData.add(vehicle.getDealer().getName());
+                    rowData.add(vehicle.getId());
+                    rowData.add(vehicle.getBrand());
+                    rowData.add(vehicle.getModel());
+                    rowData.add(vehicle.getType());
+                    rowData.add(vehicle.getColor());
+                    rowData.add(vehicle.getYear());
+                    rowData.add(vehicle.getFuel());
+                    rowData.add(vehicle.getPrice());
+                    rowData.add(vehicle.getRegister());
+
+                    tableModel.addRow(rowData);
+
+                }
+            }
+        }
+    }//GEN-LAST:event_typeFilterJComboBoxActionPerformed
+
+    private void fuelFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelFilterJComboBoxActionPerformed
+        tableModel.setRowCount(0);
+        for (Vehicle vehicle : Database.getVehicles()) {
+            if (fuelFilterJComboBox.getSelectedIndex() != -1) {
+                if (fuelFilterJComboBox.getSelectedItem().equals(vehicle.getFuel())) {
+
+                    Vector rowData = new Vector();
+
+                    rowData.add(vehicle.getDealer().getId());
+                    rowData.add(vehicle.getDealer().getName());
+                    rowData.add(vehicle.getId());
+                    rowData.add(vehicle.getBrand());
+                    rowData.add(vehicle.getModel());
+                    rowData.add(vehicle.getType());
+                    rowData.add(vehicle.getColor());
+                    rowData.add(vehicle.getYear());
+                    rowData.add(vehicle.getFuel());
+                    rowData.add(vehicle.getPrice());
+                    rowData.add(vehicle.getRegister());
+
+                    tableModel.addRow(rowData);
+
+                }
+            }
+        }
+    }//GEN-LAST:event_fuelFilterJComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private SwingComponents.Button backButton;
@@ -386,7 +453,6 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         customer = (Customer) MainFrame.instance.getAccount();
         refreshTable();
 
-//        customer.setFlagForBuyVehicle(false);
         dealerFilterJComboBox.removeAllItems();
         brandFilterJComboBox.removeAllItems();
         typeFilterJComboBox.removeAllItems();
