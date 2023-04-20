@@ -25,7 +25,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
 
     public CustomerVehicleListPanel() {
         initComponents();
-
+        
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
     }

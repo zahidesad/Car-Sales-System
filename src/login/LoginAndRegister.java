@@ -1,19 +1,18 @@
 package login;
 
 import CorePackage.ITriggerer;
+import SwingComponents.TransitionsForm;
 
 /**
  *
  * @author zahid
  */
-public class LoginAndRegister extends javax.swing.JPanel implements ITriggerer{
+public class LoginAndRegister extends TransitionsForm implements ITriggerer {
 
-    
     public LoginAndRegister() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -21,20 +20,26 @@ public class LoginAndRegister extends javax.swing.JPanel implements ITriggerer{
         loginAndRegisterDesign1 = new login.LoginAndRegisterDesign();
 
         setPreferredSize(new java.awt.Dimension(900, 529));
-        setLayout(new java.awt.BorderLayout());
 
-        loginAndRegisterDesign1.setMinimumSize(new java.awt.Dimension(900, 529));
-        loginAndRegisterDesign1.setPreferredSize(new java.awt.Dimension(900, 529));
-        add(loginAndRegisterDesign1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginAndRegisterDesign1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginAndRegisterDesign1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+        );
     }// </editor-fold>//GEN-END:initComponents
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private login.LoginAndRegisterDesign loginAndRegisterDesign1;
-    // End of variables declaration//GEN-END:variables
 
     @Override
     public void PageOn() {
         
     }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private login.LoginAndRegisterDesign loginAndRegisterDesign1;
+    // End of variables declaration//GEN-END:variables
 }

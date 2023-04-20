@@ -84,8 +84,9 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
         brandLabel.setFont(new java.awt.Font("Segoe UI Light", 3, 28)); // NOI18N
         add(brandLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 180, 40));
 
+        brandjComboBox.setBackground(new java.awt.Color(153, 153, 153));
         brandjComboBox.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        brandjComboBox.setForeground(new java.awt.Color(255, 255, 255));
+        brandjComboBox.setForeground(new java.awt.Color(0, 0, 0));
         brandjComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(brandjComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 180, 40));
 

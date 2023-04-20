@@ -13,6 +13,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     // --------------- VARIABLE DECLERATIONS ------------------
     public static MainFrame instance;
+    
+    private final MainPanel mainPanel;
 
     private final LoginAndRegister loginAndRegister;
 
@@ -37,6 +39,8 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
 
         // Initilize Variables
+        mainPanel = new MainPanel();
+        
         loginAndRegister = new LoginAndRegister();
 
         adminControlPanel = new AdminControlPanel();
@@ -55,7 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
         container = new JPanel();
 
         this.add(container); 
-        container.add(loginAndRegister);
+        container.add(mainPanel);
 
         setSize(900, 565);
         setLocationRelativeTo(null); //// this method display the MainFrame to center position of a screen
@@ -106,6 +110,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     public CustomerAccountDetailsPanel getCustomerAccountDetailsPanel() {
         return customerAccountDetailsPanel;
+    }
+    
+    public MainPanel getMainPanel(){
+        return mainPanel;
     }
 
     public User getAccount() {
@@ -175,13 +183,13 @@ public class MainFrame extends javax.swing.JFrame {
     //Method to log out and redirect the logged out user back to the login and register page.
     public void logOut() {
         account = null;
-        setPage(getLoginAndRegister());
+        setPage(getMainPanel());
     }
     
     //Method for default account
     public static void testInit() {
         //Default admin account
-        Admin admin = new Admin("admin", "123", "Zahid",
+        Admin admin = new Admin("admin", "Zeb5976116$", "Zahid",
                 "zahidesad.baltaci@stu.fsm.edu.tr", "05360666561");
 
         //Default dealer accounts
