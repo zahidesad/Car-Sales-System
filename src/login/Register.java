@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class Register extends PanelCustom implements ITriggerer {
 
+    private boolean flagForCheckBox = false;
+
     private boolean flagForName = false;
     private boolean flagForEmail = false;
     private boolean flagForUsername = false;
@@ -42,6 +44,7 @@ public class Register extends PanelCustom implements ITriggerer {
         emailIconLabel = new javax.swing.JLabel();
         usernameIconLabel = new javax.swing.JLabel();
         passwordIconLabel = new javax.swing.JLabel();
+        termsAndConditionsCheckBox = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(53, 53, 53));
 
@@ -117,33 +120,44 @@ public class Register extends PanelCustom implements ITriggerer {
             }
         });
 
+        termsAndConditionsCheckBox.setForeground(new java.awt.Color(255, 255, 255));
+        termsAndConditionsCheckBox.setText("Terms And Conditions");
+        termsAndConditionsCheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                termsAndConditionsCheckBoxİtemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(registerDealerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(registerCustomerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(termsAndConditionsCheckBox)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(registerDealerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(registerCustomerButton, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nameIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(emailIconLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(usernameIconLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(phoneNumberIconLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(passwordIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(nameIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(emailIconLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(usernameIconLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(phoneNumberIconLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(passwordIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -179,7 +193,9 @@ public class Register extends PanelCustom implements ITriggerer {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(phoneNumberIconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(termsAndConditionsCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(registerCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registerDealerButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,39 +205,46 @@ public class Register extends PanelCustom implements ITriggerer {
 
     private void registerDealerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerDealerButtonActionPerformed
 
-        if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtName.getText().equals("")
-                || txtPhoneNumber.getText().equals("") || txtEmail.getText().equals("")) {
+        if (flagForCheckBox == true) {
+            if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtName.getText().equals("")
+                    || txtPhoneNumber.getText().equals("") || txtEmail.getText().equals("")) {
 
-            JOptionPane.showMessageDialog(this, "Fill All Entries.",
-                    "Failure", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Fill All Entries.",
+                        "Failure", JOptionPane.INFORMATION_MESSAGE);
 
-        } else if (Database.checkUsername(txtUsername.getText())) {
-            JOptionPane.showMessageDialog(this, "Username Already Exist.",
-                    "Failure", JOptionPane.INFORMATION_MESSAGE);
+            } else if (Database.checkUsername(txtUsername.getText())) {
+                JOptionPane.showMessageDialog(this, "Username Already Exist.",
+                        "Failure", JOptionPane.INFORMATION_MESSAGE);
 
-        } else if (flagForName == true && flagForEmail == true && flagForUsername == true && flagForPassword == true && flagForPhoneNumber == true) {
-            Dealer dealer = new Dealer(txtUsername.getText(), txtPassword.getText(),
-                    txtName.getText(), txtEmail.getText(), txtPhoneNumber.getText());
-            Database.getUsers().add(dealer);
-            JOptionPane.showMessageDialog(this, "Successfully Created Dealer Account ",
-                    "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
-            txtUsername.setText("");
-            txtPassword.setText("");
-            txtName.setText("");
-            txtEmail.setText("");
-            txtPhoneNumber.setText("");
+            } else if (flagForName == true && flagForEmail == true && flagForUsername == true && flagForPassword == true && flagForPhoneNumber == true) {
+                Dealer dealer = new Dealer(txtUsername.getText(), txtPassword.getText(),
+                        txtName.getText(), txtEmail.getText(), txtPhoneNumber.getText());
+                Database.getUsers().add(dealer);
+                JOptionPane.showMessageDialog(this, "Successfully Created Dealer Account ",
+                        "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
+                txtUsername.setText("");
+                txtPassword.setText("");
+                txtName.setText("");
+                txtEmail.setText("");
+                txtPhoneNumber.setText("");
 
-            nameIconLabel.setIcon(null);
-            emailIconLabel.setIcon(null);
-            usernameIconLabel.setIcon(null);
-            passwordIconLabel.setIcon(null);
-            phoneNumberIconLabel.setIcon(null);
+                nameIconLabel.setIcon(null);
+                emailIconLabel.setIcon(null);
+                usernameIconLabel.setIcon(null);
+                passwordIconLabel.setIcon(null);
+                phoneNumberIconLabel.setIcon(null);
 
+            } else {
+                JOptionPane.showMessageDialog(this, "A validation error has occurred. "
+                        + "Please check the validation rules from the menu at the bottom right.",
+                        "The Gaps Were Not Filled As Desired.", JOptionPane.WARNING_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "A validation error has occurred. "
-                    + "Please check the validation rules from the menu at the bottom right.",
-                    "The Gaps Were Not Filled As Desired.", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please accept the terms and condicitions. "
+                    + "Check the menu below to read the terms of use.",
+                    "Terms And Conditions Not Accepted", JOptionPane.WARNING_MESSAGE);
         }
+
     }//GEN-LAST:event_registerDealerButtonActionPerformed
 
     private void registerCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCustomerButtonActionPerformed
@@ -263,7 +286,6 @@ public class Register extends PanelCustom implements ITriggerer {
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
         String name = txtName.getText();
 
-        
         String regex = "^[A-Za-z]{2,20}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(name);
@@ -282,7 +304,6 @@ public class Register extends PanelCustom implements ITriggerer {
     private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
         String email = txtEmail.getText();
 
-        
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
@@ -355,6 +376,14 @@ public class Register extends PanelCustom implements ITriggerer {
         }
     }//GEN-LAST:event_txtPhoneNumberKeyReleased
 
+    private void termsAndConditionsCheckBoxİtemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_termsAndConditionsCheckBoxİtemStateChanged
+        if (evt.getStateChange() == 1) {
+            flagForCheckBox = true;
+        } else {
+            flagForCheckBox = false;
+        }
+    }//GEN-LAST:event_termsAndConditionsCheckBoxİtemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel emailIconLabel;
@@ -364,6 +393,7 @@ public class Register extends PanelCustom implements ITriggerer {
     private javax.swing.JLabel phoneNumberIconLabel;
     private SwingComponents.Button registerCustomerButton;
     private SwingComponents.Button registerDealerButton;
+    private javax.swing.JCheckBox termsAndConditionsCheckBox;
     private SwingComponents.TextField txtEmail;
     private SwingComponents.TextField txtName;
     private SwingComponents.Password txtPassword;

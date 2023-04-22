@@ -189,19 +189,19 @@ public class MainFrame extends javax.swing.JFrame {
     //Method for default account
     public static void testInit() {
         //Default admin account
-        Admin admin = new Admin("admin", "Zeb5976116$", "Zahid",
+        Admin admin = new Admin("admin", "Admin123$", "Zahid",
                 "zahidesad.baltaci@stu.fsm.edu.tr", "05360666561");
 
         //Default dealer accounts
-        Dealer dealer1 = new Dealer("emirhan", "123", "Emirhan",
+        Dealer dealer1 = new Dealer("emirhan", "Emirhan123$", "Emirhan",
                 "emirhan.soylu@stu.fsm.edu.tr", "05063640557");
-        Dealer dealer2 = new Dealer("meryem", "123", "Meryem",
+        Dealer dealer2 = new Dealer("meryem", "Meryem123$", "Meryem",
                 "meryem.kilic@stu.fsm.edu.tr", "05511365622");
 
         //Default customer accounts
-        Customer customer1 = new Customer("saresu", "123", "Sare",
+        Customer customer1 = new Customer("saresu", "Saresu123$", "Sare",
                 "rumeysasare.bayram@stu.fsm.edu.tr", "05425923130");
-        Customer customer2 = new Customer("asim", "123", "Asım",
+        Customer customer2 = new Customer("asim", "Asim123$", "Asım",
                 "asimtarik.kutluer@stu.fsm.edu.tr", "05070008134");
 
         //Default vehicles

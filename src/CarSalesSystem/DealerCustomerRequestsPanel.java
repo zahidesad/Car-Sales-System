@@ -142,7 +142,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
 
     private void customerInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerInfoButtonActionPerformed
 
-        if (tableDark1.getSelectedRow() != -1) {
+        try {
             for (User user : Database.getUsers()) {
                 User customer = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
 
@@ -152,21 +152,27 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
 
             }
             return;
+        } catch (IndexOutOfBoundsException exception) {
+            JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
+                    "Selection Error", JOptionPane.ERROR_MESSAGE);
         }
-        JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
-                "Selection Error", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_customerInfoButtonActionPerformed
 
     private void acceptDennyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptDennyButtonActionPerformed
-        if (tableDark1.getSelectedRow() != 1 && tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Vehicle.pending)) {
-            if ((JOptionPane.showConfirmDialog(this, "Do You Want To Accept Offer?", "Sales Process",
-                    JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION)) {
-                dealer.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
-                refreshTable();
-            } else {
-                dealer.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));            
-                refreshTable();
+        try {
+            if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Vehicle.pending)) {
+                if ((JOptionPane.showConfirmDialog(this, "Do You Want To Accept Offer?", "Sales Process",
+                        JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION)) {
+                    dealer.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                    refreshTable();
+                } else {
+                    dealer.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                    refreshTable();
+                }
             }
+        } catch (IndexOutOfBoundsException exception) {
+            JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
+                    "Selection Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_acceptDennyButtonActionPerformed
 

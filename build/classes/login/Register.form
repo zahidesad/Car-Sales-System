@@ -21,34 +21,39 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="24" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="registerDealerButton" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="registerCustomerButton" pref="122" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="txtUsername" max="32767" attributes="0"/>
-                  <Component id="txtEmail" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtPassword" max="32767" attributes="0"/>
-                  <Component id="txtName" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtPhoneNumber" alignment="1" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="termsAndConditionsCheckBox" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="registerDealerButton" min="-2" pref="115" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="registerCustomerButton" pref="122" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="txtUsername" max="32767" attributes="0"/>
+                          <Component id="txtEmail" max="32767" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPassword" max="32767" attributes="0"/>
+                          <Component id="txtName" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPhoneNumber" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="nameIconLabel" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="emailIconLabel" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="nameIconLabel" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="emailIconLabel" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="usernameIconLabel" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="phoneNumberIconLabel" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="usernameIconLabel" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="passwordIconLabel" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="phoneNumberIconLabel" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="passwordIconLabel" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -97,7 +102,9 @@
                       <Component id="phoneNumberIconLabel" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="termsAndConditionsCheckBox" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="registerCustomerButton" min="-2" max="-2" attributes="0"/>
                   <Component id="registerDealerButton" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -239,6 +246,17 @@
     <Component class="javax.swing.JLabel" name="usernameIconLabel">
     </Component>
     <Component class="javax.swing.JLabel" name="passwordIconLabel">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="termsAndConditionsCheckBox">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Terms And Conditions"/>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="termsAndConditionsCheckBox&#x130;temStateChanged"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

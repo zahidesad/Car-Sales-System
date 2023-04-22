@@ -25,7 +25,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
 
     public CustomerVehicleListPanel() {
         initComponents();
-        
+
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
     }
@@ -230,8 +230,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         tableModel.setRowCount(0);
         for (User user : Database.getUsers()) {
             if (user instanceof Dealer dealer) {
-                if (dealerFilterJComboBox.getSelectedIndex() != -1) {
-
+                try {
                     if (dealerFilterJComboBox.getSelectedItem().equals(dealer.getName())) {
 
                         for (Vehicle listedVehicle : dealer.getListedVehicles()) {
@@ -252,6 +251,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
                             tableModel.addRow(rowData);
                         }
                     }
+                } catch (NullPointerException exception) {
                 }
 
             }
@@ -260,7 +260,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     }//GEN-LAST:event_dealerFilterJComboBoxActionPerformed
 
     private void dealerInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealerInfoButtonActionPerformed
-        if (tableDark1.getSelectedRow() != -1) {
+        try {
             for (User user : Database.getUsers()) {
                 User dealer = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
 
@@ -269,7 +269,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
                 MainFrame.instance.setPage(MainFrame.instance.getDealerAccountDetailsPanel());
 
             }
-        } else {
+        } catch (IndexOutOfBoundsException exception) {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
 
@@ -279,7 +279,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     private void brandFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brandFilterJComboBoxActionPerformed
         tableModel.setRowCount(0);
         for (Vehicle vehicle : Database.getVehicles()) {
-            if (brandFilterJComboBox.getSelectedIndex() != -1) {
+            try {
                 if (brandFilterJComboBox.getSelectedItem().equals(vehicle.getBrand())) {
 
                     Vector rowData = new Vector();
@@ -299,6 +299,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
                     tableModel.addRow(rowData);
 
                 }
+            } catch (NullPointerException e) {
             }
         }
     }//GEN-LAST:event_brandFilterJComboBoxActionPerformed
@@ -343,7 +344,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     }//GEN-LAST:event_displayDealersButtonActionPerformed
 
     private void buyVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyVehicleButtonActionPerformed
-        if (tableDark1.getSelectedRow() != -1) {
+        try {
             if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Vehicle.pending)
                     || tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Vehicle.accepted)) {
                 JOptionPane.showMessageDialog(this, "This vehicle cannot buyed! ",
@@ -367,7 +368,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
             } else {
 
             }
-        } else {
+        } catch (IndexOutOfBoundsException exception) {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -378,7 +379,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     private void typeFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeFilterJComboBoxActionPerformed
         tableModel.setRowCount(0);
         for (Vehicle vehicle : Database.getVehicles()) {
-            if (typeFilterJComboBox.getSelectedIndex() != -1) {
+            try {
                 if (typeFilterJComboBox.getSelectedItem().equals(vehicle.getType())) {
 
                     Vector rowData = new Vector();
@@ -398,6 +399,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
                     tableModel.addRow(rowData);
 
                 }
+            } catch (NullPointerException exception) {
             }
         }
     }//GEN-LAST:event_typeFilterJComboBoxActionPerformed
@@ -405,7 +407,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     private void fuelFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelFilterJComboBoxActionPerformed
         tableModel.setRowCount(0);
         for (Vehicle vehicle : Database.getVehicles()) {
-            if (fuelFilterJComboBox.getSelectedIndex() != -1) {
+            try {
                 if (fuelFilterJComboBox.getSelectedItem().equals(vehicle.getFuel())) {
 
                     Vector rowData = new Vector();
@@ -425,6 +427,8 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
                     tableModel.addRow(rowData);
 
                 }
+            } catch (NullPointerException exception) {
+
             }
         }
     }//GEN-LAST:event_fuelFilterJComboBoxActionPerformed

@@ -130,7 +130,7 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
     }//GEN-LAST:event_addVehicleButtonActionPerformed
 
     private void deleteVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVehicleButtonActionPerformed
-        if (tableDark1.getSelectedRow() != -1) {
+        try {
             if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Vehicle.accepted)) {
                 JOptionPane.showMessageDialog(this, "This car cannot be deleted because it has been sold. ",
                         " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
@@ -155,7 +155,7 @@ public class DealerManageVehiclePanel extends javax.swing.JPanel implements ITri
                 }
             }
             
-        } else {
+        } catch (IndexOutOfBoundsException exception) {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
         }

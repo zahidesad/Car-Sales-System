@@ -32,7 +32,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="panelTransitions1" min="-2" pref="441" max="-2" attributes="0"/>
+              <Component id="panelTransitions1" pref="457" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="navigationBar1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -56,7 +56,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="76" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

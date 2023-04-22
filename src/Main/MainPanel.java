@@ -15,11 +15,11 @@ public class MainPanel extends javax.swing.JPanel {
         navigationBar1.addItem(new ImageIcon(getClass().getResource("/images/account.png")));
         navigationBar1.addItem(new ImageIcon(getClass().getResource("/images/termsAndConditions.png")));
         navigationBar1.addItem(new ImageIcon(getClass().getResource("/images/validation.png")));
-
+        panelTransitions1.display(new LoginAndRegister(), navigationBar1.getAnimator());
         navigationBar1.addEvent(new EventNavigationBar() {
-            
+                
             @Override
-            public void beforeSelected(int index) {
+            public void beforeSelected(int index) {          
                 if (index == 0) {
                     panelTransitions1.display(new LoginAndRegister(),navigationBar1.getAnimator());
                 }else if (index == 1){
@@ -55,7 +55,7 @@ public class MainPanel extends javax.swing.JPanel {
         );
         navigationBar1Layout.setVerticalGroup(
             navigationBar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 76, Short.MAX_VALUE)
+            .addGap(0, 66, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -71,7 +71,7 @@ public class MainPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelTransitions1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelTransitions1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(navigationBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

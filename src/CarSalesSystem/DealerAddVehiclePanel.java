@@ -67,8 +67,9 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
         modelLabel.setFont(new java.awt.Font("Segoe UI Light", 3, 28)); // NOI18N
         add(modelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 180, 40));
 
+        fuelTypejComboBox.setBackground(new java.awt.Color(153, 153, 153));
         fuelTypejComboBox.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        fuelTypejComboBox.setForeground(new java.awt.Color(255, 255, 255));
+        fuelTypejComboBox.setForeground(new java.awt.Color(0, 0, 0));
         fuelTypejComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(fuelTypejComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 180, 40));
 
@@ -104,8 +105,9 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
         txtModel.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         add(txtModel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 180, 40));
 
+        typejComboBox.setBackground(new java.awt.Color(153, 153, 153));
         typejComboBox.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        typejComboBox.setForeground(new java.awt.Color(255, 255, 255));
+        typejComboBox.setForeground(new java.awt.Color(0, 0, 0));
         typejComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(typejComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 180, 40));
 
@@ -121,8 +123,9 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
         yearLabel.setFont(new java.awt.Font("Segoe UI Light", 3, 28)); // NOI18N
         add(yearLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, 180, 40));
 
+        yearjComboBox.setBackground(new java.awt.Color(153, 153, 153));
         yearjComboBox.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        yearjComboBox.setForeground(new java.awt.Color(255, 255, 255));
+        yearjComboBox.setForeground(new java.awt.Color(0, 0, 0));
         yearjComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(yearjComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 180, 40));
 
@@ -169,6 +172,13 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
             dealer.getListedVehicles().add(vehicle);
             JOptionPane.showMessageDialog(this, "Successfully Created A Vehicle ",
                     "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
+            brandjComboBox.setSelectedIndex(0);
+            txtModel.setText("");
+            typejComboBox.setSelectedIndex(0);
+            txtColor.setText("");
+            yearjComboBox.setSelectedIndex(0);
+            fuelTypejComboBox.setSelectedIndex(0);
+            txtPrice.setText("");
             MainFrame.instance.setPage(MainFrame.instance.getDealerManageVehiclePanel());
         }
 

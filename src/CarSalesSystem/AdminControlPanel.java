@@ -165,7 +165,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        if (tableDark1.getSelectedRow() != -1) {
+        try {
             if (jComboBox1.getSelectedItem().equals("Customer") || jComboBox1.getSelectedItem().equals("Dealer")) {
                 for (User user : Database.getUsers()) {
                     if (user instanceof Customer customer) {
@@ -222,7 +222,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                 }
 
             }
-        } else {
+        } catch (IndexOutOfBoundsException exception) {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
         }
