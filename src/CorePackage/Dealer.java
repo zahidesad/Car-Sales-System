@@ -30,9 +30,9 @@ public class Dealer extends User {
     public void removeCar(int Id) {
         Car selectedCar = null;
 
-        for (Car vehicle : Database.getCars()) {
-            if (Id == vehicle.getId()) {
-                selectedCar = vehicle;
+        for (Car car : Database.getCars()) {
+            if (Id == car.getId()) {
+                selectedCar = car;
                 break;
             }
         }
@@ -61,9 +61,9 @@ public class Dealer extends User {
     }
 
     public void acceptRequest(int CarID) {
-        for (Car listedVehicle : listedCars) {
-            if (listedVehicle.getId() == CarID) {
-                listedVehicle.setRegister(Car.accepted);
+        for (Car listedCar : listedCars) {
+            if (listedCar.getId() == CarID) {
+                listedCar.setRegister(Car.accepted);
                 
             }
         }
@@ -72,11 +72,11 @@ public class Dealer extends User {
     public void denyRequest(int CarID) {
         for (Car listedCar : listedCars) {
             if (listedCar.getId() == CarID) {
-                Car vehicle = new Car(listedCar.getId(), listedCar.getDealer(), listedCar.getCustomer(), listedCar.getBrand(), listedCar.getModel(),
+                Car car = new Car(listedCar.getId(), listedCar.getDealer(), listedCar.getCustomer(), listedCar.getBrand(), listedCar.getModel(),
                         listedCar.getColor(), listedCar.getType(), listedCar.getFuel(), listedCar.getYear(), listedCar.getPrice());
                 listedCar.setRegister(Car.available);
-                vehicle.setRegister(Car.denied);
-                listedCar.getCustomer().getListedCars().add(vehicle);
+                car.setRegister(Car.denied);
+                listedCar.getCustomer().getListedCars().add(car);
                 listedCar.setCustomer(null);
             }
         }
