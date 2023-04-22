@@ -72,9 +72,9 @@
               <Table columnCount="7" rowCount="9">
                 <Column editable="true" title="Customer ID" type="java.lang.Object"/>
                 <Column editable="true" title="Customer Username" type="java.lang.Object"/>
-                <Column editable="true" title="Vehicle ID" type="java.lang.Object"/>
-                <Column editable="true" title="Vehicle Brand" type="java.lang.Object"/>
-                <Column editable="true" title="Vehicle Model" type="java.lang.Object"/>
+                <Column editable="true" title="Car ID" type="java.lang.Object"/>
+                <Column editable="true" title="Car Brand" type="java.lang.Object"/>
+                <Column editable="true" title="Car Model" type="java.lang.Object"/>
                 <Column editable="true" title="Price " type="java.lang.Object"/>
                 <Column editable="true" title="Status" type="java.lang.Object"/>
               </Table>

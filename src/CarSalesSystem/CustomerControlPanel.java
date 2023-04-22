@@ -23,7 +23,7 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
 
         customerControlPanelLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        viewVehiclesButton = new SwingComponents.Button();
+        viewCarsButton = new SwingComponents.Button();
         myOrdersButton = new SwingComponents.Button();
         myAccountButton = new SwingComponents.Button();
         backButton = new SwingComponents.Button();
@@ -45,16 +45,16 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
         jLabel1.setText("WELCOME CUSTOMER");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 210, 30));
 
-        viewVehiclesButton.setBackground(new java.awt.Color(204, 204, 204));
-        viewVehiclesButton.setForeground(new java.awt.Color(0, 0, 0));
-        viewVehiclesButton.setText("VIEW VEHICLES");
-        viewVehiclesButton.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
-        viewVehiclesButton.addActionListener(new java.awt.event.ActionListener() {
+        viewCarsButton.setBackground(new java.awt.Color(204, 204, 204));
+        viewCarsButton.setForeground(new java.awt.Color(0, 0, 0));
+        viewCarsButton.setText("VIEW CARS");
+        viewCarsButton.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
+        viewCarsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewVehiclesButtonActionPerformed(evt);
+                viewCarsButtonActionPerformed(evt);
             }
         });
-        add(viewVehiclesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 310, 100));
+        add(viewCarsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 310, 100));
 
         myOrdersButton.setBackground(new java.awt.Color(204, 204, 204));
         myOrdersButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -88,9 +88,9 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
         add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void viewVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewVehiclesButtonActionPerformed
-        MainFrame.instance.setPage(MainFrame.instance.getCustomerVehicleListPanel());
-    }//GEN-LAST:event_viewVehiclesButtonActionPerformed
+    private void viewCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewCarsButtonActionPerformed
+        MainFrame.instance.setPage(MainFrame.instance.getCustomerCarListPanel());
+    }//GEN-LAST:event_viewCarsButtonActionPerformed
 
     private void myOrdersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myOrdersButtonActionPerformed
         MainFrame.instance.setPage(MainFrame.instance.getCustomerMyOrdersPanel());
@@ -116,7 +116,7 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
     private javax.swing.JLabel jLabel1;
     private SwingComponents.Button myAccountButton;
     private SwingComponents.Button myOrdersButton;
-    private SwingComponents.Button viewVehiclesButton;
+    private SwingComponents.Button viewCarsButton;
     // End of variables declaration//GEN-END:variables
 
     @Override

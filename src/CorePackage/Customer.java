@@ -8,13 +8,13 @@ import java.util.ArrayList;
  */
 public class Customer extends User {
 
-    private ArrayList<Vehicle> listedVehicles = new ArrayList();
+    private ArrayList<Car> listedCars = new ArrayList();
 
-    public ArrayList<Vehicle> getListedVehicles() {
-        return listedVehicles;
+    public ArrayList<Car> getListedCars() {
+        return listedCars;
     }
 
-    private boolean flagForBuyVehicle = false;
+    private boolean flagForBuyCar = false;
 
     static int newId = 300;
     int id = 0;
@@ -29,43 +29,43 @@ public class Customer extends User {
 
     }
 
-    public void buyVehicle(int vehicleID) {
-        for (Vehicle vehicle : Database.getVehicles()) {
-            if (vehicle.getId() == vehicleID) {
-                if (this.listedVehicles.contains(vehicle)) {
-                    for (Vehicle listedVehicle : listedVehicles) {
-                        if (listedVehicle.getId() == vehicle.getId() && listedVehicle.getRegister().equals(Vehicle.denied)) {
-                            setFlagForBuyVehicle(true);
+    public void buyCar(int carID) {
+        for (Car car : Database.getCars()) {
+            if (car.getId() == carID) {
+                if (this.listedCars.contains(car)) {
+                    for (Car listedCar : listedCars) {
+                        if (listedCar.getId() == car.getId() && listedCar.getRegister().equals(Car.denied)) {
+                            setFlagForBuyCar(true);
                             return;
                         }
                     }
                 }
-                vehicle.setRegister(Vehicle.pending);
-                vehicle.setCustomer(this);
-                this.listedVehicles.add(vehicle);
-                setFlagForBuyVehicle(false);
+                car.setRegister(Car.pending);
+                car.setCustomer(this);
+                this.listedCars.add(car);
+                setFlagForBuyCar(false);
                 break;
             }
         }
 
     }
 
-    public void cancelOrder(int VehicleId) {
-        for (int i = 0; i < listedVehicles.size(); i++) {
-            if (listedVehicles.get(i).getId() == VehicleId) {
-                listedVehicles.get(i).setCustomer(null);
-                listedVehicles.get(i).setRegister(Vehicle.available);
-                listedVehicles.remove(listedVehicles.get(i));
+    public void cancelOrder(int carID) {
+        for (int i = 0; i < listedCars.size(); i++) {
+            if (listedCars.get(i).getId() == carID) {
+                listedCars.get(i).setCustomer(null);
+                listedCars.get(i).setRegister(Car.available);
+                listedCars.remove(listedCars.get(i));
                 break;
             }
         }
     }
 
     public void cancelAllOrder() {
-        for (Vehicle listedVehicle : listedVehicles) {
-            listedVehicle.setCustomer(null);
-            if (!listedVehicle.getRegister().equals(Vehicle.accepted)) {
-                listedVehicle.setRegister(Vehicle.available);
+        for (Car listedCar : listedCars) {
+            listedCar.setCustomer(null);
+            if (!listedCar.getRegister().equals(Car.accepted)) {
+                listedCar.setRegister(Car.available);
             }
 
         }
@@ -76,11 +76,11 @@ public class Customer extends User {
         return id;
     }
 
-    public boolean isFlagForBuyVehicle() {
-        return flagForBuyVehicle;
+    public boolean isFlagForBuyCar() {
+        return flagForBuyCar;
     }
 
-    public void setFlagForBuyVehicle(boolean flagForBuyVehicle) {
-        this.flagForBuyVehicle = flagForBuyVehicle;
+    public void setFlagForBuyCar(boolean flagForBuyCar) {
+        this.flagForBuyCar = flagForBuyCar;
     }
 }

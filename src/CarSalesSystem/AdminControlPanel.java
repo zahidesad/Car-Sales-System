@@ -14,7 +14,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Name", "Username", "E-mail", "Phone"};
-    String[] columNamesVehicles = {"ID", "Dealer", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
+    String[] columNamesCars = {"ID", "Dealer", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
 
     public AdminControlPanel() {
         initComponents();
@@ -59,21 +59,21 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                 }
             }
 
-        } else if (jComboBox1.getSelectedItem().equals("Vehicle")) {
+        } else if (jComboBox1.getSelectedItem().equals("Car")) {
             tableModel.setRowCount(0);
-            tableModel.setColumnIdentifiers(columNamesVehicles);
-            deleteButton.setText("Delete Vehicle");
-            for (Vehicle vehicle : Database.getVehicles()) {
+            tableModel.setColumnIdentifiers(columNamesCars);
+            deleteButton.setText("Delete Car");
+            for (Car car : Database.getCars()) {
                 Vector rowData = new Vector();
-                rowData.add(vehicle.getId());
-                rowData.add(vehicle.getDealer().getName());
-                rowData.add(vehicle.getBrand());
-                rowData.add(vehicle.getModel());
-                rowData.add(vehicle.getType());
-                rowData.add(vehicle.getColor());
-                rowData.add(vehicle.getYear());
-                rowData.add(vehicle.getPrice());
-                rowData.add(vehicle.getRegister());
+                rowData.add(car.getId());
+                rowData.add(car.getDealer().getName());
+                rowData.add(car.getBrand());
+                rowData.add(car.getModel());
+                rowData.add(car.getType());
+                rowData.add(car.getColor());
+                rowData.add(car.getYear());
+                rowData.add(car.getPrice());
+                rowData.add(car.getRegister());
 
                 tableModel.addRow(rowData);
 
@@ -130,7 +130,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
         jComboBox1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Dealer", "Vehicle", "" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Dealer", "Car", "" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -198,20 +198,20 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
             }
 
-            if (jComboBox1.getSelectedItem().equals("Vehicle")) {
-                for (Vehicle vehicle : Database.getVehicles()) {
-                    if (tableModel.getValueAt(tableDark1.getSelectedRow(), 8).equals(Vehicle.accepted)) {
+            if (jComboBox1.getSelectedItem().equals("Car")) {
+                for (Car car : Database.getCars()) {
+                    if (tableModel.getValueAt(tableDark1.getSelectedRow(), 8).equals(Car.accepted)) {
                         JOptionPane.showMessageDialog(this, "This car cannot be deleted because it has been sold. ",
                                 " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
                         return;
-                    } else if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == vehicle.getId()) {
-                        if (vehicle.getRegister().equals(Vehicle.pending)) {
-                            vehicle.setRegister(Vehicle.available);
+                    } else if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == car.getId()) {
+                        if (car.getRegister().equals(Car.pending)) {
+                            car.setRegister(Car.available);
                         }
-                        if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this vehicle? "
+                        if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this car? "
                                 + "This action cannot be undone!", "WARNING",
                                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-                            vehicle.removeVehicle();
+                            car.removeCar();
                             refreshTable();
                             break;
                         } else {

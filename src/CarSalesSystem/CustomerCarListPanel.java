@@ -5,7 +5,7 @@ import CorePackage.Database;
 import CorePackage.Dealer;
 import CorePackage.ITriggerer;
 import CorePackage.User;
-import CorePackage.Vehicle;
+import CorePackage.Car;
 import Main.MainFrame;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -15,15 +15,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author zahid
  */
-public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITriggerer {
+public class CustomerCarListPanel extends javax.swing.JPanel implements ITriggerer {
 
     private Customer customer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
-    String[] columNames = {"Dealer ID", "Name", "Vehicle ID", "Brand", "Model", "Type", "Color", "Year", "Fuel Type", "Price", "Status"};
+    String[] columNames = {"Dealer ID", "Name", "Car ID", "Brand", "Model", "Type", "Color", "Year", "Fuel Type", "Price", "Status"};
     String[] columNamesForDisplayDealers = {"Dealer ID", "Username", "Name", "Phone", "E-mail"};
 
-    public CustomerVehicleListPanel() {
+    public CustomerCarListPanel() {
         initComponents();
 
         tableModel.setColumnIdentifiers(columNames);
@@ -35,7 +35,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         tableModel.setColumnIdentifiers(columNames);
 
         displayDealersButton.setText("Display Dealers");
-        buyVehicleButton.setVisible(true);
+        buyCarButton.setVisible(true);
 
         brandLabel.setVisible(true);
         brandFilterJComboBox.setVisible(true);
@@ -46,21 +46,21 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         dealerLabel.setVisible(true);
         dealerFilterJComboBox.setVisible(true);
 
-        for (Vehicle vehicle : Database.getVehicles()) {
+        for (Car car : Database.getCars()) {
 
             Vector rowData = new Vector();
 
-            rowData.add(vehicle.getDealer().getId());
-            rowData.add(vehicle.getDealer().getName());
-            rowData.add(vehicle.getId());
-            rowData.add(vehicle.getBrand());
-            rowData.add(vehicle.getModel());
-            rowData.add(vehicle.getType());
-            rowData.add(vehicle.getColor());
-            rowData.add(vehicle.getYear());
-            rowData.add(vehicle.getFuel());
-            rowData.add(vehicle.getPrice());
-            rowData.add(vehicle.getRegister());
+            rowData.add(car.getDealer().getId());
+            rowData.add(car.getDealer().getName());
+            rowData.add(car.getId());
+            rowData.add(car.getBrand());
+            rowData.add(car.getModel());
+            rowData.add(car.getType());
+            rowData.add(car.getColor());
+            rowData.add(car.getYear());
+            rowData.add(car.getFuel());
+            rowData.add(car.getPrice());
+            rowData.add(car.getRegister());
 
             tableModel.addRow(rowData);
         }
@@ -83,7 +83,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         dealerLabel = new javax.swing.JLabel();
         brandLabel = new javax.swing.JLabel();
         fuelLabel = new javax.swing.JLabel();
-        buyVehicleButton = new SwingComponents.Button();
+        buyCarButton = new SwingComponents.Button();
         dealerInfoButton = new SwingComponents.Button();
         displayDealersButton = new SwingComponents.Button();
 
@@ -95,7 +95,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         vehicleListLabel.setFont(new java.awt.Font("SansSerif", 2, 48)); // NOI18N
         vehicleListLabel.setForeground(new java.awt.Color(0, 0, 0));
         vehicleListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        vehicleListLabel.setText("VEHICLE LIST");
+        vehicleListLabel.setText("CAR LIST");
         vehicleListLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         add(vehicleListLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 490, 60));
 
@@ -188,16 +188,16 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         fuelLabel.setText("Fuel : ");
         add(fuelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, -1, -1));
 
-        buyVehicleButton.setBackground(new java.awt.Color(0, 0, 0));
-        buyVehicleButton.setForeground(new java.awt.Color(255, 255, 255));
-        buyVehicleButton.setText("Buy Vehicle ");
-        buyVehicleButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        buyVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+        buyCarButton.setBackground(new java.awt.Color(0, 0, 0));
+        buyCarButton.setForeground(new java.awt.Color(255, 255, 255));
+        buyCarButton.setText("Buy Car");
+        buyCarButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        buyCarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buyVehicleButtonActionPerformed(evt);
+                buyCarButtonActionPerformed(evt);
             }
         });
-        add(buyVehicleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 280, -1));
+        add(buyCarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 280, -1));
 
         dealerInfoButton.setBackground(new java.awt.Color(0, 0, 0));
         dealerInfoButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -233,20 +233,20 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
                 try {
                     if (dealerFilterJComboBox.getSelectedItem().equals(dealer.getName())) {
 
-                        for (Vehicle listedVehicle : dealer.getListedVehicles()) {
+                        for (Car listedCar : dealer.getListedCars()) {
                             Vector rowData = new Vector();
 
-                            rowData.add(listedVehicle.getDealer().getId());
-                            rowData.add(listedVehicle.getDealer().getName());
-                            rowData.add(listedVehicle.getId());
-                            rowData.add(listedVehicle.getBrand());
-                            rowData.add(listedVehicle.getModel());
-                            rowData.add(listedVehicle.getType());
-                            rowData.add(listedVehicle.getColor());
-                            rowData.add(listedVehicle.getYear());
-                            rowData.add(listedVehicle.getFuel());
-                            rowData.add(listedVehicle.getPrice());
-                            rowData.add(listedVehicle.getRegister());
+                            rowData.add(listedCar.getDealer().getId());
+                            rowData.add(listedCar.getDealer().getName());
+                            rowData.add(listedCar.getId());
+                            rowData.add(listedCar.getBrand());
+                            rowData.add(listedCar.getModel());
+                            rowData.add(listedCar.getType());
+                            rowData.add(listedCar.getColor());
+                            rowData.add(listedCar.getYear());
+                            rowData.add(listedCar.getFuel());
+                            rowData.add(listedCar.getPrice());
+                            rowData.add(listedCar.getRegister());
 
                             tableModel.addRow(rowData);
                         }
@@ -278,23 +278,23 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
 
     private void brandFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brandFilterJComboBoxActionPerformed
         tableModel.setRowCount(0);
-        for (Vehicle vehicle : Database.getVehicles()) {
+        for (Car car : Database.getCars()) {
             try {
-                if (brandFilterJComboBox.getSelectedItem().equals(vehicle.getBrand())) {
+                if (brandFilterJComboBox.getSelectedItem().equals(car.getBrand())) {
 
                     Vector rowData = new Vector();
 
-                    rowData.add(vehicle.getDealer().getId());
-                    rowData.add(vehicle.getDealer().getName());
-                    rowData.add(vehicle.getId());
-                    rowData.add(vehicle.getBrand());
-                    rowData.add(vehicle.getModel());
-                    rowData.add(vehicle.getType());
-                    rowData.add(vehicle.getColor());
-                    rowData.add(vehicle.getYear());
-                    rowData.add(vehicle.getFuel());
-                    rowData.add(vehicle.getPrice());
-                    rowData.add(vehicle.getRegister());
+                    rowData.add(car.getDealer().getId());
+                    rowData.add(car.getDealer().getName());
+                    rowData.add(car.getId());
+                    rowData.add(car.getBrand());
+                    rowData.add(car.getModel());
+                    rowData.add(car.getType());
+                    rowData.add(car.getColor());
+                    rowData.add(car.getYear());
+                    rowData.add(car.getFuel());
+                    rowData.add(car.getPrice());
+                    rowData.add(car.getRegister());
 
                     tableModel.addRow(rowData);
 
@@ -309,8 +309,8 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         if (displayDealersButton.getText().equals("Display Dealers")) {
             tableModel.setRowCount(0);
             tableModel.setColumnIdentifiers(columNamesForDisplayDealers);
-            displayDealersButton.setText("Display Vehicles");
-            buyVehicleButton.setVisible(false);
+            displayDealersButton.setText("Display Cars");
+            buyCarButton.setVisible(false);
 
             brandLabel.setVisible(false);
             brandFilterJComboBox.setVisible(false);
@@ -343,20 +343,20 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
 
     }//GEN-LAST:event_displayDealersButtonActionPerformed
 
-    private void buyVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyVehicleButtonActionPerformed
+    private void buyCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyCarButtonActionPerformed
         try {
-            if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Vehicle.pending)
-                    || tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Vehicle.accepted)) {
-                JOptionPane.showMessageDialog(this, "This vehicle cannot buyed! ",
+            if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Car.pending)
+                    || tableDark1.getValueAt(tableDark1.getSelectedRow(), 10).equals(Car.accepted)) {
+                JOptionPane.showMessageDialog(this, "This car cannot buyed! ",
                         "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            if ((JOptionPane.showConfirmDialog(this, "Do you really want to buy this vehicle? ", "Are You Sure?",
+            if ((JOptionPane.showConfirmDialog(this, "Do you really want to buy this car? ", "Are You Sure?",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
-                customer.buyVehicle((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
-                if (customer.isFlagForBuyVehicle() == true) {
+                customer.buyCar((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
+                if (customer.isFlagForBuyCar() == true) {
                     JOptionPane.showMessageDialog(this, "You cannot submit a request again for a car that you "
                             + "have previously purchased and rejected.", "Invalid Transaction", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -374,27 +374,27 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
         }
 
 
-    }//GEN-LAST:event_buyVehicleButtonActionPerformed
+    }//GEN-LAST:event_buyCarButtonActionPerformed
 
     private void typeFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeFilterJComboBoxActionPerformed
         tableModel.setRowCount(0);
-        for (Vehicle vehicle : Database.getVehicles()) {
+        for (Car car : Database.getCars()) {
             try {
-                if (typeFilterJComboBox.getSelectedItem().equals(vehicle.getType())) {
+                if (typeFilterJComboBox.getSelectedItem().equals(car.getType())) {
 
                     Vector rowData = new Vector();
 
-                    rowData.add(vehicle.getDealer().getId());
-                    rowData.add(vehicle.getDealer().getName());
-                    rowData.add(vehicle.getId());
-                    rowData.add(vehicle.getBrand());
-                    rowData.add(vehicle.getModel());
-                    rowData.add(vehicle.getType());
-                    rowData.add(vehicle.getColor());
-                    rowData.add(vehicle.getYear());
-                    rowData.add(vehicle.getFuel());
-                    rowData.add(vehicle.getPrice());
-                    rowData.add(vehicle.getRegister());
+                    rowData.add(car.getDealer().getId());
+                    rowData.add(car.getDealer().getName());
+                    rowData.add(car.getId());
+                    rowData.add(car.getBrand());
+                    rowData.add(car.getModel());
+                    rowData.add(car.getType());
+                    rowData.add(car.getColor());
+                    rowData.add(car.getYear());
+                    rowData.add(car.getFuel());
+                    rowData.add(car.getPrice());
+                    rowData.add(car.getRegister());
 
                     tableModel.addRow(rowData);
 
@@ -406,23 +406,23 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
 
     private void fuelFilterJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuelFilterJComboBoxActionPerformed
         tableModel.setRowCount(0);
-        for (Vehicle vehicle : Database.getVehicles()) {
+        for (Car car : Database.getCars()) {
             try {
-                if (fuelFilterJComboBox.getSelectedItem().equals(vehicle.getFuel())) {
+                if (fuelFilterJComboBox.getSelectedItem().equals(car.getFuel())) {
 
                     Vector rowData = new Vector();
 
-                    rowData.add(vehicle.getDealer().getId());
-                    rowData.add(vehicle.getDealer().getName());
-                    rowData.add(vehicle.getId());
-                    rowData.add(vehicle.getBrand());
-                    rowData.add(vehicle.getModel());
-                    rowData.add(vehicle.getType());
-                    rowData.add(vehicle.getColor());
-                    rowData.add(vehicle.getYear());
-                    rowData.add(vehicle.getFuel());
-                    rowData.add(vehicle.getPrice());
-                    rowData.add(vehicle.getRegister());
+                    rowData.add(car.getDealer().getId());
+                    rowData.add(car.getDealer().getName());
+                    rowData.add(car.getId());
+                    rowData.add(car.getBrand());
+                    rowData.add(car.getModel());
+                    rowData.add(car.getType());
+                    rowData.add(car.getColor());
+                    rowData.add(car.getYear());
+                    rowData.add(car.getFuel());
+                    rowData.add(car.getPrice());
+                    rowData.add(car.getRegister());
 
                     tableModel.addRow(rowData);
 
@@ -438,7 +438,7 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
     private SwingComponents.Button backButton;
     private javax.swing.JComboBox<String> brandFilterJComboBox;
     private javax.swing.JLabel brandLabel;
-    private SwingComponents.Button buyVehicleButton;
+    private SwingComponents.Button buyCarButton;
     private javax.swing.JComboBox<Object> dealerFilterJComboBox;
     private SwingComponents.Button dealerInfoButton;
     private javax.swing.JLabel dealerLabel;
@@ -468,17 +468,17 @@ public class CustomerVehicleListPanel extends javax.swing.JPanel implements ITri
             }
         }
 
-        for (int i = 0; i < Vehicle.vehicleBrand.length; i++) {
-            brandFilterJComboBox.addItem(Vehicle.vehicleBrand[i]);
+        for (int i = 0; i < Car.carBrand.length; i++) {
+            brandFilterJComboBox.addItem(Car.carBrand[i]);
         }
 
-        for (int i = 0; i < Vehicle.vehicleType.length; i++) {
-            typeFilterJComboBox.addItem(Vehicle.vehicleType[i]);
+        for (int i = 0; i < Car.carType.length; i++) {
+            typeFilterJComboBox.addItem(Car.carType[i]);
 
         }
 
-        for (int i = 0; i < Vehicle.vehicleFuelType.length; i++) {
-            fuelFilterJComboBox.addItem(Vehicle.vehicleFuelType[i]);
+        for (int i = 0; i < Car.carFuelType.length; i++) {
+            fuelFilterJComboBox.addItem(Car.carFuelType[i]);
         }
 
     }

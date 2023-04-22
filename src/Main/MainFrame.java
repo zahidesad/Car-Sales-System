@@ -22,12 +22,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private final DealerControlPanel dealerControlPanel;
     private final DealerAccountDetailsPanel dealerAccountDetailsPanel;
-    private final DealerManageVehiclePanel dealerManageVehiclePanel;
+    private final DealerManageCarPanel dealerManageCarPanel;
     private final DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
-    private final DealerAddVehiclePanel dealerAddVehiclePanel;
+    private final DealerAddCarPanel dealerAddCarPanel;
 
     private final CustomerControlPanel customerControlPanel;
-    private final CustomerVehicleListPanel customerVehicleListPanel;
+    private final CustomerCarListPanel customerCarListPanel;
     private final CustomerMyOrdersPanel customerMyOrdersPanel;
     private final CustomerAccountDetailsPanel customerAccountDetailsPanel;
 
@@ -47,12 +47,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         dealerControlPanel = new DealerControlPanel();
         dealerAccountDetailsPanel = new DealerAccountDetailsPanel();
-        dealerManageVehiclePanel = new DealerManageVehiclePanel();
+        dealerManageCarPanel = new DealerManageCarPanel();
         dealerCustomerRequestsPanel = new DealerCustomerRequestsPanel();
-        dealerAddVehiclePanel = new DealerAddVehiclePanel();
+        dealerAddCarPanel = new DealerAddCarPanel();
 
         customerControlPanel = new CustomerControlPanel();
-        customerVehicleListPanel = new CustomerVehicleListPanel();
+        customerCarListPanel = new CustomerCarListPanel();
         customerMyOrdersPanel = new CustomerMyOrdersPanel();
         customerAccountDetailsPanel = new CustomerAccountDetailsPanel();
 
@@ -84,24 +84,24 @@ public class MainFrame extends javax.swing.JFrame {
         return dealerAccountDetailsPanel;
     }
 
-    public DealerManageVehiclePanel getDealerManageVehiclePanel() {
-        return dealerManageVehiclePanel;
+    public DealerManageCarPanel getDealerManageCarPanel() {
+        return dealerManageCarPanel;
     }
 
     public DealerCustomerRequestsPanel getDealerCustomerRequestsPanel() {
         return dealerCustomerRequestsPanel;
     }
 
-    public DealerAddVehiclePanel getDealerAddVehiclePanel() {
-        return dealerAddVehiclePanel;
+    public DealerAddCarPanel getDealerAddCarPanel() {
+        return dealerAddCarPanel;
     }
 
     public CustomerControlPanel getCustomerControlPanel() {
         return customerControlPanel;
     }
 
-    public CustomerVehicleListPanel getCustomerVehicleListPanel() {
-        return customerVehicleListPanel;
+    public CustomerCarListPanel getCustomerCarListPanel() {
+        return customerCarListPanel;
     }
 
     public CustomerMyOrdersPanel getCustomerMyOrdersPanel() {
@@ -204,21 +204,21 @@ public class MainFrame extends javax.swing.JFrame {
         Customer customer2 = new Customer("asim", "Asim123$", "Asım",
                 "asimtarik.kutluer@stu.fsm.edu.tr", "05070008134");
 
-        //Default vehicles
-        Vehicle vehicle1 = new Vehicle(dealer1, null, "Togg",
+        //Default cars
+        Car car1 = new Car(dealer1, null, "Togg",
                 "T10X", "Red", "SUV", "Electric", "2023", "500000₺");
 
-        Vehicle vehicle2 = new Vehicle(dealer2, customer2, "BMW",
+        Car car2 = new Car(dealer2, customer2, "BMW",
                 "5.20", "Black", "Sedan", "Diesel", "2022", "700000");
-        vehicle2.setRegister(Vehicle.pending);
+        car2.setRegister(Car.pending);
 
-        Database.getVehicles().add(vehicle1);
-        Database.getVehicles().add(vehicle2);
+        Database.getCars().add(car1);
+        Database.getCars().add(car2);
 
-        dealer1.getListedVehicles().add(vehicle1);
-        dealer2.getListedVehicles().add(vehicle2);
+        dealer1.getListedCars().add(car1);
+        dealer2.getListedCars().add(car2);
 
-        customer2.getListedVehicles().add(vehicle2);
+        customer2.getListedCars().add(car2);
 
         Database.getUsers().add(admin);
         Database.getUsers().add(dealer1);

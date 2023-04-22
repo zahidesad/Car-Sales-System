@@ -8,10 +8,10 @@ import java.util.ArrayList;
  */
 public class Dealer extends User {
 
-    private ArrayList<Vehicle> listedVehicles = new ArrayList();
+    private ArrayList<Car> listedCars = new ArrayList();
 
-    public ArrayList<Vehicle> getListedVehicles() {
-        return listedVehicles;
+    public ArrayList<Car> getListedCars() {
+        return listedCars;
     }
 
     static int newid = 400;
@@ -27,57 +27,57 @@ public class Dealer extends User {
 
     }
 
-    public void removeVehicle(int Id) {
-        Vehicle selectedVehicle = null;
+    public void removeCar(int Id) {
+        Car selectedCar = null;
 
-        for (Vehicle vehicle : Database.getVehicles()) {
+        for (Car vehicle : Database.getCars()) {
             if (Id == vehicle.getId()) {
-                selectedVehicle = vehicle;
+                selectedCar = vehicle;
                 break;
             }
         }
-        Database.getVehicles().remove(selectedVehicle);
-        listedVehicles.remove(selectedVehicle);
+        Database.getCars().remove(selectedCar);
+        listedCars.remove(selectedCar);
 
-        if (selectedVehicle != null && selectedVehicle.getCustomer() != null) {
-            selectedVehicle.getCustomer().getListedVehicles().remove(selectedVehicle);
+        if (selectedCar != null && selectedCar.getCustomer() != null) {
+            selectedCar.getCustomer().getListedCars().remove(selectedCar);
         }
 
     }
 
     public void cancelAllOrder() {
 
-        for (Vehicle listedVehicle : listedVehicles) {
-            if (listedVehicle.getRegister().equals(Vehicle.accepted) || listedVehicle.getRegister().equals(Vehicle.denied)) {
+        for (Car listedCar : listedCars) {
+            if (listedCar.getRegister().equals(Car.accepted) || listedCar.getRegister().equals(Car.denied)) {
                 return;
             }
-            Database.getVehicles().remove(listedVehicle);
+            Database.getCars().remove(listedCar);
 
-            if (listedVehicle != null && listedVehicle.getCustomer() != null) {
-                listedVehicle.getCustomer().getListedVehicles().remove(listedVehicle);
+            if (listedCar != null && listedCar.getCustomer() != null) {
+                listedCar.getCustomer().getListedCars().remove(listedCar);
             }
         }
 
     }
 
-    public void acceptRequest(int VehicleID) {
-        for (Vehicle listedVehicle : listedVehicles) {
-            if (listedVehicle.getId() == VehicleID) {
-                listedVehicle.setRegister(Vehicle.accepted);
+    public void acceptRequest(int CarID) {
+        for (Car listedVehicle : listedCars) {
+            if (listedVehicle.getId() == CarID) {
+                listedVehicle.setRegister(Car.accepted);
                 
             }
         }
     }
 
-    public void denyRequest(int VehicleID) {
-        for (Vehicle listedVehicle : listedVehicles) {
-            if (listedVehicle.getId() == VehicleID) {
-                Vehicle vehicle = new Vehicle(listedVehicle.getId(), listedVehicle.getDealer(), listedVehicle.getCustomer(), listedVehicle.getBrand(), listedVehicle.getModel(),
-                        listedVehicle.getColor(), listedVehicle.getType(), listedVehicle.getFuel(), listedVehicle.getYear(), listedVehicle.getPrice());
-                listedVehicle.setRegister(Vehicle.available);
-                vehicle.setRegister(Vehicle.denied);
-                listedVehicle.getCustomer().getListedVehicles().add(vehicle);
-                listedVehicle.setCustomer(null);
+    public void denyRequest(int CarID) {
+        for (Car listedCar : listedCars) {
+            if (listedCar.getId() == CarID) {
+                Car vehicle = new Car(listedCar.getId(), listedCar.getDealer(), listedCar.getCustomer(), listedCar.getBrand(), listedCar.getModel(),
+                        listedCar.getColor(), listedCar.getType(), listedCar.getFuel(), listedCar.getYear(), listedCar.getPrice());
+                listedCar.setRegister(Car.available);
+                vehicle.setRegister(Car.denied);
+                listedCar.getCustomer().getListedCars().add(vehicle);
+                listedCar.setCustomer(null);
             }
         }
     }

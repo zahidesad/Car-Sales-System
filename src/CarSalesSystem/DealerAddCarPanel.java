@@ -3,7 +3,7 @@ package CarSalesSystem;
 import CorePackage.Database;
 import CorePackage.Dealer;
 import CorePackage.ITriggerer;
-import CorePackage.Vehicle;
+import CorePackage.Car;
 import Main.MainFrame;
 import javax.swing.JOptionPane;
 
@@ -11,9 +11,9 @@ import javax.swing.JOptionPane;
  *
  * @author zahid
  */
-public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITriggerer {
+public class DealerAddCarPanel extends javax.swing.JPanel implements ITriggerer {
 
-    public DealerAddVehiclePanel() {
+    public DealerAddCarPanel() {
         initComponents();
     }
 
@@ -21,7 +21,7 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        addVehicleLabel = new javax.swing.JLabel();
+        addCarPanelLabel = new javax.swing.JLabel();
         backButton = new SwingComponents.Button();
         modelLabel = new SwingComponents.Label();
         fuelTypejComboBox = new javax.swing.JComboBox<>();
@@ -37,20 +37,20 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
         yearjComboBox = new javax.swing.JComboBox<>();
         fuelTypeLabel = new SwingComponents.Label();
         txtColor = new SwingComponents.TextField();
-        addVehicleButton = new SwingComponents.Button();
+        addCarButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setMinimumSize(new java.awt.Dimension(900, 529));
         setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        addVehicleLabel.setBackground(new java.awt.Color(102, 102, 102));
-        addVehicleLabel.setFont(new java.awt.Font("SansSerif", 2, 48)); // NOI18N
-        addVehicleLabel.setForeground(new java.awt.Color(0, 0, 0));
-        addVehicleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        addVehicleLabel.setText("ADD VEHICLE");
-        addVehicleLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(addVehicleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 490, 60));
+        addCarPanelLabel.setBackground(new java.awt.Color(102, 102, 102));
+        addCarPanelLabel.setFont(new java.awt.Font("SansSerif", 2, 48)); // NOI18N
+        addCarPanelLabel.setForeground(new java.awt.Color(0, 0, 0));
+        addCarPanelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addCarPanelLabel.setText("ADD CAR PANEL");
+        addCarPanelLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        add(addCarPanelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 490, 60));
 
         backButton.setBackground(new java.awt.Color(0, 0, 0));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BackArrow.png"))); // NOI18N
@@ -139,38 +139,38 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
         txtColor.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 180, 40));
 
-        addVehicleButton.setBackground(new java.awt.Color(0, 0, 0));
-        addVehicleButton.setForeground(new java.awt.Color(255, 255, 255));
-        addVehicleButton.setText("Add Vehicle");
-        addVehicleButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        addVehicleButton.addActionListener(new java.awt.event.ActionListener() {
+        addCarButton.setBackground(new java.awt.Color(0, 0, 0));
+        addCarButton.setForeground(new java.awt.Color(255, 255, 255));
+        addCarButton.setText("Add Car");
+        addCarButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        addCarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addVehicleButtonActionPerformed(evt);
+                addCarButtonActionPerformed(evt);
             }
         });
-        add(addVehicleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 480, 180, -1));
+        add(addCarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 480, 180, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        MainFrame.instance.setPage(MainFrame.instance.getDealerManageVehiclePanel());
+        MainFrame.instance.setPage(MainFrame.instance.getDealerManageCarPanel());
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void addVehicleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehicleButtonActionPerformed
+    private void addCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCarButtonActionPerformed
         Dealer dealer = (Dealer) MainFrame.instance.getAccount();
         if (txtModel.getText().equals("") || txtColor.getText().equals("") || txtPrice.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Fill All Entries.",
                     "Failure", JOptionPane.ERROR_MESSAGE);
 
             return;
-        } else if ((JOptionPane.showConfirmDialog(this, "Do you really want to add this vehicle to your account? ",
+        } else if ((JOptionPane.showConfirmDialog(this, "Do you really want to add this car to your account? ",
                 "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-            Vehicle vehicle = new Vehicle(dealer, null, brandjComboBox.getSelectedItem().toString(), txtModel.getText(),
+            Car car = new Car(dealer, null, brandjComboBox.getSelectedItem().toString(), txtModel.getText(),
                     txtColor.getText(), typejComboBox.getSelectedItem().toString(), fuelTypejComboBox.getSelectedItem().toString(),
                     yearjComboBox.getSelectedItem().toString(), txtPrice.getText());
 
-            Database.getVehicles().add(vehicle);
-            dealer.getListedVehicles().add(vehicle);
-            JOptionPane.showMessageDialog(this, "Successfully Created A Vehicle ",
+            Database.getCars().add(car);
+            dealer.getListedCars().add(car);
+            JOptionPane.showMessageDialog(this, "Successfully Created A Car ",
                     "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
             brandjComboBox.setSelectedIndex(0);
             txtModel.setText("");
@@ -179,16 +179,16 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
             yearjComboBox.setSelectedIndex(0);
             fuelTypejComboBox.setSelectedIndex(0);
             txtPrice.setText("");
-            MainFrame.instance.setPage(MainFrame.instance.getDealerManageVehiclePanel());
+            MainFrame.instance.setPage(MainFrame.instance.getDealerManageCarPanel());
         }
 
 
-    }//GEN-LAST:event_addVehicleButtonActionPerformed
+    }//GEN-LAST:event_addCarButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private SwingComponents.Button addVehicleButton;
-    private javax.swing.JLabel addVehicleLabel;
+    private SwingComponents.Button addCarButton;
+    private javax.swing.JLabel addCarPanelLabel;
     private SwingComponents.Button backButton;
     private SwingComponents.Label brandLabel;
     private javax.swing.JComboBox<String> brandjComboBox;
@@ -213,20 +213,20 @@ public class DealerAddVehiclePanel extends javax.swing.JPanel implements ITrigge
         yearjComboBox.removeAllItems();
         fuelTypejComboBox.removeAllItems();
 
-        for (int i = 0; i < Vehicle.vehicleBrand.length; i++) {
-            brandjComboBox.addItem(Vehicle.vehicleBrand[i]);
+        for (int i = 0; i < Car.carBrand.length; i++) {
+            brandjComboBox.addItem(Car.carBrand[i]);
         }
 
-        for (int i = 0; i < Vehicle.vehicleType.length; i++) {
-            typejComboBox.addItem(Vehicle.vehicleType[i]);
+        for (int i = 0; i < Car.carType.length; i++) {
+            typejComboBox.addItem(Car.carType[i]);
         }
 
         for (int i = 2002; i <= 2023; i++) {
             yearjComboBox.addItem(i + "");
         }
 
-        for (int i = 0; i < Vehicle.vehicleFuelType.length; i++) {
-            fuelTypejComboBox.addItem(Vehicle.vehicleFuelType[i]);
+        for (int i = 0; i < Car.carFuelType.length; i++) {
+            fuelTypejComboBox.addItem(Car.carFuelType[i]);
         }
 
     }

@@ -3,7 +3,7 @@ package CarSalesSystem;
 import CorePackage.Database;
 import CorePackage.Dealer;
 import CorePackage.ITriggerer;
-import CorePackage.Vehicle;
+import CorePackage.Car;
 import Main.MainFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -145,8 +145,8 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
                 + "This action cannot be undone!", "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
-            for (Vehicle listedVehicle : dealer.getListedVehicles()) {
-                if (listedVehicle.getRegister().equals(Vehicle.pending)) {
+            for (Car listedCar : dealer.getListedCars()) {
+                if (listedCar.getRegister().equals(Car.pending)) {
                     JOptionPane.showMessageDialog(this, "This car cannot be deleted because you have not yet responded to the customer's request.\n"
                             + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
                             " Incorrect Operation", JOptionPane.INFORMATION_MESSAGE);
@@ -157,7 +157,7 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
             }
 
             dealer.deleteAccount();
-            Database.deleteAllVehicle(dealer);
+            Database.deleteAllCars(dealer);
             MainFrame.instance.logOut();
             dealer = null;
         }

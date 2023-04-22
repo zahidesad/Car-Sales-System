@@ -10,15 +10,15 @@ public class Database {
 
 //  ################# ArrayLists Declerations #################
     private static final ArrayList<User> users = new ArrayList<>();
-    private static final ArrayList<Vehicle> vehicles = new ArrayList<>();
+    private static final ArrayList<Car> cars = new ArrayList<>();
 
 //  ################# Encapsulate ArrayLists #################
     public static ArrayList<User> getUsers() {
         return users;
     }
 
-    public static ArrayList<Vehicle> getVehicles() {
-        return vehicles;
+    public static ArrayList<Car> getCars() {
+        return cars;
     }
 
 //  ################# Methods #################
@@ -45,14 +45,14 @@ public class Database {
         return flag;
     }
 
-    //to delete all vehicles of given dealer
-    public static void deleteAllVehicle(Dealer dealer) {
-        for (int i = 0; i < getVehicles().size(); i++) {
-            if (getVehicles().get(i).getDealer().equals(dealer) && !getVehicles().get(i).getRegister().equals(Vehicle.accepted)) {
-                getVehicles().remove(getVehicles().get(i));
+    //to delete all cars of given dealer
+    public static void deleteAllCars(Dealer dealer) {
+        for (int i = 0; i < getCars().size(); i++) {
+            if (getCars().get(i).getDealer().equals(dealer) && !getCars().get(i).getRegister().equals(Car.accepted)) {
+                getCars().remove(getCars().get(i));
 
-                if (getVehicles().get(i).getRegister().equals(Vehicle.available)) {
-                    dealer.getListedVehicles().remove(getVehicles().get(i));
+                if (getCars().get(i).getRegister().equals(Car.available)) {
+                    dealer.getListedCars().remove(getCars().get(i));
                     break;
                 }
             }

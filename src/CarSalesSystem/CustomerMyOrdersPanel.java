@@ -5,7 +5,7 @@ import CorePackage.Database;
 import CorePackage.Dealer;
 import CorePackage.ITriggerer;
 import CorePackage.User;
-import CorePackage.Vehicle;
+import CorePackage.Car;
 import Main.MainFrame;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -20,7 +20,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
     private Customer customer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
-    String[] columNames = {"Dealer ID", "Name", "Vehicle ID", "Vehicle Brand", "Vehicle Model", "Price", "Status"};
+    String[] columNames = {"Dealer ID", "Name", "Car ID", "Car Brand", "Car Model", "Price", "Status"};
 
     public CustomerMyOrdersPanel() {
         initComponents();
@@ -108,17 +108,17 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         tableModel.setRowCount(0);
         tableModel.setColumnIdentifiers(columNames);
 
-        for (Vehicle listedVehicle : customer.getListedVehicles()) {
-            if (!listedVehicle.getRegister().equals(Vehicle.available)) {
+        for (Car listedCar : customer.getListedCars()) {
+            if (!listedCar.getRegister().equals(Car.available)) {
 
                 Vector rowData = new Vector();
-                rowData.add(listedVehicle.getDealer().getId());
-                rowData.add(listedVehicle.getDealer().getName());
-                rowData.add(listedVehicle.getId());
-                rowData.add(listedVehicle.getBrand());
-                rowData.add(listedVehicle.getModel());
-                rowData.add(listedVehicle.getPrice());
-                rowData.add(listedVehicle.getRegister());
+                rowData.add(listedCar.getDealer().getId());
+                rowData.add(listedCar.getDealer().getName());
+                rowData.add(listedCar.getId());
+                rowData.add(listedCar.getBrand());
+                rowData.add(listedCar.getModel());
+                rowData.add(listedCar.getPrice());
+                rowData.add(listedCar.getRegister());
 
                 tableModel.addRow(rowData);
             }
@@ -151,7 +151,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
     private void cancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderButtonActionPerformed
 
         try {
-            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 6).equals(Vehicle.pending)) {
+            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 6).equals(Car.pending)) {
                 if ((JOptionPane.showConfirmDialog(this, "Do you really want to cancel your order? "
                         + "This action cannot be undone!", "WARNING",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {

@@ -5,7 +5,7 @@ import CorePackage.Database;
 import CorePackage.Dealer;
 import CorePackage.ITriggerer;
 import CorePackage.User;
-import CorePackage.Vehicle;
+import CorePackage.Car;
 import Main.MainFrame;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -20,7 +20,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
     private Dealer dealer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
-    String[] columNames = {"Customer ID", "Customer Username", "Vehicle ID", "Vehicle Brand", "Vehicle Model", "Price", "Status"};
+    String[] columNames = {"Customer ID", "Customer Username", "Car ID", "Car Brand", "Car Model", "Price", "Status"};
 
     public DealerCustomerRequestsPanel() {
         initComponents();
@@ -33,17 +33,17 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
         tableModel.setRowCount(0);
         tableModel.setColumnIdentifiers(columNames);
 
-        for (Vehicle listedVehicle : dealer.getListedVehicles()) {
-            if (listedVehicle.getRegister().equals(Vehicle.pending)) {
+        for (Car listedCar : dealer.getListedCars()) {
+            if (listedCar.getRegister().equals(Car.pending)) {
 
                 Vector rowData = new Vector();
-                rowData.add(listedVehicle.getCustomer().getId());
-                rowData.add(listedVehicle.getCustomer().getUsername());
-                rowData.add(listedVehicle.getId());
-                rowData.add(listedVehicle.getBrand());
-                rowData.add(listedVehicle.getModel());
-                rowData.add(listedVehicle.getPrice());
-                rowData.add(listedVehicle.getRegister());
+                rowData.add(listedCar.getCustomer().getId());
+                rowData.add(listedCar.getCustomer().getUsername());
+                rowData.add(listedCar.getId());
+                rowData.add(listedCar.getBrand());
+                rowData.add(listedCar.getModel());
+                rowData.add(listedCar.getPrice());
+                rowData.add(listedCar.getRegister());
 
                 tableModel.addRow(rowData);
             }
@@ -89,7 +89,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Customer ID", "Customer Username", "Vehicle ID", "Vehicle Brand", "Vehicle Model", "Price ", "Status"
+                "Customer ID", "Customer Username", "Car ID", "Car Brand", "Car Model", "Price ", "Status"
             }
         ));
         tableDark1.setPreferredSize(new java.awt.Dimension(300, 270));
@@ -160,7 +160,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
 
     private void acceptDennyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptDennyButtonActionPerformed
         try {
-            if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Vehicle.pending)) {
+            if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Car.pending)) {
                 if ((JOptionPane.showConfirmDialog(this, "Do You Want To Accept Offer?", "Sales Process",
                         JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION)) {
                     dealer.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));

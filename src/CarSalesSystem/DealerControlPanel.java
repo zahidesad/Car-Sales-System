@@ -21,7 +21,7 @@ public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer
 
         dealerControlPanelLabel = new javax.swing.JLabel();
         backButton = new SwingComponents.Button();
-        manageVehiclesButton = new SwingComponents.Button();
+        manageCarsButton = new SwingComponents.Button();
         customerRequestsButton = new SwingComponents.Button();
         myAccountButton = new SwingComponents.Button();
         jLabel1 = new javax.swing.JLabel();
@@ -48,16 +48,16 @@ public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer
         });
         add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        manageVehiclesButton.setBackground(new java.awt.Color(204, 204, 204));
-        manageVehiclesButton.setForeground(new java.awt.Color(0, 0, 0));
-        manageVehiclesButton.setText("MANAGE VEHICLES");
-        manageVehiclesButton.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
-        manageVehiclesButton.addActionListener(new java.awt.event.ActionListener() {
+        manageCarsButton.setBackground(new java.awt.Color(204, 204, 204));
+        manageCarsButton.setForeground(new java.awt.Color(0, 0, 0));
+        manageCarsButton.setText("MANAGE CARS");
+        manageCarsButton.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
+        manageCarsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageVehiclesButtonActionPerformed(evt);
+                manageCarsButtonActionPerformed(evt);
             }
         });
-        add(manageVehiclesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 310, 100));
+        add(manageCarsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 310, 100));
 
         customerRequestsButton.setBackground(new java.awt.Color(204, 204, 204));
         customerRequestsButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -100,9 +100,9 @@ public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer
         MainFrame.instance.setPage(MainFrame.instance.getDealerAccountDetailsPanel());
     }//GEN-LAST:event_myAccountButtonActionPerformed
 
-    private void manageVehiclesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageVehiclesButtonActionPerformed
-        MainFrame.instance.setPage(MainFrame.instance.getDealerManageVehiclePanel());
-    }//GEN-LAST:event_manageVehiclesButtonActionPerformed
+    private void manageCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCarsButtonActionPerformed
+        MainFrame.instance.setPage(MainFrame.instance.getDealerManageCarPanel());
+    }//GEN-LAST:event_manageCarsButtonActionPerformed
 
     private void customerRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerRequestsButtonActionPerformed
         MainFrame.instance.setPage(MainFrame.instance.getDealerCustomerRequestsPanel());
@@ -114,7 +114,7 @@ public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer
     private SwingComponents.Button customerRequestsButton;
     private javax.swing.JLabel dealerControlPanelLabel;
     private javax.swing.JLabel jLabel1;
-    private SwingComponents.Button manageVehiclesButton;
+    private SwingComponents.Button manageCarsButton;
     private SwingComponents.Button myAccountButton;
     // End of variables declaration//GEN-END:variables
 

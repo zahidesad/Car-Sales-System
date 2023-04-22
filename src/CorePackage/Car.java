@@ -6,16 +6,16 @@ import java.util.ArrayList;
  *
  * @author zahid
  */
-public class Vehicle {
+public class Car {
 
-    public final static String vehicleBrand[] = {"Togg", "Volkswagen", "Nissan", "Ford", "Toyata",
+    public final static String[] carBrand = {"Togg", "Volkswagen", "Nissan", "Ford", "Toyata",
         "Honda", "Chevrolet", "Hyundai", "Renault", "Skoda", "Fiat", "Tata",
         "Jeep", "Ferrari", "Lamborghini", "Bugatti", "BMW", "Maruti", "Tesla"};
 
-    public final static String vehicleType[] = {"Hatchback", "Sedan", "MPV", "SUV", "Convertible",
+    public final static String[] carType = {"Hatchback", "Sedan", "MPV", "SUV", "Convertible",
         "Pickup", "Coupe"};
 
-    public final static String vehicleFuelType[] = {"Petrol", "Diesel", "Hybrid", "Electric"};
+    public final static String[] carFuelType = {"Petrol", "Diesel", "Hybrid", "Electric"};
 
     public final static String pending = "Pending";
     public final static String accepted = "Accepted";
@@ -36,7 +36,7 @@ public class Vehicle {
     static int newId = 100;
     private int id = 0;
 
-    public Vehicle(Dealer dealer, Customer customer, String brand, String model, String color, String type, String fuel, String year, String price) {
+    public Car(Dealer dealer, Customer customer, String brand, String model, String color, String type, String fuel, String year, String price) {
         this.dealer = dealer;
         this.customer = customer;
         this.brand = brand;
@@ -49,7 +49,7 @@ public class Vehicle {
         id = newId++;
     }
 
-    public Vehicle(int id, Dealer dealer, Customer customer, String brand, String model, String color, String type, String fuel, String year, String price) {
+    public Car(int id, Dealer dealer, Customer customer, String brand, String model, String color, String type, String fuel, String year, String price) {
         this.dealer = dealer;
         this.customer = customer;
         this.brand = brand;
@@ -62,8 +62,8 @@ public class Vehicle {
         this.id = id;
     }
 
-    public void removeVehicle() {
-        Database.getVehicles().remove(this);
+    public void removeCar() {
+        Database.getCars().remove(this);
     }
 
     public String getRegister() {
