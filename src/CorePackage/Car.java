@@ -62,8 +62,8 @@ public class Car {
         this.id = id;
     }
 
-    public void removeCar() {
-        Database.getCars().remove(this);
+    public void removeCar(int CarID) {
+        dealer.removeCar(CarID);
     }
 
     public String getRegister() {

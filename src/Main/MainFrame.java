@@ -206,10 +206,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         //Default cars
         Car car1 = new Car(dealer1, null, "Togg",
-                "T10X", "Red", "SUV", "Electric", "2023", "500000₺");
+                "T10X", "Red", "SUV", "Electric", "2023", "500.000₺");
 
         Car car2 = new Car(dealer2, customer2, "BMW",
-                "5.20", "Black", "Sedan", "Diesel", "2022", "700000");
+                "5.20", "Black", "Sedan", "Diesel", "2022", "700.000₺");
         car2.setRegister(Car.pending);
 
         Database.getCars().add(car1);

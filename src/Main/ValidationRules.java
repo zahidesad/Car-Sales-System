@@ -81,7 +81,7 @@ public class ValidationRules extends TransitionsForm {
         txtUsernameValidation2.setForeground(new java.awt.Color(255, 255, 255));
         txtUsernameValidation2.setLineWrap(true);
         txtUsernameValidation2.setRows(5);
-        txtUsernameValidation2.setText("                         USERNAME VALIDATION RULES\n\n1) The username consists of 6 to 30 characters inclusive.\n2) The username can only contain alphanumeric charactersand underscores (_).\n3) The first character of the username must be an alphabetic \ncharacter.\"\n");
+        txtUsernameValidation2.setText("                         USERNAME VALIDATION RULES\n\n1) The username consists of 6 to 30 characters inclusive.\n2) The username can only contain alphanumeric characters and underscores (_).\n3) The first character of the username must be an alphabetic \ncharacter.\"\n");
         txtUsernameValidation2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
         jScrollPane3.setViewportView(txtUsernameValidation2);
 
@@ -105,7 +105,7 @@ public class ValidationRules extends TransitionsForm {
         txtUsernameValidation4.setForeground(new java.awt.Color(255, 255, 255));
         txtUsernameValidation4.setLineWrap(true);
         txtUsernameValidation4.setRows(5);
-        txtUsernameValidation4.setText("                         NAME AND VALIDATION RULES\n\n1) It must start with a capital or lowercase letter.\n2) It must be 2-20 characters long.\n3) It must not contain any special characters\n");
+        txtUsernameValidation4.setText("                                  NAME  VALIDATION RULES\n\n1) It must start with a capital or lowercase letter.\n2) It must be 2-20 characters long.\n3) It must not contain any special characters\n");
         txtUsernameValidation4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
         jScrollPane5.setViewportView(txtUsernameValidation4);
 

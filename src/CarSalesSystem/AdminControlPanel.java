@@ -205,15 +205,19 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                                 " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
                         return;
                     } else if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == car.getId()) {
-                        if (car.getRegister().equals(Car.pending)) {
-                            car.setRegister(Car.available);
-                        }
+
                         if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this car? "
                                 + "This action cannot be undone!", "WARNING",
                                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-                            car.removeCar();
+
+                            if (car.getRegister().equals(Car.pending)) {
+                                car.setRegister(Car.available);
+                            }
+
+                            car.removeCar((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
                             refreshTable();
                             break;
+
                         } else {
 
                         }

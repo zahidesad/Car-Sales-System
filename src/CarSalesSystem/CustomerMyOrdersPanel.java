@@ -39,6 +39,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         tableDark1 = new SwingComponents.TableDark();
         dealerInfoButton = new SwingComponents.Button();
         cancelOrderButton = new SwingComponents.Button();
+        informationLabel = new SwingComponents.Label();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setPreferredSize(new java.awt.Dimension(900, 529));
@@ -50,7 +51,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         myOrdersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         myOrdersLabel.setText("MY ORDERS");
         myOrdersLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(myOrdersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 490, 60));
+        add(myOrdersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 490, 60));
 
         backButton.setBackground(new java.awt.Color(0, 0, 0));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BackArrow.png"))); // NOI18N
@@ -79,7 +80,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         ));
         jScrollPane1.setViewportView(tableDark1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 840, 330));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 840, 330));
 
         dealerInfoButton.setBackground(new java.awt.Color(0, 0, 0));
         dealerInfoButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,7 +91,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
                 dealerInfoButtonActionPerformed(evt);
             }
         });
-        add(dealerInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 180, -1));
+        add(dealerInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 180, -1));
 
         cancelOrderButton.setBackground(new java.awt.Color(0, 0, 0));
         cancelOrderButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,7 +102,12 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
                 cancelOrderButtonActionPerformed(evt);
             }
         });
-        add(cancelOrderButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, 190, -1));
+        add(cancelOrderButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, 190, -1));
+
+        informationLabel.setForeground(new java.awt.Color(255, 255, 255));
+        informationLabel.setText("If you don't see your pending vehicle in your table, the account of the dealer selling the vehicle or the vehicle itself has been deleted by the admin.");
+        informationLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        add(informationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 850, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     public void refreshTable() {
@@ -176,6 +182,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
     private SwingComponents.Button backButton;
     private SwingComponents.Button cancelOrderButton;
     private SwingComponents.Button dealerInfoButton;
+    private SwingComponents.Label informationLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel myOrdersLabel;
     private SwingComponents.TableDark tableDark1;
