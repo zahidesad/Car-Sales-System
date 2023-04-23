@@ -71,7 +71,7 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        vehicleListLabel = new javax.swing.JLabel();
+        carListLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDark1 = new SwingComponents.TableDark();
         backButton = new SwingComponents.Button();
@@ -91,13 +91,13 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
         setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        vehicleListLabel.setBackground(new java.awt.Color(102, 102, 102));
-        vehicleListLabel.setFont(new java.awt.Font("SansSerif", 2, 48)); // NOI18N
-        vehicleListLabel.setForeground(new java.awt.Color(0, 0, 0));
-        vehicleListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        vehicleListLabel.setText("CAR LIST");
-        vehicleListLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(vehicleListLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 490, 60));
+        carListLabel.setBackground(new java.awt.Color(102, 102, 102));
+        carListLabel.setFont(new java.awt.Font("SansSerif", 2, 48)); // NOI18N
+        carListLabel.setForeground(new java.awt.Color(0, 0, 0));
+        carListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        carListLabel.setText("CAR LIST");
+        carListLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        add(carListLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 490, 60));
 
         tableDark1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -439,6 +439,7 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
     private javax.swing.JComboBox<String> brandFilterJComboBox;
     private javax.swing.JLabel brandLabel;
     private SwingComponents.Button buyCarButton;
+    private javax.swing.JLabel carListLabel;
     private javax.swing.JComboBox<Object> dealerFilterJComboBox;
     private SwingComponents.Button dealerInfoButton;
     private javax.swing.JLabel dealerLabel;
@@ -449,7 +450,6 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
     private SwingComponents.TableDark tableDark1;
     private javax.swing.JComboBox<String> typeFilterJComboBox;
     private javax.swing.JLabel typeLabel;
-    private javax.swing.JLabel vehicleListLabel;
     // End of variables declaration//GEN-END:variables
 
     @Override

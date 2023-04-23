@@ -163,11 +163,11 @@ public class Login extends PanelCustom implements ITriggerer {
         Matcher matcher = pattern.matcher(username);
 
         if (matcher.matches()) {
-            ImageIcon verifiedIcon = new ImageIcon("C:\\Icons\\verifiedIcon.png");
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             usernameIconLabel.setIcon(verifiedIcon);
             flagForUsername = true;
         } else {
-            ImageIcon nonVerifiedIcon = new ImageIcon("C:\\Icons\\nonVerifiedIcon.png");
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             usernameIconLabel.setIcon(nonVerifiedIcon);
             flagForUsername = false;
         }
@@ -184,11 +184,11 @@ public class Login extends PanelCustom implements ITriggerer {
         Matcher matcher = pattern.matcher(password);
 
         if (matcher.matches()) {
-            ImageIcon verifiedIcon = new ImageIcon("C:\\Icons\\verifiedIcon.png");
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             passwordIconLabel.setIcon(verifiedIcon);
             flagForPassword = true;
         } else {
-            ImageIcon nonVerifiedIcon = new ImageIcon("C:\\Icons\\nonVerifiedIcon.png");
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             passwordIconLabel.setIcon(nonVerifiedIcon);
             flagForPassword = false;
         }

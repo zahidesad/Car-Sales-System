@@ -291,11 +291,11 @@ public class Register extends PanelCustom implements ITriggerer {
         Matcher matcher = pattern.matcher(name);
 
         if (matcher.matches()) {
-            ImageIcon verifiedIcon = new ImageIcon("C:\\Icons\\verifiedIcon.png");
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             nameIconLabel.setIcon(verifiedIcon);
             flagForName = true;
         } else {
-            ImageIcon nonVerifiedIcon = new ImageIcon("C:\\Icons\\nonVerifiedIcon.png");
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             nameIconLabel.setIcon(nonVerifiedIcon);
             flagForName = false;
         }
@@ -309,11 +309,11 @@ public class Register extends PanelCustom implements ITriggerer {
         Matcher matcher = pattern.matcher(email);
 
         if (matcher.matches()) {
-            ImageIcon verifiedIcon = new ImageIcon("C:\\Icons\\verifiedIcon.png");
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             emailIconLabel.setIcon(verifiedIcon);
             flagForEmail = true;
         } else {
-            ImageIcon nonVerifiedIcon = new ImageIcon("C:\\Icons\\nonVerifiedIcon.png");
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             emailIconLabel.setIcon(nonVerifiedIcon);
             flagForEmail = false;
         }
@@ -327,11 +327,11 @@ public class Register extends PanelCustom implements ITriggerer {
         Matcher matcher = pattern.matcher(username);
 
         if (matcher.matches()) {
-            ImageIcon verifiedIcon = new ImageIcon("C:\\Icons\\verifiedIcon.png");
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             usernameIconLabel.setIcon(verifiedIcon);
             flagForUsername = true;
         } else {
-            ImageIcon nonVerifiedIcon = new ImageIcon("C:\\Icons\\nonVerifiedIcon.png");
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             usernameIconLabel.setIcon(nonVerifiedIcon);
             flagForUsername = false;
         }
@@ -348,11 +348,11 @@ public class Register extends PanelCustom implements ITriggerer {
         Matcher matcher = pattern.matcher(password);
 
         if (matcher.matches()) {
-            ImageIcon verifiedIcon = new ImageIcon("C:\\Icons\\verifiedIcon.png");
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             passwordIconLabel.setIcon(verifiedIcon);
             flagForPassword = true;
         } else {
-            ImageIcon nonVerifiedIcon = new ImageIcon("C:\\Icons\\nonVerifiedIcon.png");
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             passwordIconLabel.setIcon(nonVerifiedIcon);
             flagForPassword = false;
         }
@@ -366,11 +366,11 @@ public class Register extends PanelCustom implements ITriggerer {
         Matcher matcher = pattern.matcher(phoneNo);
 
         if (matcher.matches()) {
-            ImageIcon verifiedIcon = new ImageIcon("C:\\Icons\\verifiedIcon.png");
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             phoneNumberIconLabel.setIcon(verifiedIcon);
             flagForPhoneNumber = true;
         } else {
-            ImageIcon nonVerifiedIcon = new ImageIcon("C:\\Icons\\nonVerifiedIcon.png");
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             phoneNumberIconLabel.setIcon(nonVerifiedIcon);
             flagForPhoneNumber = false;
         }
