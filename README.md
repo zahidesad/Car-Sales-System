@@ -140,3 +140,8 @@ package.
 	
 20)	Dealer can delete his/her own account.
 
+     4. UML DIAGRAM
+   
+![CarSalesSystemUmlDiagram](https://user-images.githubusercontent.com/116666407/234034651-7eec9b56-a0ef-4d28-870e-e2a300298594.png)
+
+
