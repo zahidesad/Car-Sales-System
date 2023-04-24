@@ -1,4 +1,37 @@
 # Car-Sales-System
+								SAMPLE SCREENSHOTS AND GIFS
+
+
+![gif1](https://user-images.githubusercontent.com/116666407/234092449-fb7a7643-cd88-476d-bbbd-5f18b19f97bf.gif)
+
+![gif2](https://user-images.githubusercontent.com/116666407/234092469-28f12177-dd52-49bf-b4f6-0175a94f8410.gif)
+
+![Ekran görüntüsü 2023-04-24 220122](https://user-images.githubusercontent.com/116666407/234092575-1e347aaa-04c0-49e4-855f-608e5846cd4a.png)
+
+![Ekran görüntüsü 2023-04-24 220155](https://user-images.githubusercontent.com/116666407/234092576-9afaa9c0-2089-4363-b0e8-531c08769f8a.png)
+
+![Ekran görüntüsü 2023-04-24 220224](https://user-images.githubusercontent.com/116666407/234092579-710ae319-a0cb-400a-809c-a16d75a293ff.png)
+
+![Ekran görüntüsü 2023-04-24 220247](https://user-images.githubusercontent.com/116666407/234092581-a4ac97ca-bf58-4754-8bbf-a0280a5afe42.png)
+
+![Ekran görüntüsü 2023-04-24 220303](https://user-images.githubusercontent.com/116666407/234092584-50fff5c7-d562-49bc-8d8e-ff812f46ad2d.png)
+
+![Ekran görüntüsü 2023-04-24 220333](https://user-images.githubusercontent.com/116666407/234092586-bc4c496c-a5a1-4810-a4c0-ff803a72a373.png)
+
+![Ekran görüntüsü 2023-04-24 220353](https://user-images.githubusercontent.com/116666407/234092541-e3f2b019-6c72-4ae9-b8c8-265a4039c35c.png)
+
+![Ekran görüntüsü 2023-04-24 220411](https://user-images.githubusercontent.com/116666407/234092550-1090774c-9c7c-4834-9a98-57edea99621e.png)
+
+![Ekran görüntüsü 2023-04-24 220427](https://user-images.githubusercontent.com/116666407/234092556-c817515e-2814-437e-9084-6396eeca7646.png)
+
+![Ekran görüntüsü 2023-04-24 220506](https://user-images.githubusercontent.com/116666407/234092562-f29565d9-2968-4d2a-b5e6-a04f1307bc99.png)
+
+![Ekran görüntüsü 2023-04-24 220535](https://user-images.githubusercontent.com/116666407/234092566-3f6c5150-164d-4a4d-a9fc-accac7374cdc.png)
+
+![Ekran görüntüsü 2023-04-24 220620](https://user-images.githubusercontent.com/116666407/234092567-3fd58d8f-db9e-4e41-9b3d-868197289cd0.png)
+
+![Ekran görüntüsü 2023-04-24 220638](https://user-images.githubusercontent.com/116666407/234092569-f3acd798-713e-4beb-b9fe-7bd7cec2d941.png)
+
 
 1.	AIM OF THE PROJECT AND REQUIREMENTS 
 
