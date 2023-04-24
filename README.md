@@ -1,5 +1,5 @@
 # Car-Sales-System
-								SAMPLE SCREENSHOTS AND GIFS
+							SAMPLE SCREENSHOTS AND GIFS
 
 
 ![gif1](https://user-images.githubusercontent.com/116666407/234092449-fb7a7643-cd88-476d-bbbd-5f18b19f97bf.gif)
