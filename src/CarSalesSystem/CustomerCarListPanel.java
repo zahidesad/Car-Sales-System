@@ -266,8 +266,13 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
 
                 MainFrame.instance.getDealerAccountDetailsPanel().dealer = (Dealer) dealer;
                 MainFrame.instance.getDealerAccountDetailsPanel().accountDetailsForCustomer();
-                MainFrame.instance.setPage(MainFrame.instance.getDealerAccountDetailsPanel());
-
+                if (dealer != null) {  //Extra control when admin deletes a dealer account or dealer deletes their own account
+                    MainFrame.instance.setPage(MainFrame.instance.getDealerAccountDetailsPanel());
+                } else {
+                    JOptionPane.showMessageDialog(this, "This dealer account has been deleted by itself or by the admin. ",
+                            "Undefined User", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
         } catch (IndexOutOfBoundsException exception) {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",

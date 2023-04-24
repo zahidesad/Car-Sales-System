@@ -105,7 +105,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         add(cancelOrderButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, 190, -1));
 
         informationLabel.setForeground(new java.awt.Color(255, 255, 255));
-        informationLabel.setText("If you don't see your pending vehicle in your table, the account of the dealer selling the vehicle or the vehicle itself has been deleted by the admin.");
+        informationLabel.setText("If you don't see your pending status vehicle in your table, the account of the dealer selling the vehicle or the vehicle itself has been deleted by the admin.");
         informationLabel.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         add(informationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 850, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -143,12 +143,18 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
 
                 MainFrame.instance.getDealerAccountDetailsPanel().dealer = (Dealer) dealer;
                 MainFrame.instance.getDealerAccountDetailsPanel().accountDetailsForCustomer();
-                MainFrame.instance.setPage(MainFrame.instance.getDealerAccountDetailsPanel());
-                
+                if (dealer != null) {  // Extra control when admin deletes a dealer account or dealer deletes their own account
+                    MainFrame.instance.setPage(MainFrame.instance.getDealerAccountDetailsPanel());
+                } else {
+                    JOptionPane.showMessageDialog(this, "This dealer account has been deleted by itself or by the admin. ",
+                            "Undefined User", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
             }
             return;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Something went wrong");
+
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
         }
