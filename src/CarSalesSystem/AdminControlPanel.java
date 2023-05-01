@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer {
 
-    DefaultTableModel tableModel = new DefaultTableModel();
+    DefaultTableModel tableModel = new DefaultTableModel();   
     String[] columNames = {"ID", "Name", "Username", "E-mail", "Phone"};
     String[] columNamesCars = {"ID", "Dealer", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
 

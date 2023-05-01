@@ -173,8 +173,8 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
 
                 }
             } else {
-                JOptionPane.showConfirmDialog(this, "This car is already in accepted or denied status. ",
-                        "Invalid Transaction", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "This order cannot be canceled because the car "
+                        + "is already in accepted or denied status.", "Invalid Transaction", JOptionPane.ERROR_MESSAGE);
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Something went wrong");

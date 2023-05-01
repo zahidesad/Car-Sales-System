@@ -199,7 +199,7 @@ public class MainFrame extends javax.swing.JFrame {
                 "meryem.kilic@gmail.com", "551-136-5622");
 
         //Default customer accounts
-        Customer customer1 = new Customer("saresu", "Saresu123$", "Sare",
+        Customer customer1 = new Customer("sare", "Sare123$", "Sare",
                 "rumeysasare.bayram@gmail.com", "542-592-3130");
         Customer customer2 = new Customer("asim", "Asim123$", "Asım",
                 "asimtarik.kutluer@gmail.com", "507-000-8134");

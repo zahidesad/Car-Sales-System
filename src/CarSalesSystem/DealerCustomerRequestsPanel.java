@@ -159,15 +159,18 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
     }//GEN-LAST:event_customerInfoButtonActionPerformed
 
     private void acceptDennyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptDennyButtonActionPerformed
+        String[] options = {"Accept", "Deny", "Cancel"};
+        int selection = JOptionPane.showOptionDialog(this, "Do You Want To Accept Offer?", "Sales Process",
+                0, 3, null, options, options[2]);
         try {
             if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Car.pending)) {
-                if ((JOptionPane.showConfirmDialog(this, "Do You Want To Accept Offer?", "Sales Process",
-                        JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION)) {
+                if (selection == 0) {
                     dealer.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
                     refreshTable();
-                } else {
+                } else if (selection == 1) {
                     dealer.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
                     refreshTable();
+                } else {
                 }
             }
         } catch (IndexOutOfBoundsException exception) {
