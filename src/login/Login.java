@@ -158,7 +158,10 @@ public class Login extends PanelCustom implements ITriggerer {
     private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
         String username = txtUsername.getText();
 
-        String regex = "^[A-Za-z]\\w{3,29}$";
+        String regex = "^" //Satırın başlangıcını belirtir
+                + "[A-Za-z]" // En az bir harf karakteri ile başlamalıdır
+                + "\\w{3,29}" //3 ila 29 karakter uzunluğunda bir kelime karakteri (\w) dizisi (word character)olmalıdır.
+                + "$"; // Satırın sonunu belirtir
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(username);
 
@@ -175,10 +178,13 @@ public class Login extends PanelCustom implements ITriggerer {
 
     private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
         String password = txtPassword.getText();
-        String regex = "^(?=.*[0-9])"
-                + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
+        String regex = "^" //Satırın başlangıcını belirtir
+                + "(?=.*[0-9])" // En az bir rakam içermesi gerektiğini belirtir
+                + "(?=.*[a-z])(?=.*[A-Z])" //En az bir küçük harf ve bir büyük harf içermesi gerektiğini belirtir
+                + "(?=.*[@#$%^&+=])" // En az bir özel karakter içermesi gerektiğini belirtir
+                + "(?=\\S+$)" // Boşluk olmadığını belirtir
+                + ".{8,20}" // 8 ila 20 karakter arasında olması gerektiğini belirtir
+                + "$"; // Satırın sonunu belirtir
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);

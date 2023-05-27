@@ -11,23 +11,24 @@ import javax.swing.table.DefaultTableModel;
  * @author zahid
  */
 public class DealerManageCarPanel extends javax.swing.JPanel implements ITriggerer {
-    
+
     private Dealer dealer;
-    
+    public Car searchedCar;
+
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
-    
+
     public DealerManageCarPanel() {
         initComponents();
         tableModel.setColumnIdentifiers(columNames);
         tableDark1.setModel(tableModel);
-        
+
     }
-    
+
     public void refreshTable() {
         tableModel.setRowCount(0);
         tableModel.setColumnIdentifiers(columNames);
-        
+
         for (Car listedCar : dealer.getListedCars()) {
             Vector rowData = new Vector();
             rowData.add(listedCar.getId());
@@ -38,13 +39,13 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
             rowData.add(listedCar.getYear());
             rowData.add(listedCar.getPrice());
             rowData.add(listedCar.getRegister());
-            
+
             tableModel.addRow(rowData);
-            
+
         }
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -55,6 +56,7 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
         addCarButton = new SwingComponents.Button();
         deleteCarButton = new SwingComponents.Button();
         backButton = new SwingComponents.Button();
+        editCarButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setMinimumSize(new java.awt.Dimension(900, 529));
@@ -98,7 +100,7 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
                 addCarButtonActionPerformed(evt);
             }
         });
-        add(addCarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 180, -1));
+        add(addCarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, 180, -1));
 
         deleteCarButton.setBackground(new java.awt.Color(0, 0, 0));
         deleteCarButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,7 +111,7 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
                 deleteCarButtonActionPerformed(evt);
             }
         });
-        add(deleteCarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 180, -1));
+        add(deleteCarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, 180, -1));
 
         backButton.setBackground(new java.awt.Color(0, 0, 0));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BackArrow.png"))); // NOI18N
@@ -119,6 +121,17 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
             }
         });
         add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        editCarButton.setBackground(new java.awt.Color(0, 0, 0));
+        editCarButton.setForeground(new java.awt.Color(255, 255, 255));
+        editCarButton.setText("Edit Car Properties");
+        editCarButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        editCarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCarButtonActionPerformed(evt);
+            }
+        });
+        add(editCarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 460, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -139,13 +152,13 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
                 JOptionPane.showMessageDialog(this, "This car cannot be deleted because you have not yet responded to the customer's request.\n"
                         + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
                         " Incorrect Operation", JOptionPane.INFORMATION_MESSAGE);
-                
+
                 MainFrame.instance.setPage(MainFrame.instance.getDealerCustomerRequestsPanel());
-                
+
             } else if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this car to your account? "
                     + "This action cannot be undone!", "WARNING",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-                
+
                 for (int i = 0; i < dealer.getListedCars().size(); i++) {
                     if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)
                             == dealer.getListedCars().get(i).getId()) {
@@ -154,7 +167,7 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
                     }
                 }
             }
-            
+
         } catch (IndexOutOfBoundsException exception) {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
@@ -162,11 +175,42 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
 
     }//GEN-LAST:event_deleteCarButtonActionPerformed
 
+    private void editCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCarButtonActionPerformed
+        try {
+            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Car.accepted)) {
+                JOptionPane.showMessageDialog(this, "This car cannot be edited because it has been sold. ",
+                        " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Car.pending)) {
+                JOptionPane.showMessageDialog(this, "This car cannot be edited because you have not yet responded to the customer's request.\n"
+                        + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
+                        " Incorrect Operation", JOptionPane.INFORMATION_MESSAGE);
+
+                MainFrame.instance.setPage(MainFrame.instance.getDealerCustomerRequestsPanel());
+                return;
+            }
+
+            for (Car car : Database.getCars()) {
+                if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)
+                        == car.getId()) {
+                    searchedCar = car;
+                    MainFrame.instance.setPage(MainFrame.instance.getDealerEditCarPanel());
+                }
+            }
+
+        } catch (IndexOutOfBoundsException exception) {
+            JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
+                    "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_editCarButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private SwingComponents.Button addCarButton;
     private SwingComponents.Button backButton;
     private SwingComponents.Button deleteCarButton;
+    private SwingComponents.Button editCarButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel myCarsLabel;
     private SwingComponents.TableDark tableDark1;

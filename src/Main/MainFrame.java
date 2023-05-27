@@ -13,7 +13,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     // --------------- VARIABLE DECLERATIONS ------------------
     public static MainFrame instance;
-    
+
     private final MainPanel mainPanel;
 
     private final LoginAndRegister loginAndRegister;
@@ -25,6 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final DealerManageCarPanel dealerManageCarPanel;
     private final DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
     private final DealerAddCarPanel dealerAddCarPanel;
+    private final DealerEditCarPanel dealerEditCarPanel;
 
     private final CustomerControlPanel customerControlPanel;
     private final CustomerCarListPanel customerCarListPanel;
@@ -40,7 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         // Initilize Variables
         mainPanel = new MainPanel();
-        
+
         loginAndRegister = new LoginAndRegister();
 
         adminControlPanel = new AdminControlPanel();
@@ -50,6 +51,7 @@ public class MainFrame extends javax.swing.JFrame {
         dealerManageCarPanel = new DealerManageCarPanel();
         dealerCustomerRequestsPanel = new DealerCustomerRequestsPanel();
         dealerAddCarPanel = new DealerAddCarPanel();
+        dealerEditCarPanel = new DealerEditCarPanel();
 
         customerControlPanel = new CustomerControlPanel();
         customerCarListPanel = new CustomerCarListPanel();
@@ -58,7 +60,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         container = new JPanel();
 
-        this.add(container); 
+        this.add(container);
         container.add(mainPanel);
 
         setSize(900, 565);
@@ -96,6 +98,10 @@ public class MainFrame extends javax.swing.JFrame {
         return dealerAddCarPanel;
     }
 
+    public DealerEditCarPanel getDealerEditCarPanel() {
+        return dealerEditCarPanel;
+    }
+
     public CustomerControlPanel getCustomerControlPanel() {
         return customerControlPanel;
     }
@@ -111,8 +117,8 @@ public class MainFrame extends javax.swing.JFrame {
     public CustomerAccountDetailsPanel getCustomerAccountDetailsPanel() {
         return customerAccountDetailsPanel;
     }
-    
-    public MainPanel getMainPanel(){
+
+    public MainPanel getMainPanel() {
         return mainPanel;
     }
 
@@ -157,15 +163,15 @@ public class MainFrame extends javax.swing.JFrame {
             public void run() {
                 testInit();
                 // ---------------- SINGLETON -----------------
-                new Main.SplashScreen(null,true).setVisible(true);
-                instance = new MainFrame();               
+                new Main.SplashScreen(null, true).setVisible(true);
+                instance = new MainFrame();
                 instance.setVisible(true);
 
             }
         });
 
     }
-    
+
     // Method to set page transitions
     public final void setPage(JPanel page) {
         container.removeAll();
@@ -179,13 +185,13 @@ public class MainFrame extends javax.swing.JFrame {
             iTriggerer.PageOn();
         }
     }
-    
+
     //Method to log out and redirect the logged out user back to the login and register page.
     public void logOut() {
         account = null;
         setPage(getMainPanel());
     }
-    
+
     //Method for default account
     public static void testInit() {
         //Default admin account
@@ -210,15 +216,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         Car car2 = new Car(dealer2, customer2, "BMW",
                 "5.20", "Black", "Sedan", "Diesel", "2022", "700.000₺");
-        car2.setRegister(Car.pending);
 
         Database.getCars().add(car1);
         Database.getCars().add(car2);
 
         dealer1.getListedCars().add(car1);
         dealer2.getListedCars().add(car2);
-
-        customer2.getListedCars().add(car2);
 
         Database.getUsers().add(admin);
         Database.getUsers().add(dealer1);

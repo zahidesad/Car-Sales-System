@@ -286,7 +286,10 @@ public class Register extends PanelCustom implements ITriggerer {
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
         String name = txtName.getText();
 
-        String regex = "^[A-Za-z]{2,20}$";
+        String regex = "^" //metnin başlangıcını belirtir.
+                + "[A-Za-z]" // büyük veya küçük harflerin herhangi birinin eşleşebileceğini belirtir.
+                + "{2,20}" // önceki karakter setinin 2 ile 20 arasında kez tekrarlanabileceğini belirtir.
+                + "$"; //metnin sonunu belirtir.
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(name);
 
@@ -304,7 +307,15 @@ public class Register extends PanelCustom implements ITriggerer {
     private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
         String email = txtEmail.getText();
 
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String regex = "^" //işareti, metnin başlangıcını belirtir.
+                + "[A-Za-z0-9+_.-]+" //  e-posta adresinin kullanıcı adını belirten bölümü ifade eder. 
+                //Burada, büyük/küçük harf ve rakamlardan oluşan karakterlerin yanı sıra, "+" ve "", "." ve "-" 
+                //karakterleri de kullanılabilir. "+" karakteri, kullanıcı adının sonunda kullanıldığında özellikle 
+                //yaygın bir şekilde kullanılır ve çeşitli e-posta servisleri tarafından desteklenir.
+                + "@" //e-posta adresinin kullanıcı adı ve etki alanı arasındaki ayırıcıdır.
+                + "(.+)" //ifadesi, e-posta adresinin etki alanını belirtir. Burada, parantez içindeki nokta karakteri, 
+                //herhangi bir karakteri eşleştirir ve "+" işareti, bu karakterin bir veya daha fazla kez tekrarlanabileceğini belirtir.
+                + "$"; // metnin sonunu belirtir.
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
 
@@ -322,7 +333,10 @@ public class Register extends PanelCustom implements ITriggerer {
     private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
         String username = txtUsername.getText();
 
-        String regex = "^[A-Za-z]\\w{3,29}$";
+        String regex = "^" //Satırın başlangıcını belirtir
+                + "[A-Za-z]" // En az bir harf karakteri ile başlamalıdır
+                + "\\w{3,29}" //3 ila 29 karakter uzunluğunda bir kelime karakteri (\w) dizisi (word character)olmalıdır.
+                + "$"; // Satırın sonunu belirtir
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(username);
 
@@ -339,10 +353,13 @@ public class Register extends PanelCustom implements ITriggerer {
 
     private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
         String password = txtPassword.getText();
-        String regex = "^(?=.*[0-9])"
-                + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
+        String regex = "^" //Satırın başlangıcını belirtir
+                + "(?=.*[0-9])" // En az bir rakam içermesi gerektiğini belirtir
+                + "(?=.*[a-z])(?=.*[A-Z])" //En az bir küçük harf ve bir büyük harf içermesi gerektiğini belirtir
+                + "(?=.*[@#$%^&+=])" // En az bir özel karakter içermesi gerektiğini belirtir
+                + "(?=\\S+$)" // Boşluk olmadığını belirtir
+                + ".{8,20}" // 8 ila 20 karakter arasında olması gerektiğini belirtir
+                + "$"; // Satırın sonunu belirtir
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(password);
@@ -360,7 +377,13 @@ public class Register extends PanelCustom implements ITriggerer {
 
     private void txtPhoneNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNumberKeyReleased
         String phoneNo = txtPhoneNumber.getText();
-        String regex = "^\\d{3}-\\d{3}-\\d{4}$";
+        String regex = "^" //metnin başlangıcını belirtir.
+                + "\\d{3}" //üç rakam içeren bir sayı bloğunu eşleştirir.
+                + "-" //karakteri, sayı blokları arasında ayırıcı olarak kullanılır.
+                + "\\d{3}" //üç rakam içeren bir sayı bloğunu eşleştirir.
+                + "-" //karakteri, sayı blokları arasında ayırıcı olarak kullanılır.
+                + "\\d{4}" //dört rakam içeren bir sayı bloğunu eşleştirir. 
+                + "$"; //işareti, metnin sonunu belirtir.
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(phoneNo);
