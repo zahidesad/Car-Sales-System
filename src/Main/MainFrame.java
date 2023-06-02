@@ -161,7 +161,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                testInit();
+//                testInit();
                 // ---------------- SINGLETON -----------------
                 new Main.SplashScreen(null, true).setVisible(true);
                 instance = new MainFrame();
@@ -193,43 +193,43 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     //Method for default account
-    public static void testInit() {
-        //Default admin account
-        Admin admin = new Admin("admin", "Admin123$", "Zahid",
-                "zahid.bltci@gmail.com", "536-066-6561");
-
-        //Default dealer accounts
-        Dealer dealer1 = new Dealer("emirhan", "Emirhan123$", "Emirhan",
-                "emirhan.soylu@gmail.com", "506-364-0557");
-        Dealer dealer2 = new Dealer("meryem", "Meryem123$", "Meryem",
-                "meryem.kilic@gmail.com", "551-136-5622");
-
-        //Default customer accounts
-        Customer customer1 = new Customer("sare", "Sare123$", "Sare",
-                "rumeysasare.bayram@gmail.com", "542-592-3130");
-        Customer customer2 = new Customer("asim", "Asim123$", "Asım",
-                "asimtarik.kutluer@gmail.com", "507-000-8134");
-
-        //Default cars
-        Car car1 = new Car(dealer1, null, "Togg",
-                "T10X", "Red", "SUV", "Electric", "2023", "500.000₺");
-
-        Car car2 = new Car(dealer2, customer2, "BMW",
-                "5.20", "Black", "Sedan", "Diesel", "2022", "700.000₺");
-
-        Database.getCars().add(car1);
-        Database.getCars().add(car2);
-
-        dealer1.getListedCars().add(car1);
-        dealer2.getListedCars().add(car2);
-
-        Database.getUsers().add(admin);
-        Database.getUsers().add(dealer1);
-        Database.getUsers().add(dealer2);
-        Database.getUsers().add(customer1);
-        Database.getUsers().add(customer2);
-
-    }
+//    public static void testInit() {
+//        //Default admin account
+//        Admin admin = new Admin("admin", "Admin123$", "Zahid",
+//                "zahid.bltci@gmail.com", "536-066-6561");
+//
+//        //Default dealer accounts
+//        Dealer dealer1 = new Dealer("emirhan", "Emirhan123$", "Emirhan",
+//                "emirhan.soylu@gmail.com", "506-364-0557");
+//        Dealer dealer2 = new Dealer("meryem", "Meryem123$", "Meryem",
+//                "meryem.kilic@gmail.com", "551-136-5622");
+//
+//        //Default customer accounts
+//        Customer customer1 = new Customer("sare", "Sare123$", "Sare",
+//                "rumeysasare.bayram@gmail.com", "542-592-3130");
+//        Customer customer2 = new Customer("asim", "Asim123$", "Asım",
+//                "asimtarik.kutluer@gmail.com", "507-000-8134");
+//
+//        //Default cars
+//        Car car1 = new Car(dealer1, null, "Togg",
+//                "T10X", "Red", "SUV", "Electric", "2023", "500.000₺");
+//
+//        Car car2 = new Car(dealer2, customer2, "BMW",
+//                "5.20", "Black", "Sedan", "Diesel", "2022", "700.000₺");
+//
+//        Database.getCars().add(car1);
+//        Database.getCars().add(car2);
+//
+//        dealer1.getListedCars().add(car1);
+//        dealer2.getListedCars().add(car2);
+//
+//        Database.getUsers().add(admin);
+//        Database.getUsers().add(dealer1);
+//        Database.getUsers().add(dealer2);
+//        Database.getUsers().add(customer1);
+//        Database.getUsers().add(customer2);
+//
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

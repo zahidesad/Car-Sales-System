@@ -9,6 +9,13 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("Admin")
-public class Admin extends Users{
+public class Admin extends Users {
 
+    public Admin() {
+    }
+
+    public Admin(String name, String username, String password, String email, Integer phone) {
+        super(name, username, password, email, phone);
+
+    }
 }

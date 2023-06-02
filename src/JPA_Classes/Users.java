@@ -23,15 +23,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USERS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE")
+@DiscriminatorColumn(name = "USERS_TYPE")
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
-    @NamedQuery(name = "Users.findByType", query = "SELECT u FROM Users u WHERE u.type = :type"),
+    @NamedQuery(name = "Users.findByUserType", query = "SELECT u FROM Users u WHERE u.usersType = :type"),
     @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
-    @NamedQuery(name = "Users.findAllCustomers", query = "SELECT u FROM Users u WHERE u.type = 'Customer'"),
-    @NamedQuery(name = "Users.findAllDealers", query = "SELECT u FROM Users u WHERE u.type = 'Dealer'"),
-    @NamedQuery(name = "Users.findAllAdmins", query = "SELECT u FROM Users u WHERE u.type = 'Admin'"),
+    @NamedQuery(name = "Users.findAllCustomers", query = "SELECT u FROM Users u WHERE u.usersType = 'Customer'"),
+    @NamedQuery(name = "Users.findAllDealers", query = "SELECT u FROM Users u WHERE u.usersType = 'Dealer'"),
+    @NamedQuery(name = "Users.findAllAdmins", query = "SELECT u FROM Users u WHERE u.usersType = 'Admin'"),
     @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
@@ -40,12 +40,10 @@ public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Integer id;
-    @Column(name = "TYPE")
-    private String type;
     @Column(name = "NAME")
     private String name;
     @Column(name = "USERNAME")
@@ -55,13 +53,19 @@ public class Users implements Serializable {
     @Column(name = "EMAIL")
     private String email;
     @Column(name = "PHONE")
-    private String phone;
-    @OneToMany(mappedBy = "customerId")
-    private List<Cars> carsList;
-    @OneToMany(mappedBy = "dealerId")
-    private List<Cars> carsList1;
+    private Integer phone;
+    @Column(name = "USERS_TYPE")
+    private String usersType;
 
     public Users() {
+    }
+
+    public Users(String name, String username, String password, String email, Integer phone) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
     }
 
     public Users(Integer id) {
@@ -76,12 +80,12 @@ public class Users implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getUsersType() {
+        return usersType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setUsersType(String usersType) {
+        this.usersType = usersType;
     }
 
     public String getName() {
@@ -116,28 +120,12 @@ public class Users implements Serializable {
         this.email = email;
     }
 
-    public String getPhone() {
+    public Integer getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
-    }
-
-    public List<Cars> getCarsList() {
-        return carsList;
-    }
-
-    public void setCarsList(List<Cars> carsList) {
-        this.carsList = carsList;
-    }
-
-    public List<Cars> getCarsList1() {
-        return carsList1;
-    }
-
-    public void setCarsList1(List<Cars> carsList1) {
-        this.carsList1 = carsList1;
     }
 
     @Override
@@ -162,7 +150,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "JPA_Classes.Users[ id=" + id + " ]";
+        return name;
     }
 
 }
