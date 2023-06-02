@@ -388,7 +388,7 @@ public class Register extends PanelCustom implements ITriggerer {
             phoneNumberIconLabel.setIcon(nonVerifiedIcon);
             flagForPhoneNumber = false;
         }
-        flagForPhoneNumber = true;
+
     }//GEN-LAST:event_txtPhoneNumberKeyReleased
 
     private void termsAndConditionsCheckBoxİtemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_termsAndConditionsCheckBoxİtemStateChanged

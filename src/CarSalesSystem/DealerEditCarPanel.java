@@ -3,6 +3,9 @@ package CarSalesSystem;
 import CorePackage.Car;
 import CorePackage.ITriggerer;
 import Main.MainFrame;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +15,10 @@ import javax.swing.JOptionPane;
 public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer {
 
     Car car;
+
+    private boolean flagForModelLabel = false;
+    private boolean flagForColorLabel = false;
+    private boolean flagForPriceLabel = false;
 
     public DealerEditCarPanel() {
         initComponents();
@@ -38,6 +45,9 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
         txtPrice = new SwingComponents.TextField();
         updateCarButton = new SwingComponents.Button();
         backButton = new SwingComponents.Button();
+        modelIconLabel = new javax.swing.JLabel();
+        colorIconLabel = new javax.swing.JLabel();
+        priceIconLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -100,6 +110,11 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
 
         txtModel.setForeground(new java.awt.Color(0, 0, 0));
         txtModel.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        txtModel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtModelKeyReleased(evt);
+            }
+        });
         add(txtModel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 180, 40));
 
         typejComboBox.setBackground(new java.awt.Color(153, 153, 153));
@@ -110,6 +125,11 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
 
         txtColor.setForeground(new java.awt.Color(0, 0, 0));
         txtColor.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtColorKeyReleased(evt);
+            }
+        });
         add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 180, 40));
 
         yearjComboBox.setBackground(new java.awt.Color(153, 153, 153));
@@ -126,6 +146,11 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
 
         txtPrice.setForeground(new java.awt.Color(0, 0, 0));
         txtPrice.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        txtPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPriceKeyReleased(evt);
+            }
+        });
         add(txtPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 460, 180, 40));
 
         updateCarButton.setBackground(new java.awt.Color(0, 0, 0));
@@ -147,6 +172,9 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
             }
         });
         add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        add(modelIconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, 40));
+        add(colorIconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, -1, 40));
+        add(priceIconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, -1, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCarButtonActionPerformed
@@ -156,29 +184,41 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
 
             return;
 
-        } else if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the features of this car? This action cannot be undone! ",
-                "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+        } else if (flagForColorLabel == true && flagForModelLabel == true && flagForPriceLabel == true) {
+            if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the features of this car? This action cannot be undone! ",
+                    "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
-            car.setBrand(brandjComboBox.getSelectedItem().toString());
-            car.setModel(txtModel.getText());
-            car.setType(typejComboBox.getSelectedItem().toString());
-            car.setColor(txtColor.getText());
-            car.setYear(yearjComboBox.getSelectedItem().toString());
-            car.setFuel(fuelTypejComboBox.getSelectedItem().toString());
-            car.setPrice(txtPrice.getText());
+                car.setBrand(brandjComboBox.getSelectedItem().toString());
+                car.setModel(txtModel.getText());
+                car.setType(typejComboBox.getSelectedItem().toString());
+                car.setColor(txtColor.getText());
+                car.setYear(yearjComboBox.getSelectedItem().toString());
+                car.setFuel(fuelTypejComboBox.getSelectedItem().toString());
+                car.setPrice(txtPrice.getText());
 
-            JOptionPane.showMessageDialog(this, "Car features successfully updated ",
-                    "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
-            brandjComboBox.setSelectedIndex(0);
-            txtModel.setText("");
-            typejComboBox.setSelectedIndex(0);
-            txtColor.setText("");
-            yearjComboBox.setSelectedIndex(0);
-            fuelTypejComboBox.setSelectedIndex(0);
-            txtPrice.setText("");
-            MainFrame.instance.setPage(MainFrame.instance.getDealerManageCarPanel());
+                JOptionPane.showMessageDialog(this, "Car features successfully updated ",
+                        "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
+                brandjComboBox.setSelectedIndex(0);
+                txtModel.setText("");
+                typejComboBox.setSelectedIndex(0);
+                txtColor.setText("");
+                yearjComboBox.setSelectedIndex(0);
+                fuelTypejComboBox.setSelectedIndex(0);
+                txtPrice.setText("");
+
+                modelIconLabel.setIcon(null);
+                colorIconLabel.setIcon(null);
+                priceIconLabel.setIcon(null);
+
+                MainFrame.instance.setPage(MainFrame.instance.getDealerManageCarPanel());
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "There was a validation error, please enter only a letter"
+                    + " for the model and color, and a maximum of 9 digits for the price.",
+                    "The Gaps Were Not Filled As Desired.", JOptionPane.WARNING_MESSAGE);
         }
-
 
     }//GEN-LAST:event_updateCarButtonActionPerformed
 
@@ -192,16 +232,70 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
 
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void txtModelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModelKeyReleased
+        String phoneNo = txtModel.getText();
+        String regex = "[a-zA-Z]+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(phoneNo);
+
+        if (matcher.matches()) {
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
+            modelIconLabel.setIcon(verifiedIcon);
+            flagForModelLabel = true;
+        } else {
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
+            modelIconLabel.setIcon(nonVerifiedIcon);
+            flagForModelLabel = false;
+        }
+    }//GEN-LAST:event_txtModelKeyReleased
+
+    private void txtColorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyReleased
+        String color = txtColor.getText();
+        String regex = "[a-zA-Z]+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(color);
+
+        if (matcher.matches()) {
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
+            colorIconLabel.setIcon(verifiedIcon);
+            flagForColorLabel = true;
+        } else {
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
+            colorIconLabel.setIcon(nonVerifiedIcon);
+            flagForColorLabel = false;
+        }
+    }//GEN-LAST:event_txtColorKeyReleased
+
+    private void txtPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPriceKeyReleased
+        String price = txtPrice.getText();
+        String regex = "\\d{1,9}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(price);
+
+        if (matcher.matches()) {
+            ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
+            priceIconLabel.setIcon(verifiedIcon);
+            flagForPriceLabel = true;
+        } else {
+            ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
+            priceIconLabel.setIcon(nonVerifiedIcon);
+            flagForPriceLabel = false;
+        }
+    }//GEN-LAST:event_txtPriceKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private SwingComponents.Button backButton;
     private SwingComponents.Label brandLabel;
     private javax.swing.JComboBox<String> brandjComboBox;
+    private javax.swing.JLabel colorIconLabel;
     private SwingComponents.Label colorLabel;
     private javax.swing.JLabel editCarLabel;
     private SwingComponents.Label fuelTypeLabel;
     private javax.swing.JComboBox<String> fuelTypejComboBox;
+    private javax.swing.JLabel modelIconLabel;
     private SwingComponents.Label modelLabel;
+    private javax.swing.JLabel priceIconLabel;
     private SwingComponents.Label priceLabel;
     private SwingComponents.TextField txtColor;
     private SwingComponents.TextField txtModel;
@@ -221,6 +315,18 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
         typejComboBox.removeAllItems();
         yearjComboBox.removeAllItems();
         fuelTypejComboBox.removeAllItems();
+
+        flagForColorLabel = false;
+        flagForModelLabel = false;
+        flagForPriceLabel = false;
+
+        txtModel.setText("");
+        txtColor.setText("");
+        txtPrice.setText("");
+
+        modelIconLabel.setIcon(null);
+        colorIconLabel.setIcon(null);
+        priceIconLabel.setIcon(null);
 
         for (int i = 0; i < Car.carBrand.length; i++) {
             brandjComboBox.addItem(Car.carBrand[i]);
