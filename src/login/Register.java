@@ -1,8 +1,6 @@
 package login;
 
-import CorePackage.Customer;
-import CorePackage.Database;
-import CorePackage.Dealer;
+import JPA_Classes.*;
 import CorePackage.ITriggerer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -217,9 +215,9 @@ public class Register extends PanelCustom implements ITriggerer {
                         "Failure", JOptionPane.INFORMATION_MESSAGE);
 
             } else if (flagForName == true && flagForEmail == true && flagForUsername == true && flagForPassword == true && flagForPhoneNumber == true) {
-                Dealer dealer = new Dealer(txtUsername.getText(), txtPassword.getText(),
-                        txtName.getText(), txtEmail.getText(), txtPhoneNumber.getText());
-                Database.getUsers().add(dealer);
+                Dealer dealer = new Dealer(txtName.getText(), txtUsername.getText(), txtPassword.getText(),
+                        txtEmail.getText(), Integer.parseInt(txtPhoneNumber.getText()));
+                Database.saveUser(dealer);
                 JOptionPane.showMessageDialog(this, "Successfully Created Dealer Account ",
                         "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
                 txtUsername.setText("");
@@ -259,9 +257,9 @@ public class Register extends PanelCustom implements ITriggerer {
                     "Failure", JOptionPane.INFORMATION_MESSAGE);
 
         } else if (flagForName == true && flagForEmail == true && flagForUsername == true && flagForPassword == true && flagForPhoneNumber == true) {
-            Customer customer = new Customer(txtUsername.getText(), txtPassword.getText(),
-                    txtName.getText(), txtEmail.getText(), txtPhoneNumber.getText());
-            Database.getUsers().add(customer);
+            Customer customer = new Customer(txtName.getText(), txtUsername.getText(), txtPassword.getText(),
+                    txtEmail.getText(), Integer.parseInt(txtPhoneNumber.getText()));
+            Database.saveUser(customer);
             JOptionPane.showMessageDialog(this, "Successfully Created Customer Account ",
                     "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
             txtUsername.setText("");
@@ -377,14 +375,7 @@ public class Register extends PanelCustom implements ITriggerer {
 
     private void txtPhoneNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNumberKeyReleased
         String phoneNo = txtPhoneNumber.getText();
-        String regex = "^" //metnin başlangıcını belirtir.
-                + "\\d{3}" //üç rakam içeren bir sayı bloğunu eşleştirir.
-                + "-" //karakteri, sayı blokları arasında ayırıcı olarak kullanılır.
-                + "\\d{3}" //üç rakam içeren bir sayı bloğunu eşleştirir.
-                + "-" //karakteri, sayı blokları arasında ayırıcı olarak kullanılır.
-                + "\\d{4}" //dört rakam içeren bir sayı bloğunu eşleştirir. 
-                + "$"; //işareti, metnin sonunu belirtir.
-
+        String regex = "\\b\\d{9}\\b";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(phoneNo);
 
@@ -397,6 +388,7 @@ public class Register extends PanelCustom implements ITriggerer {
             phoneNumberIconLabel.setIcon(nonVerifiedIcon);
             flagForPhoneNumber = false;
         }
+        flagForPhoneNumber = true;
     }//GEN-LAST:event_txtPhoneNumberKeyReleased
 
     private void termsAndConditionsCheckBoxİtemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_termsAndConditionsCheckBoxİtemStateChanged

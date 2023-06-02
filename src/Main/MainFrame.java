@@ -1,7 +1,8 @@
 package Main;
 
 import CarSalesSystem.*;
-import CorePackage.*;
+import CorePackage.ITriggerer;
+import JPA_Classes.*;
 import javax.swing.JPanel;
 import login.LoginAndRegister;
 
@@ -34,7 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private final JPanel container;
 
-    private User account;
+    private Users account;
 
     public MainFrame() {
         initComponents();
@@ -122,11 +123,11 @@ public class MainFrame extends javax.swing.JFrame {
         return mainPanel;
     }
 
-    public User getAccount() {
+    public Users getAccount() {
         return account;
     }
 
-    public void setAccount(User account) {
+    public void setAccount(Users account) {
         this.account = account;
     }
 

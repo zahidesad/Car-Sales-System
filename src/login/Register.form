@@ -222,6 +222,9 @@
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPhoneNumberKeyReleased"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Register_txtPhoneNumber"/>
+      </AuxValues>
     </Component>
     <Component class="SwingComponents.TextField" name="txtName">
       <Properties>

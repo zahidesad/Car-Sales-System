@@ -1,6 +1,7 @@
 package CarSalesSystem;
 
-import CorePackage.*;
+import CorePackage.ITriggerer;
+import JPA_Classes.*;
 import Main.MainFrame;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -28,7 +29,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
             tableModel.setRowCount(0);
             tableModel.setColumnIdentifiers(columNames);
             deleteButton.setText("Delete Customer");
-            for (User user : Database.getUsers()) {
+            for (Users user : Database.getUsers()) {
                 if (user instanceof Customer customer) {
                     Vector rowData = new Vector();
                     rowData.add(customer.getId());
@@ -45,7 +46,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
             tableModel.setColumnIdentifiers(columNames);
             deleteButton.setText("Delete Dealer");
 
-            for (User user : Database.getUsers()) {
+            for (Users user : Database.getUsers()) {
 
                 if (user instanceof Dealer dealer) {
                     Vector rowData = new Vector();
@@ -63,17 +64,17 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
             tableModel.setRowCount(0);
             tableModel.setColumnIdentifiers(columNamesCars);
             deleteButton.setText("Delete Car");
-            for (Car car : Database.getCars()) {
+            for (Sales sales : Database.getSales()) {
                 Vector rowData = new Vector();
-                rowData.add(car.getId());
-                rowData.add(car.getDealer().getName());
-                rowData.add(car.getBrand());
-                rowData.add(car.getModel());
-                rowData.add(car.getType());
-                rowData.add(car.getColor());
-                rowData.add(car.getYear());
-                rowData.add(car.getPrice());
-                rowData.add(car.getRegister());
+                rowData.add(sales.getId());
+                rowData.add(sales.getDealerId().getName());
+                rowData.add(sales.getCarId().getBrand());
+                rowData.add(sales.getCarId().getModel());
+                rowData.add(sales.getCarId().getType());
+                rowData.add(sales.getCarId().getColor());
+                rowData.add(sales.getCarId().getAge());
+                rowData.add(sales.getCarId().getPrice());
+                rowData.add(sales.getStatus());
 
                 tableModel.addRow(rowData);
 

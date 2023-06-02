@@ -1,6 +1,7 @@
 package login;
 
-import CorePackage.*;
+import CorePackage.ITriggerer;
+import JPA_Classes.*;
 import Main.MainFrame;
 import java.awt.Color;
 import java.util.regex.Matcher;
@@ -118,7 +119,7 @@ public class Login extends PanelCustom implements ITriggerer {
         String password = String.valueOf(txtPassword.getPassword());
 
         if (flagForUsername == true && flagForPassword == true) {
-            User account = Database.loginVerification(txtUsername.getText(), password);
+            Users account = Database.loginVerification(txtUsername.getText(), password);
 
             if (account == null) {
                 JOptionPane.showMessageDialog(this, "This user does not exist!",
