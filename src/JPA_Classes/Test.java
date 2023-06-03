@@ -27,31 +27,50 @@ public class Test {
 
         em.getTransaction().begin();
 
-//        Admin admin = new Admin("Zahid", "admin", "Admin123$",
-//                "zahid.bltci@gmail.com", 536066656);
-//
-//        //Default dealer accounts
-//        Dealer dealer1 = new Dealer("Emirhan", "emirhan", "Emirhan123$",
-//                "emirhan.soylu@gmail.com", 506364055);
-//        Dealer dealer2 = new Dealer("Meryem", "meryem", "Meryem123$",
-//                "meryem.kilic@gmail.com", 551136562);
-//
-//        //Default customer accounts
-//        Customer customer1 = new Customer("Sare", "sare", "Sare123$",
-//                "rumeysasare.bayram@gmail.com", 542592313);
-//        Customer customer2 = new Customer("Asım", "asim", "Asim123$",
-//                "asimtarik.kutluer@gmail.com", 507000813);
+        Admin admin = new Admin("Zahid", "admin", "Admin123$",
+                "zahid.bltci@gmail.com", 536066656);
+
+        //Default dealer accounts
+        Dealer dealer1 = new Dealer("Emirhan", "emirhan", "Emirhan123$",
+                "emirhan.soylu@gmail.com", 506364055);
+        Dealer dealer2 = new Dealer("Meryem", "meryem", "Meryem123$",
+                "meryem.kilic@gmail.com", 551136562);
+        Dealer dealer3 = new Dealer("Ahmet", "ahmet", "Ahmet123$",
+                "ahmet@gmail.com", 123123123);
+        Dealer dealer4 = new Dealer("Mehmet", "mehmet", "Mehmet123$",
+                "mehmet@gmail.com", 123123124);
+
+        //Default customer accounts
+        Customer customer1 = new Customer("Sare", "sare", "Sare123$",
+                "rumeysasare.bayram@gmail.com", 542592313);
+        Customer customer2 = new Customer("Asım", "asim", "Asim123$",
+                "asimtarik.kutluer@gmail.com", 507000813);
+        Customer customer3 = new Customer("Ayşe", "ayşe", "Ayşe123$",
+                "ayşe@gmail.com", 1231231235);
+        Customer customer4 = new Customer("Fatma", "fatma", "Fatma123$",
+                "fatma@gmail.com", 1231231236);
         //Default cars
         Cars car1 = new Cars("Togg", "T10X", "Red", "SUV", "Electric", 2023, 500000);
-
         Cars car2 = new Cars("BMW", "5.20", "Black", "Sedan", "Diesel", 2022, 700000);
-//        em.persist(admin);
-//        em.persist(dealer1);
-//        em.persist(dealer2);
-//        em.persist(customer1);
-//        em.persist(customer2);
+        Cars car3 = new Cars("Audi", "A8", "Black", "Sedan", "Petrol", 2018, 900000);
+        Cars car4 = new Cars("Wolkswagen", "Tiguan", "Grey", "SUV", "Diesel", 2019, 800000);
+        Cars car5 = new Cars("Mercedes", "AMG", "White", "Sedan", "Petrol", 2016, 400000);
+
+        em.persist(admin);
+        
+        em.persist(dealer1);
+        em.persist(dealer2);
+        em.persist(dealer3);
+        em.persist(dealer4);
+        
+        em.persist(customer1);
+        em.persist(customer2);
+        
         em.persist(car1);
         em.persist(car2);
+        em.persist(car3);
+        em.persist(car4);
+        em.persist(car5);
         em.getTransaction().commit();
     }
 

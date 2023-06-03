@@ -37,7 +37,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
     @NamedQuery(name = "Users.findByPhone", query = "SELECT u FROM Users u WHERE u.phone = :phone")})
 public class Users implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -56,10 +56,10 @@ public class Users implements Serializable {
     private Integer phone;
     @Column(name = "USERS_TYPE")
     private String usersType;
-
+    
     public Users() {
     }
-
+    
     public Users(String name, String username, String password, String email, Integer phone) {
         this.name = name;
         this.username = username;
@@ -67,74 +67,74 @@ public class Users implements Serializable {
         this.email = email;
         this.phone = phone;
     }
-
+    
     public Users(Integer id) {
         this.id = id;
     }
-
+    
     public Integer getId() {
         return id;
     }
-
+    
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
     public String getUsersType() {
         return usersType;
     }
-
+    
     public void setUsersType(String usersType) {
         this.usersType = usersType;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public String getUsername() {
         return username;
     }
-
+    
     public void setUsername(String username) {
         this.username = username;
     }
-
+    
     public String getPassword() {
         return password;
     }
-
+    
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
     public String getEmail() {
         return email;
     }
-
+    
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
     public Integer getPhone() {
         return phone;
     }
-
+    
     public void setPhone(Integer phone) {
         this.phone = phone;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -147,10 +147,22 @@ public class Users implements Serializable {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
         return name;
     }
-
+    
+    public void deleteAccount() {
+        
+        if (this instanceof Customer user) {
+            System.out.println("jkdasjkldsljkdaskjlakjldasjkladslds");
+            Database.deleteCustomer(user.getId());
+        } else if (this instanceof Dealer user) {
+            System.out.println("kasldasjklkjdslkjakjladsljksad");
+            Database.deleteDealer(user.getId());
+        }
+        
+    }
+    
 }

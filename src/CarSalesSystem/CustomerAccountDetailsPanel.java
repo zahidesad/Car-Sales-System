@@ -1,9 +1,7 @@
 package CarSalesSystem;
 
-import CorePackage.Customer;
-import CorePackage.Dealer;
+import JPA_Classes.*;
 import CorePackage.ITriggerer;
-import CorePackage.User;
 import Main.MainFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -44,6 +42,8 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
         phoneNoInformationLabel = new SwingComponents.Label();
         emailInformationLabel = new SwingComponents.Label();
         deleteAccountButton = new SwingComponents.Button();
+        changePasswordButton = new SwingComponents.Button();
+        editAccountButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setPreferredSize(new java.awt.Dimension(900, 529));
@@ -68,7 +68,7 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
 
         customerIDLabel.setBackground(new java.awt.Color(153, 153, 153));
         customerIDLabel.setForeground(new java.awt.Color(0, 0, 0));
-        customerIDLabel.setText("Dealer ID :");
+        customerIDLabel.setText("Customer ID :");
         customerIDLabel.setFont(new java.awt.Font("Segoe UI Light", 3, 28)); // NOI18N
         add(customerIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 210, 50));
 
@@ -130,7 +130,29 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
                 deleteAccountButtonActionPerformed(evt);
             }
         });
-        add(deleteAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 480, 170, 40));
+        add(deleteAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, 140, 40));
+
+        changePasswordButton.setBackground(new java.awt.Color(102, 102, 102));
+        changePasswordButton.setForeground(new java.awt.Color(0, 0, 0));
+        changePasswordButton.setText("Change Password");
+        changePasswordButton.setFont(new java.awt.Font("Stencil", 2, 14)); // NOI18N
+        changePasswordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePasswordButtonActionPerformed(evt);
+            }
+        });
+        add(changePasswordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 170, 40));
+
+        editAccountButton.setBackground(new java.awt.Color(102, 102, 102));
+        editAccountButton.setForeground(new java.awt.Color(0, 0, 0));
+        editAccountButton.setText("EDIT  ACCOUNT");
+        editAccountButton.setFont(new java.awt.Font("Stencil", 2, 14)); // NOI18N
+        editAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editAccountButtonActionPerformed(evt);
+            }
+        });
+        add(editAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -149,12 +171,24 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
 
     }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
+    private void changePasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordButtonActionPerformed
+        MainFrame.instance.setPage(MainFrame.instance.getCustomerChangePasswordPanel());
+        customer = null;
+    }//GEN-LAST:event_changePasswordButtonActionPerformed
+
+    private void editAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAccountButtonActionPerformed
+        MainFrame.instance.setPage(MainFrame.instance.getCustomerEditAccountDetailsPanel());
+        customer = null;
+    }//GEN-LAST:event_editAccountButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private SwingComponents.Button backButton;
+    private SwingComponents.Button changePasswordButton;
     private SwingComponents.Label customerIDInformationLabel;
     private SwingComponents.Label customerIDLabel;
     private SwingComponents.Button deleteAccountButton;
+    private SwingComponents.Button editAccountButton;
     private SwingComponents.Label emailInformationLabel;
     private SwingComponents.Label emailLabel;
     private javax.swing.JLabel myAccountLabel;
@@ -178,7 +212,7 @@ public class CustomerAccountDetailsPanel extends javax.swing.JPanel implements I
         customerIDInformationLabel.setText(customer.getId() + "");
         nameInformationLabel.setText(customer.getName());
         usernameInformationLabel.setText(customer.getUsername());
-        phoneNoInformationLabel.setText(customer.getPhone());
+        phoneNoInformationLabel.setText(customer.getPhone()+"");
         emailInformationLabel.setText(customer.getEmail());
     }
 }

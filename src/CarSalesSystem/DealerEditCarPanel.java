@@ -16,9 +16,9 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
 
     Car car;
 
-    private boolean flagForModelLabel = false;
-    private boolean flagForColorLabel = false;
-    private boolean flagForPriceLabel = false;
+    private boolean flagForModel = false;
+    private boolean flagForColor = false;
+    private boolean flagForPrice = false;
 
     public DealerEditCarPanel() {
         initComponents();
@@ -184,7 +184,7 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
 
             return;
 
-        } else if (flagForColorLabel == true && flagForModelLabel == true && flagForPriceLabel == true) {
+        } else if (flagForColor == true && flagForModel == true && flagForPrice == true) {
             if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the features of this car? This action cannot be undone! ",
                     "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
@@ -217,7 +217,7 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
         } else {
             JOptionPane.showMessageDialog(this, "There was a validation error, please enter only a letter"
                     + " for the model and color, and a maximum of 9 digits for the price.",
-                    "The Gaps Were Not Filled As Desired.", JOptionPane.WARNING_MESSAGE);
+                    "Validation Error Occured.", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_updateCarButtonActionPerformed
@@ -241,11 +241,11 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
         if (matcher.matches()) {
             ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             modelIconLabel.setIcon(verifiedIcon);
-            flagForModelLabel = true;
+            flagForModel = true;
         } else {
             ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             modelIconLabel.setIcon(nonVerifiedIcon);
-            flagForModelLabel = false;
+            flagForModel = false;
         }
     }//GEN-LAST:event_txtModelKeyReleased
 
@@ -258,11 +258,11 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
         if (matcher.matches()) {
             ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             colorIconLabel.setIcon(verifiedIcon);
-            flagForColorLabel = true;
+            flagForColor = true;
         } else {
             ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             colorIconLabel.setIcon(nonVerifiedIcon);
-            flagForColorLabel = false;
+            flagForColor = false;
         }
     }//GEN-LAST:event_txtColorKeyReleased
 
@@ -275,11 +275,11 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
         if (matcher.matches()) {
             ImageIcon verifiedIcon = new ImageIcon(getClass().getResource("/images/verifiedIcon.png"));
             priceIconLabel.setIcon(verifiedIcon);
-            flagForPriceLabel = true;
+            flagForPrice = true;
         } else {
             ImageIcon nonVerifiedIcon = new ImageIcon(getClass().getResource("/images/nonVerifiedIcon.png"));
             priceIconLabel.setIcon(nonVerifiedIcon);
-            flagForPriceLabel = false;
+            flagForPrice = false;
         }
     }//GEN-LAST:event_txtPriceKeyReleased
 
@@ -316,9 +316,9 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
         yearjComboBox.removeAllItems();
         fuelTypejComboBox.removeAllItems();
 
-        flagForColorLabel = false;
-        flagForModelLabel = false;
-        flagForPriceLabel = false;
+        flagForColor = false;
+        flagForModel = false;
+        flagForPrice = false;
 
         txtModel.setText("");
         txtColor.setText("");

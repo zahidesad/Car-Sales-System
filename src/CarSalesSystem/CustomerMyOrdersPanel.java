@@ -1,11 +1,7 @@
 package CarSalesSystem;
 
-import CorePackage.Customer;
-import CorePackage.Database;
-import CorePackage.Dealer;
+import JPA_Classes.*;
 import CorePackage.ITriggerer;
-import CorePackage.User;
-import CorePackage.Car;
 import Main.MainFrame;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -20,7 +16,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
     private Customer customer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
-    String[] columNames = {"Dealer ID", "Name", "Car ID", "Car Brand", "Car Model", "Price", "Status"};
+    String[] columNames = {"Dealer ID", "Name", "Sale ID", "Car Brand", "Car Model", "Price", "Status"};
 
     public CustomerMyOrdersPanel() {
         initComponents();
@@ -114,17 +110,17 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         tableModel.setRowCount(0);
         tableModel.setColumnIdentifiers(columNames);
 
-        for (Car listedCar : customer.getListedCars()) {
-            if (!listedCar.getRegister().equals(Car.available)) {
+        for (Sales sale : customer.getSalesList()) {
+            if (!sale.getStatus().equals(Sales.AVAILABLE)) {
 
                 Vector rowData = new Vector();
-                rowData.add(listedCar.getDealer().getId());
-                rowData.add(listedCar.getDealer().getName());
-                rowData.add(listedCar.getId());
-                rowData.add(listedCar.getBrand());
-                rowData.add(listedCar.getModel());
-                rowData.add(listedCar.getPrice());
-                rowData.add(listedCar.getRegister());
+                rowData.add(sale.getDealerId().getId());
+                rowData.add(sale.getDealerId().getName());
+                rowData.add(sale.getId());
+                rowData.add(sale.getCarId().getBrand());
+                rowData.add(sale.getCarId().getModel());
+                rowData.add(sale.getCarId().getPrice());
+                rowData.add(sale.getStatus());
 
                 tableModel.addRow(rowData);
             }
@@ -138,8 +134,8 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
 
     private void dealerInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealerInfoButtonActionPerformed
         try {
-            for (User user : Database.getUsers()) {
-                User dealer = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
+            for (Users user : Database.getUsers()) {
+                Users dealer = Database.findUserByID((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
 
                 MainFrame.instance.getDealerAccountDetailsPanel().dealer = (Dealer) dealer;
                 MainFrame.instance.getDealerAccountDetailsPanel().accountDetailsForCustomer();
@@ -163,11 +159,17 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
     private void cancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderButtonActionPerformed
 
         try {
-            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 6).equals(Car.pending)) {
+            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 6).equals(Sales.PENDING)) {
                 if ((JOptionPane.showConfirmDialog(this, "Do you really want to cancel your order? "
                         + "This action cannot be undone!", "WARNING",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-                    customer.cancelOrder((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
+
+                    Database.cancelOrder((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2));
+                    for (int i = 0; i < customer.getSalesList().size(); i++) {
+                        if (customer.getSalesList().get(i).getId() == (Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 2)) {
+                            customer.getSalesList().remove(i);
+                        }
+                    }
                     refreshTable();
                 } else {
 

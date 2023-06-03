@@ -27,11 +27,15 @@ public class MainFrame extends javax.swing.JFrame {
     private final DealerCustomerRequestsPanel dealerCustomerRequestsPanel;
     private final DealerAddCarPanel dealerAddCarPanel;
     private final DealerEditCarPanel dealerEditCarPanel;
+    private final DealerEditAccountDetailsPanel dealerEditAccountDetailsPanel;
+    private final DealerChangePasswordPanel dealerChangePasswordPanel;
 
     private final CustomerControlPanel customerControlPanel;
     private final CustomerCarListPanel customerCarListPanel;
     private final CustomerMyOrdersPanel customerMyOrdersPanel;
     private final CustomerAccountDetailsPanel customerAccountDetailsPanel;
+    private final CustomerEditAccountDetailsPanel customerEditAccountDetailsPanel;
+    private final CustomerChangePasswordPanel customerChangePasswordPanel;
 
     private final JPanel container;
 
@@ -53,11 +57,15 @@ public class MainFrame extends javax.swing.JFrame {
         dealerCustomerRequestsPanel = new DealerCustomerRequestsPanel();
         dealerAddCarPanel = new DealerAddCarPanel();
         dealerEditCarPanel = new DealerEditCarPanel();
+        dealerEditAccountDetailsPanel = new DealerEditAccountDetailsPanel();
+        dealerChangePasswordPanel = new DealerChangePasswordPanel();
 
         customerControlPanel = new CustomerControlPanel();
         customerCarListPanel = new CustomerCarListPanel();
         customerMyOrdersPanel = new CustomerMyOrdersPanel();
         customerAccountDetailsPanel = new CustomerAccountDetailsPanel();
+        customerEditAccountDetailsPanel = new CustomerEditAccountDetailsPanel();
+        customerChangePasswordPanel = new CustomerChangePasswordPanel();
 
         container = new JPanel();
 
@@ -103,6 +111,14 @@ public class MainFrame extends javax.swing.JFrame {
         return dealerEditCarPanel;
     }
 
+    public DealerEditAccountDetailsPanel getDealerEditAccountDetailsPanel() {
+        return dealerEditAccountDetailsPanel;
+    }
+
+    public DealerChangePasswordPanel getDealerChangePasswordPanel() {
+        return dealerChangePasswordPanel;
+    }
+
     public CustomerControlPanel getCustomerControlPanel() {
         return customerControlPanel;
     }
@@ -117,6 +133,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     public CustomerAccountDetailsPanel getCustomerAccountDetailsPanel() {
         return customerAccountDetailsPanel;
+    }
+
+    public CustomerEditAccountDetailsPanel getCustomerEditAccountDetailsPanel() {
+        return customerEditAccountDetailsPanel;
+    }
+
+    public CustomerChangePasswordPanel getCustomerChangePasswordPanel() {
+        return customerChangePasswordPanel;
     }
 
     public MainPanel getMainPanel() {

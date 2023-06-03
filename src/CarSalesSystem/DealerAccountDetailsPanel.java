@@ -1,9 +1,7 @@
 package CarSalesSystem;
 
-import CorePackage.Database;
-import CorePackage.Dealer;
+import JPA_Classes.*;
 import CorePackage.ITriggerer;
-import CorePackage.Car;
 import Main.MainFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,6 +22,8 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
 
     public void accountDetailsForCustomer() {
         deleteAccountButton.setVisible(false);
+        editAccountButton.setVisible(false);
+        changePasswordButton.setVisible(false);
         previousPanel = MainFrame.instance.getCustomerControlPanel();
 
     }
@@ -45,6 +45,8 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
         usernameInformationLabel = new SwingComponents.Label();
         phoneNoInformationLabel = new SwingComponents.Label();
         deleteAccountButton = new SwingComponents.Button();
+        editAccountButton = new SwingComponents.Button();
+        changePasswordButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setPreferredSize(new java.awt.Dimension(900, 529));
@@ -131,7 +133,29 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
                 deleteAccountButtonActionPerformed(evt);
             }
         });
-        add(deleteAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 480, 170, 40));
+        add(deleteAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, 140, 40));
+
+        editAccountButton.setBackground(new java.awt.Color(102, 102, 102));
+        editAccountButton.setForeground(new java.awt.Color(0, 0, 0));
+        editAccountButton.setText("EDIT  ACCOUNT");
+        editAccountButton.setFont(new java.awt.Font("Stencil", 2, 14)); // NOI18N
+        editAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editAccountButtonActionPerformed(evt);
+            }
+        });
+        add(editAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 480, 140, 40));
+
+        changePasswordButton.setBackground(new java.awt.Color(102, 102, 102));
+        changePasswordButton.setForeground(new java.awt.Color(0, 0, 0));
+        changePasswordButton.setText("Change Password");
+        changePasswordButton.setFont(new java.awt.Font("Stencil", 2, 14)); // NOI18N
+        changePasswordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePasswordButtonActionPerformed(evt);
+            }
+        });
+        add(changePasswordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 170, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -145,8 +169,8 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
                 + "This action cannot be undone!", "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
-            for (Car listedCar : dealer.getListedCars()) {
-                if (listedCar.getRegister().equals(Car.pending)) {
+            for (Sales sale : dealer.getSalesList()) {
+                if (sale.getStatus().equals(Sales.PENDING)) {
                     JOptionPane.showMessageDialog(this, "This car cannot be deleted because you have not yet responded to the customer's request.\n"
                             + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
                             " Incorrect Operation", JOptionPane.INFORMATION_MESSAGE);
@@ -157,18 +181,29 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
             }
 
             dealer.deleteAccount();
-            Database.deleteAllCars(dealer);
             MainFrame.instance.logOut();
             dealer = null;
         }
     }//GEN-LAST:event_deleteAccountButtonActionPerformed
 
+    private void editAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAccountButtonActionPerformed
+        MainFrame.instance.setPage(MainFrame.instance.getDealerEditAccountDetailsPanel());
+        dealer = null;
+    }//GEN-LAST:event_editAccountButtonActionPerformed
+
+    private void changePasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordButtonActionPerformed
+        MainFrame.instance.setPage(MainFrame.instance.getDealerChangePasswordPanel());
+        dealer = null;
+    }//GEN-LAST:event_changePasswordButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private SwingComponents.Button backButton;
+    private SwingComponents.Button changePasswordButton;
     private SwingComponents.Label dealerIDInformationLabel;
     private SwingComponents.Label dealerIDLabel;
     private SwingComponents.Button deleteAccountButton;
+    private SwingComponents.Button editAccountButton;
     private SwingComponents.Label emailInformationLabel;
     private SwingComponents.Label emailLabel;
     private javax.swing.JLabel myAccountLabel;
@@ -186,12 +221,14 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
             dealer = (Dealer) MainFrame.instance.getAccount();
             previousPanel = MainFrame.instance.getDealerControlPanel();
             deleteAccountButton.setVisible(true);
+            editAccountButton.setVisible(true);
+            changePasswordButton.setVisible(true);
         }
 
         dealerIDInformationLabel.setText(dealer.getId() + "");
         nameInformationLabel.setText(dealer.getName());
         usernameInformationLabel.setText(dealer.getUsername());
-        phoneNoInformationLabel.setText(dealer.getPhone());
+        phoneNoInformationLabel.setText(dealer.getPhone() + "");
         emailInformationLabel.setText(dealer.getEmail());
     }
 }

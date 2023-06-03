@@ -15,7 +15,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Name", "Username", "E-mail", "Phone"};
-    String[] columNamesCars = {"ID", "Dealer", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
+    String[] columNamesCars = {"Sale ID", "Dealer", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
 
     public AdminControlPanel() {
         initComponents();
@@ -67,7 +67,11 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
             for (Sales sales : Database.getSales()) {
                 Vector rowData = new Vector();
                 rowData.add(sales.getId());
-                rowData.add(sales.getDealerId().getName());
+                if (sales.getDealerId() != null) {
+                    rowData.add(sales.getDealerId().getName());
+                } else {
+                    rowData.add("Deleted Account");
+                }
                 rowData.add(sales.getCarId().getBrand());
                 rowData.add(sales.getCarId().getModel());
                 rowData.add(sales.getCarId().getType());
@@ -168,62 +172,36 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         try {
             if (jComboBox1.getSelectedItem().equals("Customer") || jComboBox1.getSelectedItem().equals("Dealer")) {
-                for (User user : Database.getUsers()) {
-                    if (user instanceof Customer customer) {
-                        if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == customer.getId()) {
-                            if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this account? "
-                                    + "This action cannot be undone!", "WARNING",
-                                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-                                customer.deleteAccount();
-                                refreshTable();
-                                break;
-                            } else {
-
-                            }
-                        }
-                    } else if (user instanceof Dealer dealer) {
-                        if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == dealer.getId()) {
-                            if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this account? "
-                                    + "This action cannot be undone!", "WARNING",
-                                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-                                dealer.deleteAccount();
-                                refreshTable();
-                                break;
-                            } else {
-                            }
-                        }
-
+                Users user = Database.findUserByID((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
+                if (user != null) {
+                    if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this account? "
+                            + "This action cannot be undone!", "WARNING",
+                            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                        System.out.println(user.toString());
+                        user.deleteAccount();
+                        refreshTable();
                     }
-
                 }
 
-            }
-
-            if (jComboBox1.getSelectedItem().equals("Car")) {
-                for (Car car : Database.getCars()) {
-                    if (tableModel.getValueAt(tableDark1.getSelectedRow(), 8).equals(Car.accepted)) {
+            } else if (jComboBox1.getSelectedItem().equals("Car")) {
+                Sales sale = Database.findSaleByID((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
+                if (sale != null) {
+                    if (tableModel.getValueAt(tableDark1.getSelectedRow(), 8).equals(Sales.ACCEPTED)) {
                         JOptionPane.showMessageDialog(this, "This car cannot be deleted because it has been sold. ",
                                 " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    } else if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == car.getId()) {
 
-                        if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this car? "
-                                + "This action cannot be undone!", "WARNING",
-                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
+                    } else if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this car? "
+                            + "This action cannot be undone!", "WARNING",
+                            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
-                            if (car.getRegister().equals(Car.pending)) {
-                                car.setRegister(Car.available);
-                            }
-
-                            car.removeCar((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
-                            refreshTable();
-                            break;
-
-                        } else {
-
+                        if (sale.getStatus().equals(Sales.PENDING)) {
+                            sale.setStatus(Sales.AVAILABLE);
                         }
-                    }
 
+                        Database.removeCar((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
+                        refreshTable();
+
+                    }
                 }
 
             }
@@ -236,7 +214,6 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-
         if ((JOptionPane.showConfirmDialog(this, "Do You Want To Log Out?", "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
             MainFrame.instance.logOut();
