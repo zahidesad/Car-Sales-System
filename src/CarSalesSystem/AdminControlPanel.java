@@ -32,7 +32,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
     }
 
     public void refreshTable() {
-        if (jComboBox1.getSelectedItem().equals("Customer")) {
+        if (jComboBox1.getSelectedItem().equals("Customers")) {
             tableModel.setRowCount(0);
             tableModel.setColumnIdentifiers(columNames);
             deleteButton.setText("Delete Customer");
@@ -48,7 +48,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                     tableModel.addRow(rowData);
                 }
             }
-        } else if (jComboBox1.getSelectedItem().equals("Dealer")) {
+        } else if (jComboBox1.getSelectedItem().equals("Dealers")) {
             tableModel.setRowCount(0);
             tableModel.setColumnIdentifiers(columNames);
             deleteButton.setText("Delete Dealer");
@@ -67,7 +67,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                 }
             }
 
-        } else if (jComboBox1.getSelectedItem().equals("Car")) {
+        } else if (jComboBox1.getSelectedItem().equals("Sales")) {
             tableModel.setRowCount(0);
             tableModel.setColumnIdentifiers(columNamesCars);
             deleteButton.setText("Delete Car");
@@ -145,7 +145,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
         jComboBox1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Dealer", "Car", "" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customers", "Dealers", "Sales", "" }));
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
