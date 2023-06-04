@@ -37,7 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final CustomerEditAccountDetailsPanel customerEditAccountDetailsPanel;
     private final CustomerChangePasswordPanel customerChangePasswordPanel;
 
-    private final JPanel container;
+    private final JPanel container; 
 
     private Users account;
 

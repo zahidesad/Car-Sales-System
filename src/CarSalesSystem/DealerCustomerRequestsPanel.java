@@ -1,11 +1,7 @@
 package CarSalesSystem;
 
-import CorePackage.Customer;
-import CorePackage.Database;
-import CorePackage.Dealer;
+import JPA_Classes.*;
 import CorePackage.ITriggerer;
-import CorePackage.User;
-import CorePackage.Car;
 import Main.MainFrame;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -20,7 +16,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
     private Dealer dealer;
 
     DefaultTableModel tableModel = new DefaultTableModel();
-    String[] columNames = {"Customer ID", "Customer Username", "Car ID", "Car Brand", "Car Model", "Price", "Status"};
+    String[] columNames = {"Customer ID", "Customer Username", "Sale ID", "Car Brand", "Car Model", "Price", "Status"};
 
     public DealerCustomerRequestsPanel() {
         initComponents();
@@ -33,17 +29,17 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
         tableModel.setRowCount(0);
         tableModel.setColumnIdentifiers(columNames);
 
-        for (Car listedCar : dealer.getListedCars()) {
-            if (listedCar.getRegister().equals(Car.pending)) {
+        for (Sales sale : dealer.getSalesList()) {
+            if (sale.getStatus().equals(Sales.PENDING)) {
 
                 Vector rowData = new Vector();
-                rowData.add(listedCar.getCustomer().getId());
-                rowData.add(listedCar.getCustomer().getUsername());
-                rowData.add(listedCar.getId());
-                rowData.add(listedCar.getBrand());
-                rowData.add(listedCar.getModel());
-                rowData.add(listedCar.getPrice());
-                rowData.add(listedCar.getRegister());
+                rowData.add(sale.getCustomerId().getId());
+                rowData.add(sale.getCustomerId().getUsername());
+                rowData.add(sale.getId());
+                rowData.add(sale.getCarId().getBrand());
+                rowData.add(sale.getCarId().getModel());
+                rowData.add(sale.getCarId().getPrice());
+                rowData.add(sale.getStatus());
 
                 tableModel.addRow(rowData);
             }
@@ -143,8 +139,8 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
     private void customerInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerInfoButtonActionPerformed
 
         try {
-            for (User user : Database.getUsers()) {
-                User customer = user.findUser((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
+            for (Users user : Database.getUsers()) {
+                Users customer = Database.findUserByID((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
 
                 MainFrame.instance.getCustomerAccountDetailsPanel().customer = (Customer) customer;
                 MainFrame.instance.getCustomerAccountDetailsPanel().accountDetailsForDealer();
@@ -163,12 +159,16 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
         int selection = JOptionPane.showOptionDialog(this, "Do You Want To Accept Offer?", "Sales Process",
                 0, 3, null, options, options[2]);
         try {
-            if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Car.pending)) {
+            if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Sales.PENDING)) {
                 if (selection == 0) {
-                    dealer.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                    Database.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                    dealer = (Dealer) Database.findUserByID(dealer.getId());
+                    MainFrame.instance.setAccount(dealer);
                     refreshTable();
                 } else if (selection == 1) {
-                    dealer.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                    Database.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                    dealer = (Dealer) Database.findUserByID(dealer.getId());
+                    MainFrame.instance.setAccount(dealer);
                     refreshTable();
                 } else {
                 }

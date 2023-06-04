@@ -111,11 +111,19 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         tableModel.setColumnIdentifiers(columNames);
 
         for (Sales sale : customer.getSalesList()) {
-            if (!sale.getStatus().equals(Sales.AVAILABLE)) {
+            if (!sale.getStatus().equals(Sales.AVAILABLE) ) {
 
                 Vector rowData = new Vector();
-                rowData.add(sale.getDealerId().getId());
-                rowData.add(sale.getDealerId().getName());
+                if (sale.getDealerId() != null) {
+                    rowData.add(sale.getDealerId().getId());
+                } else {
+                    rowData.add("Deleted Account");
+                }
+                if (sale.getDealerId() != null) {
+                    rowData.add(sale.getDealerId().getName());
+                } else {
+                    rowData.add("Deleted Account");
+                }
                 rowData.add(sale.getId());
                 rowData.add(sale.getCarId().getBrand());
                 rowData.add(sale.getCarId().getModel());
@@ -153,6 +161,9 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
 
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassCastException exception) {
+            JOptionPane.showMessageDialog(this, "This dealer account has been deleted by itself or by the admin.",
+                    "Undefined User", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_dealerInfoButtonActionPerformed
 

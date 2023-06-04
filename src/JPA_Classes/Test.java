@@ -57,15 +57,15 @@ public class Test {
         Cars car5 = new Cars("Mercedes", "AMG", "White", "Sedan", "Petrol", 2016, 400000);
 
         em.persist(admin);
-        
+
         em.persist(dealer1);
         em.persist(dealer2);
         em.persist(dealer3);
         em.persist(dealer4);
-        
+
         em.persist(customer1);
         em.persist(customer2);
-        
+
         em.persist(car1);
         em.persist(car2);
         em.persist(car3);
@@ -80,22 +80,22 @@ public class Test {
 
         em.getTransaction().begin();
 
-        Cars car1 = em.find(Cars.class, 952);
-        Dealer dealer1 = em.find(Dealer.class, 1051);
+        Cars car1 = em.find(Cars.class, 1651);
+        Dealer dealer1 = em.find(Dealer.class, 1406);
         Customer customer1 = null;
-        Customer customer2 = em.find(Customer.class, 404);
+        Customer customer2 = em.find(Customer.class, 1404);
         Customer customer3 = em.createNamedQuery("Users.findAllCustomers", Customer.class).getResultList().get(0);
 
         Sales sale1 = new Sales(car1, dealer1, customer1, Sales.AVAILABLE);
-        Sales sale2 = new Sales(car1, dealer1, customer2, Sales.PENDING);
+        Sales sale2 = new Sales(car1, dealer1, customer1, Sales.PENDING);
 
 //        em.persist(car1);
 //        em.persist(dealer1);
 //        em.persist(customer1);
 //        em.persist(customer2);
 //        em.persist(customer3);
-//        em.persist(sale1);
-        em.persist(sale2);
+        em.persist(sale1);
+//        em.persist(sale2);
 
         em.getTransaction().commit();
 

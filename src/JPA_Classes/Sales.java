@@ -125,7 +125,7 @@ public class Sales implements Serializable {
 
     @Override
     public String toString() {
-        return "Dealer = " + dealerId + " Customer = " + customerId + " Car = " + carId;
+        return "Dealer = " + dealerId + ", Customer = " + customerId + ", Car = " + carId;
     }
 
 }

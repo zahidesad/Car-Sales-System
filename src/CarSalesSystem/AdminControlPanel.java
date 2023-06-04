@@ -3,7 +3,14 @@ package CarSalesSystem;
 import CorePackage.ITriggerer;
 import JPA_Classes.*;
 import Main.MainFrame;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -64,23 +71,25 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
             tableModel.setRowCount(0);
             tableModel.setColumnIdentifiers(columNamesCars);
             deleteButton.setText("Delete Car");
-            for (Sales sales : Database.getSales()) {
-                Vector rowData = new Vector();
-                rowData.add(sales.getId());
-                if (sales.getDealerId() != null) {
-                    rowData.add(sales.getDealerId().getName());
-                } else {
-                    rowData.add("Deleted Account");
-                }
-                rowData.add(sales.getCarId().getBrand());
-                rowData.add(sales.getCarId().getModel());
-                rowData.add(sales.getCarId().getType());
-                rowData.add(sales.getCarId().getColor());
-                rowData.add(sales.getCarId().getAge());
-                rowData.add(sales.getCarId().getPrice());
-                rowData.add(sales.getStatus());
+            for (Sales sale : Database.getSales()) {
+                if (!sale.getStatus().equals(Sales.DENIED)) {
+                    Vector rowData = new Vector();
+                    rowData.add(sale.getId());
+                    if (sale.getDealerId() != null) {
+                        rowData.add(sale.getDealerId().getName());
+                    } else {
+                        rowData.add("Deleted Account");
+                    }
+                    rowData.add(sale.getCarId().getBrand());
+                    rowData.add(sale.getCarId().getModel());
+                    rowData.add(sale.getCarId().getType());
+                    rowData.add(sale.getCarId().getColor());
+                    rowData.add(sale.getCarId().getAge());
+                    rowData.add(sale.getCarId().getPrice());
+                    rowData.add(sale.getStatus());
 
-                tableModel.addRow(rowData);
+                    tableModel.addRow(rowData);
+                }
 
             }
 
@@ -98,6 +107,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
         jComboBox1 = new javax.swing.JComboBox<>();
         deleteButton = new SwingComponents.Button();
         backButton = new SwingComponents.Button();
+        downloadSalesArchive = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setPreferredSize(new java.awt.Dimension(900, 529));
@@ -136,6 +146,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
         jComboBox1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Dealer", "Car", "" }));
+        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -153,7 +164,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                 deleteButtonActionPerformed(evt);
             }
         });
-        add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 470, 310, -1));
+        add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 470, 230, -1));
 
         backButton.setBackground(new java.awt.Color(0, 0, 0));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BackArrow.png"))); // NOI18N
@@ -163,6 +174,18 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
             }
         });
         add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 50, -1));
+
+        downloadSalesArchive.setBackground(new java.awt.Color(0, 0, 0));
+        downloadSalesArchive.setForeground(new java.awt.Color(255, 255, 255));
+        downloadSalesArchive.setText("Download Sales Archive");
+        downloadSalesArchive.setBorderPainted(false);
+        downloadSalesArchive.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        downloadSalesArchive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downloadSalesArchiveActionPerformed(evt);
+            }
+        });
+        add(downloadSalesArchive, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 250, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -222,11 +245,57 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void downloadSalesArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadSalesArchiveActionPerformed
+        downloadSales();
+    }//GEN-LAST:event_downloadSalesArchiveActionPerformed
+
+    public void downloadSales() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int userChoice = fileChooser.showSaveDialog(null);
+
+        if (userChoice == JFileChooser.APPROVE_OPTION) {
+            String directoryPath = fileChooser.getSelectedFile().getPath();
+            String filename = getFormattedFilename(directoryPath, "Sales_", ".txt");
+
+            ArrayList<String> lines = new ArrayList<>();
+            for (Sales sale : Database.getSales()) {
+                lines.add(sale.toString() );
+            }
+
+            try {
+                FileWriter fileWriter = new FileWriter(filename, true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+                for (String line : lines) {
+                    bufferedWriter.write(line);
+                    bufferedWriter.newLine();
+                }
+
+                bufferedWriter.close();
+                System.out.println("Content written to the file.");
+                JOptionPane.showMessageDialog(this, "All sales downloaded successfuly!", "Sales Downloaded", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (IOException e) {
+                System.out.println("An error occurred while writing to the file: " + e.getMessage());
+            }
+        } else if (userChoice == JFileChooser.CANCEL_OPTION) {
+            System.out.println("Operation canceled by the user.");
+        }
+    }
+
+    private static String getFormattedFilename(String directoryPath, String prefix, String extension) {
+        LocalDate currentDate = LocalDate.now();
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        return directoryPath + "/" + prefix + "_" + formattedDate + extension;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adminControlPanelLabel;
     private SwingComponents.Button backButton;
     private SwingComponents.Button deleteButton;
+    private SwingComponents.Button downloadSalesArchive;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private SwingComponents.TableDark tableDark1;

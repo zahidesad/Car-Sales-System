@@ -156,10 +156,8 @@ public class Users implements Serializable {
     public void deleteAccount() {
         
         if (this instanceof Customer user) {
-            System.out.println("jkdasjkldsljkdaskjlakjldasjkladslds");
             Database.deleteCustomer(user.getId());
         } else if (this instanceof Dealer user) {
-            System.out.println("kasldasjklkjdslkjakjladsljksad");
             Database.deleteDealer(user.getId());
         }
         

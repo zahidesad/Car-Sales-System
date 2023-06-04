@@ -1,6 +1,7 @@
 package CarSalesSystem;
 
-import CorePackage.*;
+import JPA_Classes.*;
+import CorePackage.ITriggerer;
 import Main.MainFrame;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -13,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 public class DealerManageCarPanel extends javax.swing.JPanel implements ITriggerer {
 
     private Dealer dealer;
-    public Car searchedCar;
+    public Sales searchedSales;
 
     DefaultTableModel tableModel = new DefaultTableModel();
     String[] columNames = {"ID", "Brand", "Model", "Type", "Color", "Year", "Price", "Status"};
@@ -28,19 +29,20 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
     public void refreshTable() {
         tableModel.setRowCount(0);
         tableModel.setColumnIdentifiers(columNames);
+        for (Sales sale : dealer.getSalesList()) {
+            if (!sale.getStatus().equals(Sales.DENIED)) {
+                Vector rowData = new Vector();
+                rowData.add(sale.getId());
+                rowData.add(sale.getCarId().getBrand());
+                rowData.add(sale.getCarId().getModel());
+                rowData.add(sale.getCarId().getType());
+                rowData.add(sale.getCarId().getColor());
+                rowData.add(sale.getCarId().getAge());
+                rowData.add(sale.getCarId().getPrice());
+                rowData.add(sale.getStatus());
 
-        for (Car listedCar : dealer.getListedCars()) {
-            Vector rowData = new Vector();
-            rowData.add(listedCar.getId());
-            rowData.add(listedCar.getBrand());
-            rowData.add(listedCar.getModel());
-            rowData.add(listedCar.getType());
-            rowData.add(listedCar.getColor());
-            rowData.add(listedCar.getYear());
-            rowData.add(listedCar.getPrice());
-            rowData.add(listedCar.getRegister());
-
-            tableModel.addRow(rowData);
+                tableModel.addRow(rowData);
+            }
 
         }
 
@@ -144,11 +146,11 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
 
     private void deleteCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCarButtonActionPerformed
         try {
-            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Car.accepted)) {
+            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Sales.ACCEPTED)) {
                 JOptionPane.showMessageDialog(this, "This car cannot be deleted because it has been sold. ",
                         " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
                 return;
-            } else if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Car.pending)) {
+            } else if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Sales.PENDING)) {
                 JOptionPane.showMessageDialog(this, "This car cannot be deleted because you have not yet responded to the customer's request.\n"
                         + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
                         " Incorrect Operation", JOptionPane.INFORMATION_MESSAGE);
@@ -159,13 +161,14 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
                     + "This action cannot be undone!", "WARNING",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
-                for (int i = 0; i < dealer.getListedCars().size(); i++) {
-                    if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)
-                            == dealer.getListedCars().get(i).getId()) {
-                        dealer.removeCar(dealer.getListedCars().get(i).getId());
-                        refreshTable();
+                Database.removeCar((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
+                for (int i = 0; i < dealer.getSalesList().size(); i++) {
+                    if (dealer.getSalesList().get(i).getId() == (Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)) {
+                        dealer.getSalesList().remove(i);
                     }
-                }
+                } 
+                refreshTable();
+
             }
 
         } catch (IndexOutOfBoundsException exception) {
@@ -177,11 +180,11 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
 
     private void editCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCarButtonActionPerformed
         try {
-            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Car.accepted)) {
+            if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Sales.ACCEPTED)) {
                 JOptionPane.showMessageDialog(this, "This car cannot be edited because it has been sold. ",
                         " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
                 return;
-            } else if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Car.pending)) {
+            } else if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Sales.PENDING)) {
                 JOptionPane.showMessageDialog(this, "This car cannot be edited because you have not yet responded to the customer's request.\n"
                         + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
                         " Incorrect Operation", JOptionPane.INFORMATION_MESSAGE);
@@ -190,10 +193,10 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
                 return;
             }
 
-            for (Car car : Database.getCars()) {
-                if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)
-                        == car.getId()) {
-                    searchedCar = car;
+            for (Sales sale : Database.getSales()) {
+                if ((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0) == sale.getId()) {
+
+                    searchedSales = sale;
                     MainFrame.instance.setPage(MainFrame.instance.getDealerEditCarPanel());
                 }
             }

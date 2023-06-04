@@ -43,7 +43,7 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
         dealerFilterJComboBox.setVisible(true);
 
         for (Sales sale : Database.getSales()) {
-            if (!sale.getStatus().equals(Sales.ACCEPTED) && !sale.getStatus().equals(Sales.DENIED)) {
+            if (!sale.getStatus().equals(Sales.ACCEPTED) || !sale.getStatus().equals(Sales.DENIED)) {
                 Vector rowData = new Vector();
                 rowData.add(sale.getDealerId().getId());
                 if (sale.getDealerId() != null) {
@@ -118,7 +118,7 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
         ));
         jScrollPane1.setViewportView(tableDark1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 840, 320));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 840, 320));
 
         backButton.setBackground(new java.awt.Color(0, 0, 0));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BackArrow.png"))); // NOI18N

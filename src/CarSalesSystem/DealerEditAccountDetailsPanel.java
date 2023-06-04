@@ -154,12 +154,13 @@ public class DealerEditAccountDetailsPanel extends javax.swing.JPanel implements
             if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the informations of this acount? This action cannot be undone! ",
                     "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
-                dealer.setName(txtName.getText());
-                dealer.setUsername(txtUsername.getText());
-                dealer.setPhone(Integer.parseInt(txtPhoneNo.getText()));
-                dealer.setEmail(txtEmail.getText());
+                Database.updateInformation(dealer.getId(), txtName.getText(),
+                        txtUsername.getText(), Integer.parseInt(txtPhoneNo.getText()),
+                        txtEmail.getText());
 
-                Database.updateInformation(dealer);
+                Dealer dealer = (Dealer) MainFrame.instance.getAccount();
+                dealer = (Dealer) Database.findUserByID(dealer.getId());
+                MainFrame.instance.setAccount(dealer);
 
                 MainFrame.instance.setPage(MainFrame.instance.getDealerControlPanel());
                 dealer = null;

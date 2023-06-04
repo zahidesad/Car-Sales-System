@@ -1,6 +1,6 @@
 package CarSalesSystem;
 
-import CorePackage.Car;
+import JPA_Classes.*;
 import CorePackage.ITriggerer;
 import Main.MainFrame;
 import java.util.regex.Matcher;
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer {
 
-    Car car;
+    Sales sale;
 
     private boolean flagForModel = false;
     private boolean flagForColor = false;
@@ -188,13 +188,14 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
             if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the features of this car? This action cannot be undone! ",
                     "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
-                car.setBrand(brandjComboBox.getSelectedItem().toString());
-                car.setModel(txtModel.getText());
-                car.setType(typejComboBox.getSelectedItem().toString());
-                car.setColor(txtColor.getText());
-                car.setYear(yearjComboBox.getSelectedItem().toString());
-                car.setFuel(fuelTypejComboBox.getSelectedItem().toString());
-                car.setPrice(txtPrice.getText());
+                Database.updateCar(sale.getId(), brandjComboBox.getSelectedItem().toString(),
+                        txtModel.getText(), typejComboBox.getSelectedItem().toString(),
+                        txtColor.getText(), fuelTypejComboBox.getSelectedItem().toString(),
+                        Integer.valueOf(yearjComboBox.getSelectedItem().toString()), Integer.valueOf(txtPrice.getText()));
+
+                Dealer dealer = (Dealer) MainFrame.instance.getAccount();
+                dealer = (Dealer) Database.findUserByID(dealer.getId());
+                MainFrame.instance.setAccount(dealer);
 
                 JOptionPane.showMessageDialog(this, "Car features successfully updated ",
                         "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
@@ -309,7 +310,7 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
 
     @Override
     public void PageOn() {
-        car = MainFrame.instance.getDealerManageCarPanel().searchedCar;
+        sale = MainFrame.instance.getDealerManageCarPanel().searchedSales;
 
         brandjComboBox.removeAllItems();
         typejComboBox.removeAllItems();
@@ -328,20 +329,20 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
         colorIconLabel.setIcon(null);
         priceIconLabel.setIcon(null);
 
-        for (int i = 0; i < Car.carBrand.length; i++) {
-            brandjComboBox.addItem(Car.carBrand[i]);
+        for (int i = 0; i < Cars.carBrand.length; i++) {
+            brandjComboBox.addItem(Cars.carBrand[i]);
         }
 
-        for (int i = 0; i < Car.carType.length; i++) {
-            typejComboBox.addItem(Car.carType[i]);
+        for (int i = 0; i < Cars.carType.length; i++) {
+            typejComboBox.addItem(Cars.carType[i]);
         }
 
         for (int i = 2002; i <= 2023; i++) {
             yearjComboBox.addItem(i + "");
         }
 
-        for (int i = 0; i < Car.carFuelType.length; i++) {
-            fuelTypejComboBox.addItem(Car.carFuelType[i]);
+        for (int i = 0; i < Cars.carFuelType.length; i++) {
+            fuelTypejComboBox.addItem(Cars.carFuelType[i]);
         }
     }
 }

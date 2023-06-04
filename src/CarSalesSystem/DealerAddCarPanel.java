@@ -1,9 +1,7 @@
 package CarSalesSystem;
 
-import CorePackage.Database;
-import CorePackage.Dealer;
+import JPA_Classes.*;
 import CorePackage.ITriggerer;
-import CorePackage.Car;
 import Main.MainFrame;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -193,12 +191,15 @@ public class DealerAddCarPanel extends javax.swing.JPanel implements ITriggerer 
         } else if (flagForColorLabel == true && flagForModelLabel == true && flagForPriceLabel == true) {
             if ((JOptionPane.showConfirmDialog(this, "Do you really want to add this car to your account? ",
                     "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
-                Car car = new Car(dealer, null, brandjComboBox.getSelectedItem().toString(), txtModel.getText(),
+                Cars car = new Cars(brandjComboBox.getSelectedItem().toString(), txtModel.getText(),
                         txtColor.getText(), typejComboBox.getSelectedItem().toString(), fuelTypejComboBox.getSelectedItem().toString(),
-                        yearjComboBox.getSelectedItem().toString(), txtPrice.getText());
+                        Integer.valueOf(yearjComboBox.getSelectedItem().toString()), Integer.valueOf(txtPrice.getText()));
 
-                Database.getCars().add(car);
-                dealer.getListedCars().add(car);
+                Database.addCar(car);
+
+                Database.addSales(car, dealer, null, Sales.AVAILABLE);
+                
+
                 JOptionPane.showMessageDialog(this, "Successfully Created A Car ",
                         "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
                 brandjComboBox.setSelectedIndex(0);
@@ -318,20 +319,20 @@ public class DealerAddCarPanel extends javax.swing.JPanel implements ITriggerer 
         colorIconLabel.setIcon(null);
         priceIconLabel.setIcon(null);
 
-        for (int i = 0; i < Car.carBrand.length; i++) {
-            brandjComboBox.addItem(Car.carBrand[i]);
+        for (int i = 0; i < Cars.carBrand.length; i++) {
+            brandjComboBox.addItem(Cars.carBrand[i]);
         }
 
-        for (int i = 0; i < Car.carType.length; i++) {
-            typejComboBox.addItem(Car.carType[i]);
+        for (int i = 0; i < Cars.carType.length; i++) {
+            typejComboBox.addItem(Cars.carType[i]);
         }
 
         for (int i = 2002; i <= 2023; i++) {
             yearjComboBox.addItem(i + "");
         }
 
-        for (int i = 0; i < Car.carFuelType.length; i++) {
-            fuelTypejComboBox.addItem(Car.carFuelType[i]);
+        for (int i = 0; i < Cars.carFuelType.length; i++) {
+            fuelTypejComboBox.addItem(Cars.carFuelType[i]);
         }
 
     }

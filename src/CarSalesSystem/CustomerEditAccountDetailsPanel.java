@@ -46,6 +46,7 @@ public class CustomerEditAccountDetailsPanel extends javax.swing.JPanel implemen
         backButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(900, 529));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         myAccountLabel.setBackground(new java.awt.Color(102, 102, 102));
@@ -238,12 +239,13 @@ public class CustomerEditAccountDetailsPanel extends javax.swing.JPanel implemen
             if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the informations of this acount? This action cannot be undone! ",
                     "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
 
-                customer.setName(txtName.getText());
-                customer.setUsername(txtUsername.getText());
-                customer.setPhone(Integer.parseInt(txtPhoneNo.getText()));
-                customer.setEmail(txtEmail.getText());
-
-                Database.updateInformation(customer);
+                Database.updateInformation(customer.getId(), txtName.getText(),
+                        txtUsername.getText(), Integer.parseInt(txtPhoneNo.getText()),
+                        txtEmail.getText());
+                
+                Customer customer = (Customer) MainFrame.instance.getAccount();
+                customer = (Customer) Database.findUserByID(customer.getId());
+                MainFrame.instance.setAccount(customer);
 
                 MainFrame.instance.setPage(MainFrame.instance.getCustomerControlPanel());
                 customer = null;
