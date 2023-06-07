@@ -50,7 +50,7 @@ public class DealerControlPanel extends javax.swing.JPanel implements ITriggerer
 
         manageCarsButton.setBackground(new java.awt.Color(204, 204, 204));
         manageCarsButton.setForeground(new java.awt.Color(0, 0, 0));
-        manageCarsButton.setText("MANAGE CARS");
+        manageCarsButton.setText("MANAGE SALES");
         manageCarsButton.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
         manageCarsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

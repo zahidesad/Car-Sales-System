@@ -148,7 +148,6 @@ public class DealerEditAccountDetailsPanel extends javax.swing.JPanel implements
             JOptionPane.showMessageDialog(this, "Fill All Entries.",
                     "Failure", JOptionPane.ERROR_MESSAGE);
 
-            return;
 
         } else if (flagForName == true && flagForUsername == true && flagForPhoneNo == true && flagForEmail == true) {
             if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the informations of this acount? This action cannot be undone! ",

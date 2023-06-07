@@ -131,7 +131,6 @@ public class DealerChangePasswordPanel extends javax.swing.JPanel implements ITr
             if (txtNewPassword.getText().equals(txtOldPassword.getText())) {
                 JOptionPane.showMessageDialog(this, "Your old password cannot be the same as your new password.",
                         "Logical Error Occured. ", JOptionPane.WARNING_MESSAGE);
-                return;
 
             } else if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the password of this account? This action cannot be undone! ",
                     "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {

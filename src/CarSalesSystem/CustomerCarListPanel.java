@@ -43,7 +43,7 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
         dealerFilterJComboBox.setVisible(true);
 
         for (Sales sale : Database.getSales()) {
-            if (!sale.getStatus().equals(Sales.ACCEPTED) || !sale.getStatus().equals(Sales.DENIED)) {
+            if (!sale.getStatus().equals(Sales.DENIED)) {
                 Vector rowData = new Vector();
                 rowData.add(sale.getDealerId().getId());
                 if (sale.getDealerId() != null) {
@@ -237,20 +237,21 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
 
                         for (Sales sale : Database.showDealerSales(((Dealer) dealerFilterJComboBox.getSelectedItem()).getId())) {
                             Vector rowData = new Vector();
+                            if (!sale.getStatus().equals(Sales.DENIED)) {
+                                rowData.add(sale.getDealerId().getId());
+                                rowData.add(sale.getDealerId().getName());
+                                rowData.add(sale.getId());
+                                rowData.add(sale.getCarId().getBrand());
+                                rowData.add(sale.getCarId().getModel());
+                                rowData.add(sale.getCarId().getType());
+                                rowData.add(sale.getCarId().getColor());
+                                rowData.add(sale.getCarId().getAge());
+                                rowData.add(sale.getCarId().getFuel());
+                                rowData.add(sale.getCarId().getPrice());
+                                rowData.add(sale.getStatus());
 
-                            rowData.add(sale.getDealerId().getId());
-                            rowData.add(sale.getDealerId().getName());
-                            rowData.add(sale.getId());
-                            rowData.add(sale.getCarId().getBrand());
-                            rowData.add(sale.getCarId().getModel());
-                            rowData.add(sale.getCarId().getType());
-                            rowData.add(sale.getCarId().getColor());
-                            rowData.add(sale.getCarId().getAge());
-                            rowData.add(sale.getCarId().getFuel());
-                            rowData.add(sale.getCarId().getPrice());
-                            rowData.add(sale.getStatus());
-
-                            tableModel.addRow(rowData);
+                                tableModel.addRow(rowData);
+                            }
                         }
                     }
                 } catch (NullPointerException exception) {
@@ -289,23 +290,23 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
         for (Sales sale : Database.getSales()) {
             try {
                 if (brandFilterJComboBox.getSelectedItem().equals(sale.getCarId().getBrand())) {
+                    if (!sale.getStatus().equals(Sales.DENIED)) {
+                        Vector rowData = new Vector();
 
-                    Vector rowData = new Vector();
+                        rowData.add(sale.getDealerId().getId());
+                        rowData.add(sale.getDealerId().getName());
+                        rowData.add(sale.getId());
+                        rowData.add(sale.getCarId().getBrand());
+                        rowData.add(sale.getCarId().getModel());
+                        rowData.add(sale.getCarId().getType());
+                        rowData.add(sale.getCarId().getColor());
+                        rowData.add(sale.getCarId().getAge());
+                        rowData.add(sale.getCarId().getFuel());
+                        rowData.add(sale.getCarId().getPrice());
+                        rowData.add(sale.getStatus());
 
-                    rowData.add(sale.getDealerId().getId());
-                    rowData.add(sale.getDealerId().getName());
-                    rowData.add(sale.getId());
-                    rowData.add(sale.getCarId().getBrand());
-                    rowData.add(sale.getCarId().getModel());
-                    rowData.add(sale.getCarId().getType());
-                    rowData.add(sale.getCarId().getColor());
-                    rowData.add(sale.getCarId().getAge());
-                    rowData.add(sale.getCarId().getFuel());
-                    rowData.add(sale.getCarId().getPrice());
-                    rowData.add(sale.getStatus());
-
-                    tableModel.addRow(rowData);
-
+                        tableModel.addRow(rowData);
+                    }
                 }
             } catch (NullPointerException e) {
             }
@@ -317,7 +318,7 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
         if (displayDealersButton.getText().equals("Display Dealers")) {
             tableModel.setRowCount(0);
             tableModel.setColumnIdentifiers(columNamesForDisplayDealers);
-            displayDealersButton.setText("Display Cars");
+            displayDealersButton.setText("Display Sales");
             buyCarButton.setVisible(false);
 
             brandLabel.setVisible(false);
@@ -389,23 +390,23 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
         for (Sales sale : Database.getSales()) {
             try {
                 if (typeFilterJComboBox.getSelectedItem().equals(sale.getCarId().getType())) {
+                    if (!sale.getStatus().equals(Sales.DENIED)) {
+                        Vector rowData = new Vector();
 
-                    Vector rowData = new Vector();
+                        rowData.add(sale.getDealerId().getId());
+                        rowData.add(sale.getDealerId().getName());
+                        rowData.add(sale.getId());
+                        rowData.add(sale.getCarId().getBrand());
+                        rowData.add(sale.getCarId().getModel());
+                        rowData.add(sale.getCarId().getType());
+                        rowData.add(sale.getCarId().getColor());
+                        rowData.add(sale.getCarId().getAge());
+                        rowData.add(sale.getCarId().getFuel());
+                        rowData.add(sale.getCarId().getPrice());
+                        rowData.add(sale.getStatus());
 
-                    rowData.add(sale.getDealerId().getId());
-                    rowData.add(sale.getDealerId().getName());
-                    rowData.add(sale.getId());
-                    rowData.add(sale.getCarId().getBrand());
-                    rowData.add(sale.getCarId().getModel());
-                    rowData.add(sale.getCarId().getType());
-                    rowData.add(sale.getCarId().getColor());
-                    rowData.add(sale.getCarId().getAge());
-                    rowData.add(sale.getCarId().getFuel());
-                    rowData.add(sale.getCarId().getPrice());
-                    rowData.add(sale.getStatus());
-
-                    tableModel.addRow(rowData);
-
+                        tableModel.addRow(rowData);
+                    }
                 }
             } catch (NullPointerException exception) {
             }
@@ -417,22 +418,22 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
         for (Sales sale : Database.getSales()) {
             try {
                 if (fuelFilterJComboBox.getSelectedItem().equals(sale.getCarId().getFuel())) {
+                    if (!sale.getStatus().equals(Sales.DENIED)) {
+                        Vector rowData = new Vector();
 
-                    Vector rowData = new Vector();
-
-                    rowData.add(sale.getDealerId().getId());
-                    rowData.add(sale.getDealerId().getName());
-                    rowData.add(sale.getId());
-                    rowData.add(sale.getCarId().getBrand());
-                    rowData.add(sale.getCarId().getModel());
-                    rowData.add(sale.getCarId().getType());
-                    rowData.add(sale.getCarId().getColor());
-                    rowData.add(sale.getCarId().getAge());
-                    rowData.add(sale.getCarId().getFuel());
-                    rowData.add(sale.getCarId().getPrice());
-                    rowData.add(sale.getStatus());
-                    tableModel.addRow(rowData);
-
+                        rowData.add(sale.getDealerId().getId());
+                        rowData.add(sale.getDealerId().getName());
+                        rowData.add(sale.getId());
+                        rowData.add(sale.getCarId().getBrand());
+                        rowData.add(sale.getCarId().getModel());
+                        rowData.add(sale.getCarId().getType());
+                        rowData.add(sale.getCarId().getColor());
+                        rowData.add(sale.getCarId().getAge());
+                        rowData.add(sale.getCarId().getFuel());
+                        rowData.add(sale.getCarId().getPrice());
+                        rowData.add(sale.getStatus());
+                        tableModel.addRow(rowData);
+                    }
                 }
             } catch (NullPointerException exception) {
 
@@ -475,17 +476,16 @@ public class CustomerCarListPanel extends javax.swing.JPanel implements ITrigger
             }
         }
 
-        for (int i = 0; i < Cars.carBrand.length; i++) {
-            brandFilterJComboBox.addItem(Cars.carBrand[i]);
+        for (String carBrand : Cars.carBrand) {
+            brandFilterJComboBox.addItem(carBrand);
         }
 
-        for (int i = 0; i < Cars.carType.length; i++) {
-            typeFilterJComboBox.addItem(Cars.carType[i]);
-
+        for (String carType : Cars.carType) {
+            typeFilterJComboBox.addItem(carType);
         }
 
-        for (int i = 0; i < Cars.carFuelType.length; i++) {
-            fuelFilterJComboBox.addItem(Cars.carFuelType[i]);
+        for (String carFuelType : Cars.carFuelType) {
+            fuelFilterJComboBox.addItem(carFuelType);
         }
 
     }

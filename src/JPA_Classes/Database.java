@@ -1,5 +1,6 @@
 package JPA_Classes;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -183,14 +184,22 @@ public class Database {
         em.getTransaction().begin();
 
         Sales sale = em.find(Sales.class, salesId);
+        ArrayList<Sales> deniedSales = new ArrayList<>();
         for (Sales sale1 : Database.getSales()) { //Customer'ın araç kaldırılsa dahi denied arabasını görebilmesi için
             if (sale1.getCarId().equals(sale.getCarId()) && sale1.getStatus().equals(Sales.DENIED)) {
                 sale1.setCarId(null);
-                em.persist(sale1);
+                deniedSales.add(sale1);
             }
-
         }
 
+        for (Sales deniedSale : deniedSales) {
+            Sales dbSales = em.find(Sales.class, deniedSale.getId());
+            dbSales.setCarId(null);
+            em.persist(dbSales);
+        }
+
+        em.getTransaction().commit();
+        em.getTransaction().begin();
         em.remove(sale.getCarId());
         em.getTransaction().commit();
         em.close();
@@ -227,14 +236,17 @@ public class Database {
 
         List<Sales> sales = query.getResultList();
 
-        if (sales.size() > 0) { //Eğer araba daha önce denied statüsüne düştüyse bir daha satın alınma isteği gönderilmesin diye kontrol.
-            em.close();
-            emf.close();
-            return -1;
+        for (Sales sale1 : sales) {  //Eğer araba daha önce denied statüsüne düştüyse bir daha satın alınma isteği gönderilmesin diye kontrol.
+            if (customer.getSalesList().contains(sale1)) {
+                em.close();
+                emf.close();
+                return -1;
+            }
         }
+
         sale.setCustomerId(customer);
         sale.setStatus(Sales.PENDING);
-        sale.getCustomerId().getSalesList().add(sale); //EMİRHANA SORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+        sale.getCustomerId().getSalesList().add(sale);
 
         em.persist(sale);
         em.getTransaction().commit();

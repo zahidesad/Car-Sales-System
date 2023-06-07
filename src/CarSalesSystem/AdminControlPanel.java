@@ -70,7 +70,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
         } else if (jComboBox1.getSelectedItem().equals("Sales")) {
             tableModel.setRowCount(0);
             tableModel.setColumnIdentifiers(columNamesCars);
-            deleteButton.setText("Delete Car");
+            deleteButton.setText("Delete Sale");
             for (Sales sale : Database.getSales()) {
                 if (!sale.getStatus().equals(Sales.DENIED)) {
                     Vector rowData = new Vector();
@@ -194,7 +194,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         try {
-            if (jComboBox1.getSelectedItem().equals("Customer") || jComboBox1.getSelectedItem().equals("Dealer")) {
+            if (jComboBox1.getSelectedItem().equals("Customers") || jComboBox1.getSelectedItem().equals("Dealers")) {
                 Users user = Database.findUserByID((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
                 if (user != null) {
                     if ((JOptionPane.showConfirmDialog(this, "Do you really want to delete this account? "
@@ -206,7 +206,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                     }
                 }
 
-            } else if (jComboBox1.getSelectedItem().equals("Car")) {
+            } else if (jComboBox1.getSelectedItem().equals("Sales")) {
                 Sales sale = Database.findSaleByID((Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0));
                 if (sale != null) {
                     if (tableModel.getValueAt(tableDark1.getSelectedRow(), 8).equals(Sales.ACCEPTED)) {
@@ -225,6 +225,8 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                         refreshTable();
 
                     }
+                }else{
+                    System.out.println("Null Sale");
                 }
 
             }

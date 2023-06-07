@@ -111,7 +111,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
         tableModel.setColumnIdentifiers(columNames);
 
         for (Sales sale : customer.getSalesList()) {
-            if (!sale.getStatus().equals(Sales.AVAILABLE) ) {
+            if (!sale.getStatus().equals(Sales.AVAILABLE)) {
 
                 Vector rowData = new Vector();
                 if (sale.getDealerId() != null) {
@@ -124,10 +124,18 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
                 } else {
                     rowData.add("Deleted Account");
                 }
+
                 rowData.add(sale.getId());
-                rowData.add(sale.getCarId().getBrand());
-                rowData.add(sale.getCarId().getModel());
-                rowData.add(sale.getCarId().getPrice());
+                if (sale.getCarId() != null) {
+                    rowData.add(sale.getCarId().getBrand());
+                    rowData.add(sale.getCarId().getModel());
+                    rowData.add(sale.getCarId().getPrice());
+
+                } else {
+                    rowData.add("Deleted Car ");
+                    rowData.add("Deleted Car ");
+                    rowData.add("Deleted Car ");
+                }
                 rowData.add(sale.getStatus());
 
                 tableModel.addRow(rowData);
@@ -156,7 +164,7 @@ public class CustomerMyOrdersPanel extends javax.swing.JPanel implements ITrigge
                 }
 
             }
-            return;
+
         } catch (IndexOutOfBoundsException e) {
 
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",

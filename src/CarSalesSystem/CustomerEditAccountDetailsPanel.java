@@ -233,8 +233,6 @@ public class CustomerEditAccountDetailsPanel extends javax.swing.JPanel implemen
             JOptionPane.showMessageDialog(this, "Fill All Entries.",
                     "Failure", JOptionPane.ERROR_MESSAGE);
 
-            return;
-
         } else if (flagForName == true && flagForUsername == true && flagForPhoneNo == true && flagForEmail == true) {
             if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the informations of this acount? This action cannot be undone! ",
                     "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
@@ -242,7 +240,7 @@ public class CustomerEditAccountDetailsPanel extends javax.swing.JPanel implemen
                 Database.updateInformation(customer.getId(), txtName.getText(),
                         txtUsername.getText(), Integer.parseInt(txtPhoneNo.getText()),
                         txtEmail.getText());
-                
+
                 Customer customer = (Customer) MainFrame.instance.getAccount();
                 customer = (Customer) Database.findUserByID(customer.getId());
                 MainFrame.instance.setAccount(customer);

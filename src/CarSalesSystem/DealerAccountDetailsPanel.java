@@ -171,8 +171,9 @@ public class DealerAccountDetailsPanel extends javax.swing.JPanel implements ITr
 
             for (Sales sale : dealer.getSalesList()) {
                 if (sale.getStatus().equals(Sales.PENDING)) {
-                    JOptionPane.showMessageDialog(this, "This car cannot be deleted because you have not yet responded to the customer's request.\n"
-                            + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
+                    JOptionPane.showMessageDialog(this, """
+                                                        This car cannot be deleted because you have not yet responded to the customer's request.
+                                                        Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.""",
                             " Incorrect Operation", JOptionPane.INFORMATION_MESSAGE);
 
                     MainFrame.instance.setPage(MainFrame.instance.getDealerCustomerRequestsPanel());

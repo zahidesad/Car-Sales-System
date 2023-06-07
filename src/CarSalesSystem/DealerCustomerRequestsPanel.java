@@ -147,7 +147,7 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
                 MainFrame.instance.setPage(MainFrame.instance.getCustomerAccountDetailsPanel());
 
             }
-            return;
+
         } catch (IndexOutOfBoundsException exception) {
             JOptionPane.showMessageDialog(this, "No Data Selected from the Table. ",
                     "Selection Error", JOptionPane.ERROR_MESSAGE);
@@ -160,17 +160,21 @@ public class DealerCustomerRequestsPanel extends javax.swing.JPanel implements I
                 0, 3, null, options, options[2]);
         try {
             if (tableDark1.getValueAt(tableDark1.getSelectedRow(), 6).equals(Sales.PENDING)) {
-                if (selection == 0) {
-                    Database.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
-                    dealer = (Dealer) Database.findUserByID(dealer.getId());
-                    MainFrame.instance.setAccount(dealer);
-                    refreshTable();
-                } else if (selection == 1) {
-                    Database.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
-                    dealer = (Dealer) Database.findUserByID(dealer.getId());
-                    MainFrame.instance.setAccount(dealer);
-                    refreshTable();
-                } else {
+                switch (selection) {
+                    case 0:
+                        Database.acceptRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                        dealer = (Dealer) Database.findUserByID(dealer.getId());
+                        MainFrame.instance.setAccount(dealer);
+                        refreshTable();
+                        break;
+                    case 1:
+                        Database.denyRequest((Integer) tableDark1.getValueAt(tableDark1.getSelectedRow(), 2));
+                        dealer = (Dealer) Database.findUserByID(dealer.getId());
+                        MainFrame.instance.setAccount(dealer);
+                        refreshTable();
+                        break;
+                    default:
+                        break;
                 }
             }
         } catch (IndexOutOfBoundsException exception) {

@@ -47,7 +47,7 @@ public class CustomerControlPanel extends javax.swing.JPanel implements ITrigger
 
         viewCarsButton.setBackground(new java.awt.Color(204, 204, 204));
         viewCarsButton.setForeground(new java.awt.Color(0, 0, 0));
-        viewCarsButton.setText("VIEW CARS");
+        viewCarsButton.setText("VIEW SALES");
         viewCarsButton.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
         viewCarsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -149,7 +149,6 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
             if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Sales.ACCEPTED)) {
                 JOptionPane.showMessageDialog(this, "This car cannot be deleted because it has been sold. ",
                         " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
-                return;
             } else if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Sales.PENDING)) {
                 JOptionPane.showMessageDialog(this, "This car cannot be deleted because you have not yet responded to the customer's request.\n"
                         + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
@@ -166,7 +165,7 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
                     if (dealer.getSalesList().get(i).getId() == (Integer) tableModel.getValueAt(tableDark1.getSelectedRow(), 0)) {
                         dealer.getSalesList().remove(i);
                     }
-                } 
+                }
                 refreshTable();
 
             }
@@ -185,8 +184,9 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
                         " Incorrect Operation", JOptionPane.ERROR_MESSAGE);
                 return;
             } else if (tableModel.getValueAt(tableDark1.getSelectedRow(), 7).equals(Sales.PENDING)) {
-                JOptionPane.showMessageDialog(this, "This car cannot be edited because you have not yet responded to the customer's request.\n"
-                        + "Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.",
+                JOptionPane.showMessageDialog(this, """
+                                                    This car cannot be edited because you have not yet responded to the customer's request.
+                                                    Firstly, accept or deny the customer's request. You are directed to the dealer customer request panel.""",
                         " Incorrect Operation", JOptionPane.INFORMATION_MESSAGE);
 
                 MainFrame.instance.setPage(MainFrame.instance.getDealerCustomerRequestsPanel());
@@ -219,6 +219,7 @@ public class DealerManageCarPanel extends javax.swing.JPanel implements ITrigger
     private SwingComponents.TableDark tableDark1;
     // End of variables declaration//GEN-END:variables
 
+    @Override
     public void PageOn() {
         dealer = (Dealer) MainFrame.instance.getAccount();
         refreshTable();

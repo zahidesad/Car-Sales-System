@@ -204,8 +204,7 @@ public class MainFrame extends javax.swing.JFrame {
         container.repaint();
         System.out.println("Page Setted!");
 
-        if (page instanceof ITriggerer) {
-            ITriggerer iTriggerer = (ITriggerer) page;
+        if (page instanceof ITriggerer iTriggerer) {
             iTriggerer.PageOn();
         }
     }

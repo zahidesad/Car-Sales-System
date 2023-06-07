@@ -182,8 +182,6 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
             JOptionPane.showMessageDialog(this, "Fill All Entries.",
                     "Failure", JOptionPane.ERROR_MESSAGE);
 
-            return;
-
         } else if (flagForColor == true && flagForModel == true && flagForPrice == true) {
             if ((JOptionPane.showConfirmDialog(this, "Do you really want to change the features of this car? This action cannot be undone! ",
                     "Are You Sure ?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
@@ -329,20 +327,20 @@ public class DealerEditCarPanel extends javax.swing.JPanel implements ITriggerer
         colorIconLabel.setIcon(null);
         priceIconLabel.setIcon(null);
 
-        for (int i = 0; i < Cars.carBrand.length; i++) {
-            brandjComboBox.addItem(Cars.carBrand[i]);
+        for (String carBrand : Cars.carBrand) {
+            brandjComboBox.addItem(carBrand);
         }
 
-        for (int i = 0; i < Cars.carType.length; i++) {
-            typejComboBox.addItem(Cars.carType[i]);
+        for (String carType : Cars.carType) {
+            typejComboBox.addItem(carType);
         }
 
         for (int i = 2002; i <= 2023; i++) {
             yearjComboBox.addItem(i + "");
         }
 
-        for (int i = 0; i < Cars.carFuelType.length; i++) {
-            fuelTypejComboBox.addItem(Cars.carFuelType[i]);
+        for (String carFuelType : Cars.carFuelType) {
+            fuelTypejComboBox.addItem(carFuelType);
         }
     }
 }

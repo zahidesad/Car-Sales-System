@@ -185,8 +185,6 @@ public class CustomerChangePasswordPanel extends javax.swing.JPanel implements I
             JOptionPane.showMessageDialog(this, "Fill All Entries.",
                     "Failure", JOptionPane.ERROR_MESSAGE);
 
-            return;
-
         } else if (oldPasswordControl == true && newPasswordControl == true && flagForPassword == true) {
             if (txtNewPassword.getText().equals(txtOldPassword.getText())) {
                 JOptionPane.showMessageDialog(this, "Your old password cannot be the same as your new password.",

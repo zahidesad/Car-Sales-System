@@ -2,30 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/DealerManageCarPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CorePackage/User.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/JPA_Classes/Test.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/JPA_Classes/Customer.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/JPA_Classes/Dealer.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/CustomerCarListPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/Main/MainFrame.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/JPA_Classes/Cars.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/JPA_Classes/Database.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/AdminControlPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/JPA_Classes/Users.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CorePackage/Dealer.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/DealerEditCarPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/DealerEditAccountDetailsPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/DealerAccountDetailsPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/CustomerEditAccountDetailsPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/CustomerAccountDetailsPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/DealerCustomerRequestsPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/CustomerChangePasswordPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/DealerAddCarPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CorePackage/Customer.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/CarSalesSystem/CustomerMyOrdersPanel.java</file>
-            <file>file:/C:/Users/zahid/OneDrive/Belgeler/NetBeansProjects/EndOfTermProjectWithJavaSwing/src/JPA_Classes/Sales.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
