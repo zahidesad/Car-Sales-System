@@ -218,6 +218,7 @@ public class Register extends PanelCustom implements ITriggerer {
                 Dealer dealer = new Dealer(txtName.getText(), txtUsername.getText(), txtPassword.getText(),
                         txtEmail.getText(), Integer.parseInt(txtPhoneNumber.getText()));
                 Database.saveUser(dealer);
+                Database.getUsers().add(dealer);
                 JOptionPane.showMessageDialog(this, "Successfully Created Dealer Account ",
                         "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
                 txtUsername.setText("");
@@ -246,37 +247,44 @@ public class Register extends PanelCustom implements ITriggerer {
     }//GEN-LAST:event_registerDealerButtonActionPerformed
 
     private void registerCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCustomerButtonActionPerformed
-        if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtName.getText().equals("")
-                || txtPhoneNumber.getText().equals("") || txtEmail.getText().equals("")) {
+        if (flagForCheckBox == true) {
+            if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtName.getText().equals("")
+                    || txtPhoneNumber.getText().equals("") || txtEmail.getText().equals("")) {
 
-            JOptionPane.showMessageDialog(this, "Fill All Entries.",
-                    "Failure", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Fill All Entries.",
+                        "Failure", JOptionPane.INFORMATION_MESSAGE);
 
-        } else if (Database.checkUsername(txtUsername.getText())) {
-            JOptionPane.showMessageDialog(this, "Username Already Exist.",
-                    "Failure", JOptionPane.INFORMATION_MESSAGE);
+            } else if (Database.checkUsername(txtUsername.getText())) {
+                JOptionPane.showMessageDialog(this, "Username Already Exist.",
+                        "Failure", JOptionPane.INFORMATION_MESSAGE);
 
-        } else if (flagForName == true && flagForEmail == true && flagForUsername == true && flagForPassword == true && flagForPhoneNumber == true) {
-            Customer customer = new Customer(txtName.getText(), txtUsername.getText(), txtPassword.getText(),
-                    txtEmail.getText(), Integer.parseInt(txtPhoneNumber.getText()));
-            Database.saveUser(customer);
-            JOptionPane.showMessageDialog(this, "Successfully Created Customer Account ",
-                    "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
-            txtUsername.setText("");
-            txtPassword.setText("");
-            txtName.setText("");
-            txtEmail.setText("");
-            txtPhoneNumber.setText("");
+            } else if (flagForName == true && flagForEmail == true && flagForUsername == true && flagForPassword == true && flagForPhoneNumber == true) {
+                Customer customer = new Customer(txtName.getText(), txtUsername.getText(), txtPassword.getText(),
+                        txtEmail.getText(), Integer.parseInt(txtPhoneNumber.getText()));
+                Database.saveUser(customer);
+                Database.getUsers().add(customer);
+                JOptionPane.showMessageDialog(this, "Successfully Created Customer Account ",
+                        "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
+                txtUsername.setText("");
+                txtPassword.setText("");
+                txtName.setText("");
+                txtEmail.setText("");
+                txtPhoneNumber.setText("");
 
-            nameIconLabel.setIcon(null);
-            emailIconLabel.setIcon(null);
-            usernameIconLabel.setIcon(null);
-            passwordIconLabel.setIcon(null);
-            phoneNumberIconLabel.setIcon(null);
+                nameIconLabel.setIcon(null);
+                emailIconLabel.setIcon(null);
+                usernameIconLabel.setIcon(null);
+                passwordIconLabel.setIcon(null);
+                phoneNumberIconLabel.setIcon(null);
+            } else {
+                JOptionPane.showMessageDialog(this, "A validation error has occurred. "
+                        + "Please check the validation rules from the menu at the bottom right.",
+                        "The Gaps Were Not Filled As Desired.", JOptionPane.WARNING_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "A validation error has occurred. "
-                    + "Please check the validation rules from the menu at the bottom right.",
-                    "The Gaps Were Not Filled As Desired.", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please accept the terms and condicitions. "
+                    + "Check the menu below to read the terms of use.",
+                    "Terms And Conditions Not Accepted", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_registerCustomerButtonActionPerformed
