@@ -3,12 +3,15 @@ package CarSalesSystem;
 import CorePackage.ITriggerer;
 import JPA_Classes.*;
 import Main.MainFrame;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -108,6 +111,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
         deleteButton = new SwingComponents.Button();
         backButton = new SwingComponents.Button();
         downloadSalesArchive = new SwingComponents.Button();
+        learnDatabaseInfoButton = new SwingComponents.Button();
 
         setBackground(new java.awt.Color(153, 153, 153));
         setPreferredSize(new java.awt.Dimension(900, 529));
@@ -164,7 +168,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                 deleteButtonActionPerformed(evt);
             }
         });
-        add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 470, 230, -1));
+        add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 470, 230, -1));
 
         backButton.setBackground(new java.awt.Color(0, 0, 0));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BackArrow.png"))); // NOI18N
@@ -185,7 +189,19 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                 downloadSalesArchiveActionPerformed(evt);
             }
         });
-        add(downloadSalesArchive, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 250, -1));
+        add(downloadSalesArchive, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, 250, -1));
+
+        learnDatabaseInfoButton.setBackground(new java.awt.Color(0, 0, 0));
+        learnDatabaseInfoButton.setForeground(new java.awt.Color(255, 255, 255));
+        learnDatabaseInfoButton.setText("Learn Database Informations");
+        learnDatabaseInfoButton.setBorderPainted(false);
+        learnDatabaseInfoButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        learnDatabaseInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                learnDatabaseInfoButtonActionPerformed(evt);
+            }
+        });
+        add(learnDatabaseInfoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 270, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -225,7 +241,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
                         refreshTable();
 
                     }
-                }else{
+                } else {
                     System.out.println("Null Sale");
                 }
 
@@ -251,6 +267,10 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
         downloadSales();
     }//GEN-LAST:event_downloadSalesArchiveActionPerformed
 
+    private void learnDatabaseInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_learnDatabaseInfoButtonActionPerformed
+        readDatabaseInformation();
+    }//GEN-LAST:event_learnDatabaseInfoButtonActionPerformed
+
     public void downloadSales() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -263,7 +283,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
 
             ArrayList<String> lines = new ArrayList<>();
             for (Sales sale : Database.getSales()) {
-                lines.add(sale.toString() );
+                lines.add(sale.toString());
             }
 
             try {
@@ -293,6 +313,25 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
         return directoryPath + "/" + prefix + "_" + formattedDate + extension;
     }
 
+    public void readDatabaseInformation() {
+        Properties properties = new Properties();
+        String configFile = "C:\\cp2\\config.txt";
+
+        try ( BufferedReader reader = new BufferedReader(new FileReader(configFile))) {
+            properties.load(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String dbUrl = properties.getProperty("db.url");
+        String dbUsername = properties.getProperty("db.username");
+        String dbPassword = properties.getProperty("db.password");
+
+        JOptionPane.showMessageDialog(this, "Database Url : " + dbUrl +
+                "\nDatabase Username : " + dbUsername + "\nDatabase Password : " + dbPassword, "Database Informations", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adminControlPanelLabel;
     private SwingComponents.Button backButton;
@@ -300,6 +339,7 @@ public class AdminControlPanel extends javax.swing.JPanel implements ITriggerer 
     private SwingComponents.Button downloadSalesArchive;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
+    private SwingComponents.Button learnDatabaseInfoButton;
     private SwingComponents.TableDark tableDark1;
     // End of variables declaration//GEN-END:variables
 
